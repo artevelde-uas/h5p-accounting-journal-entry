@@ -1,0 +1,7 @@
+src
+node_modules
+.git
+.h5pignore
+webpack.config.js
+README.md
+package.json

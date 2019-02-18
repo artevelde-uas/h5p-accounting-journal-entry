@@ -1,0 +1,25 @@
+{
+  "title": "Accounting - Journal Entry",
+  "description": "Accounting - Journal Entry",
+  "majorVersion": 0,
+  "minorVersion": 1,
+  "patchVersion": 0,
+  "runnable": 1,
+  "author": "AUC Ghent",
+  "license": "MIT",
+  "machineName": "H5P.AccountingJournalEntry",
+  "coreApi": {
+    "majorVersion": 1,
+    "minorVersion": 0
+  },
+  "preloadedJs": [
+    {
+      "path": "dist/h5p-accounting-journal-entry.js"
+    }
+  ],
+  "preloadedCss": [
+    {
+      "path": "dist/h5p-accounting-journal-entry.css"
+    }
+  ]
+}
