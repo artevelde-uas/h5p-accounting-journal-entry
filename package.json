@@ -1,8 +1,9 @@
 {
   "private": true,
   "scripts": {
-    "build": "webpack --progress",
-    "watch": "webpack --watch"
+    "build": "webpack --progress --config ./conf/webpack.prod.config.js",
+    "build-dev": "webpack --progress --config ./conf/webpack.dev.config.js",
+    "watch": "webpack --watch --config ./conf/webpack.dev.config.js"
   },
   "devDependencies": {
     "@babel/core": "^7.3.3",
