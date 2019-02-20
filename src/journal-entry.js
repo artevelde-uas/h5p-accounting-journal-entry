@@ -1,7 +1,7 @@
 import styles from './journal-entry.css';
 
 
-export default class extends H5P.EventDispatcher {
+export default class {
   
   /**
    * @constructor
@@ -11,7 +11,7 @@ export default class extends H5P.EventDispatcher {
    * @param {object} [extras] Saved state, metadata, etc.
    */
   constructor(params, contentId, extras = {}) {
-    super();
+    
   }
   
   /**
