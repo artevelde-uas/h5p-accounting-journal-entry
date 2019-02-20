@@ -33,7 +33,7 @@ module.exports = {
         loader: 'css-loader',
         options: {
           modules: true,
-          localIdentName: 'h5p-accounting-journal-entry__[local]__[hash:5]',
+          localIdentName: 'h5p-accounting-journal-entry__[local]',
           camelCase: true
         }
       }, {
