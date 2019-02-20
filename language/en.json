@@ -1,0 +1,104 @@
+{
+  "semantics": [
+    {
+      "label": "Debit",
+      "field": {
+        "label": "Debit item",
+        "fields": [
+          {
+            "label": "Account number"
+          },
+          {
+            "label": "Account name"
+          },
+          {
+            "label": "Type",
+            "options": [
+              {
+                "label": "-"
+              },
+              {
+                "label": "Assets"
+              },
+              {
+                "label": "Liabilities"
+              },
+              {
+                "label": "Expenses"
+              },
+              {
+                "label": "Revenue"
+              }
+            ],
+            "default": "-"
+          },
+          {
+            "label": "Plus / minus",
+            "options": [
+              {
+                "label": "+"
+              },
+              {
+                "label": "-"
+              }
+            ],
+            "default": "plus"
+          },
+          {
+            "label": "Debet amount"
+          }
+        ]
+      }
+    },
+    {
+      "label": "Credit",
+      "field": {
+        "label": "Credit item",
+        "fields": [
+          {
+            "label": "Account number"
+          },
+          {
+            "label": "Account name"
+          },
+          {
+            "label": "Type",
+            "options": [
+              {
+                "label": "-"
+              },
+              {
+                "label": "Assets"
+              },
+              {
+                "label": "Liabilities"
+              },
+              {
+                "label": "Expenses"
+              },
+              {
+                "label": "Revenue"
+              }
+            ],
+            "default": "-"
+          },
+          {
+            "label": "Plus / minus",
+            "options": [
+              {
+                "label": "+"
+              },
+              {
+                "label": "-"
+              }
+            ],
+            "default": "plus"
+          },
+          {
+            "label": "Credit bedrag"
+          }
+        ]
+      }
+    }
+  ]
+}

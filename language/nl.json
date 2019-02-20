@@ -1,0 +1,104 @@
+{
+  "semantics": [
+    {
+      "label": "Debet",
+      "field": {
+        "label": "Debet item",
+        "fields": [
+          {
+            "label": "Rekening nummer"
+          },
+          {
+            "label": "Rekening naam"
+          },
+          {
+            "label": "Type",
+            "options": [
+              {
+                "label": "-"
+              },
+              {
+                "label": "Activa"
+              },
+              {
+                "label": "Passiva"
+              },
+              {
+                "label": "Kost"
+              },
+              {
+                "label": "Opbrengst"
+              }
+            ],
+            "default": "-"
+          },
+          {
+            "label": "Plus / min",
+            "options": [
+              {
+                "label": "+"
+              },
+              {
+                "label": "-"
+              }
+            ],
+            "default": "plus"
+          },
+          {
+            "label": "Debet bedrag"
+          }
+        ]
+      }
+    },
+    {
+      "label": "Credit",
+      "field": {
+        "label": "Credit item",
+        "fields": [
+          {
+            "label": "Rekening nummer"
+          },
+          {
+            "label": "Rekening naam"
+          },
+          {
+            "label": "Type",
+            "options": [
+              {
+                "label": "-"
+              },
+              {
+                "label": "Activa"
+              },
+              {
+                "label": "Passiva"
+              },
+              {
+                "label": "Kost"
+              },
+              {
+                "label": "Opbrengst"
+              }
+            ],
+            "default": "-"
+          },
+          {
+            "label": "Plus / min",
+            "options": [
+              {
+                "label": "+"
+              },
+              {
+                "label": "-"
+              }
+            ],
+            "default": "plus"
+          },
+          {
+            "label": "Credit bedrag"
+          }
+        ]
+      }
+    }
+  ]
+}
