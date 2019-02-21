@@ -1,3 +1,56 @@
-.test {
-  color: green;
+
+:global .h5p-accounting-journal-entry {
+  padding: 1em .5em;
+}
+
+table.journalItem {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table.journalItem tbody.credit tr:first-child {
+  border-top: solid 2px gray;
+}
+
+table.journalItem tbody.debit td.title,
+table.journalItem tbody.credit td.title {
+  vertical-align: top;
+  font-weight: bold;
+}
+
+table.journalItem td {
+  padding: .4em;
+}
+table.journalItem td > input:first-child,
+table.journalItem td > select:first-child {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+}
+table.journalItem td.title {
+  width: 3em;
+}
+table.journalItem td.account-number {
+  width: 4em;
+}
+table.journalItem td.account-name {
+  width: auto;
+}
+table.journalItem td.invoice-type {
+  width: 7em;
+}
+table.journalItem td.plus-min {
+  width: 3em;
+}
+table.journalItem td.amount-debit {
+  width: 5em;
+}
+table.journalItem td.amount-credit {
+  width: 5em;
+}
+
+table.journalItem tfoot th.total-label,
+table.journalItem tfoot th.total-debit,
+table.journalItem tfoot th.total-credit {
+  text-align: right;
 }
