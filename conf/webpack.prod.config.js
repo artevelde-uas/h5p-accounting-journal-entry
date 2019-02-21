@@ -34,7 +34,7 @@ module.exports = {
         options: {
           modules: true,
           localIdentName: 'h5p-accounting-journal-entry__[local]',
-          camelCase: true
+          camelCase: 'only'
         }
       }, {
         loader: 'postcss-loader',
