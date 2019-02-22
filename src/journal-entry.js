@@ -43,6 +43,15 @@ export default class {
       }
     });
     
+    // Calculate debit and credit totals if necessary
+    container.addEventListener('keyup', function (event) {
+      if (event.target.matches(`td.${styles.amountDebit} input, td.${styles.amountCredit} input`)) {
+        let table = event.target.closest('table');
+        
+        calculateTotals(table);
+      }
+    });
+    
     container.classList.add('h5p-accounting-journal-entry');
     container.appendChild(entry);
   }
@@ -75,4 +84,17 @@ function addTransactionRow(row) {
   
   row.insertAdjacentHTML('afterend', journalTransactionTemplate(null, type));
   list.querySelector(`td.${styles.title}`).setAttribute('rowspan', list.children.length);
+}
+
+function calculateTotals(table) {
+  var reducer = (sum, input) => (sum + Number(input.value));
+  var totalDebit = Array.from(table.querySelectorAll(`td.${styles.amountDebit} input`)).reduce(reducer, 0);
+  var totalCredit = Array.from(table.querySelectorAll(`td.${styles.amountCredit} input`)).reduce(reducer, 0);
+
+  table.querySelector(`th.${styles.totalDebit}`).textContent = formatAmount(totalDebit);
+  table.querySelector(`th.${styles.totalCredit}`).textContent = formatAmount(totalCredit);
+}
+
+function formatAmount(amount) {
+  return amount.toLocaleString(undefined, { minimumFractionDigits: 2 });
 }
