@@ -42,11 +42,13 @@ table.journal-item td.invoice-type {
 table.journal-item td.plus-min {
   width: 3em;
 }
-table.journal-item td.amount-debit {
-  width: 5em;
-}
+table.journal-item td.amount-debit,
 table.journal-item td.amount-credit {
   width: 5em;
+}
+table.journal-item td.amount-debit > input,
+table.journal-item td.amount-credit > input {
+  text-align: right;
 }
 
 table.journal-item tfoot th.total-label,
