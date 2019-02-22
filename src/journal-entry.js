@@ -1,4 +1,6 @@
-import { journalItemTemplate } from './templates';
+import { journalItemTemplate, journalTransactionTemplate } from './templates';
+
+import styles from './journal-entry.css';
 
 
 export default class {
@@ -20,8 +22,57 @@ export default class {
    * @param {jQuery} $container
    */
   attach($container) {
-    $container.addClass('h5p-accounting-journal-entry');
-    $container.append(journalItemTemplate());
+    var container = $container.get(0);
+    var entry = document.createElement('div');
+    
+    entry.classList.add(styles.journalEntry);
+    entry.insertAdjacentHTML('afterbegin', journalItemTemplate());
+
+    // Add or remove transaction rows if necessary
+    container.addEventListener('keyup', function (event) {
+      if (event.target.matches(`table.${styles.journalItem} td input`)) {
+        let row = event.target.closest('tr');
+        let accountNumber = row.querySelector(`td.${styles.accountNumber} input`).value;
+        let amount = row.querySelector(`td.${styles.amountDebit} input, td.${styles.amountCredit} input`).value;
+        
+        if (accountNumber === '' && amount === '') {
+          removeTransactionRow(row);
+        } else if (accountNumber !== '' || amount !== '') {
+          addTransactionRow(row);
+        }
+      }
+    });
+    
+    container.classList.add('h5p-accounting-journal-entry');
+    container.appendChild(entry);
   }
   
+}
+
+function removeTransactionRow(row) {
+  let list = row.parentNode;
+  
+  // Do not remove if there are no more than two rows
+  if (list.children.length <= 2) return false;
+  
+  // Move the title cell to the next row if on first row
+  if (row.previousElementSibling === null) {
+    let nextRow = row.nextElementSibling;
+    
+    nextRow.insertBefore(row.firstElementChild, nextRow.firstElementChild);
+  }
+  
+  list.removeChild(row);
+  list.querySelector(`td.${styles.title}`).setAttribute('rowspan', list.children.length);
+}
+
+function addTransactionRow(row) {
+  // Only insert a new row if on the last row
+  if (row.nextElementSibling !== null) return false;
+  
+  let list = row.parentNode;
+  let type = list.classList.contains(styles.debit) ? 'debit' : 'credit';
+  
+  row.insertAdjacentHTML('afterend', journalTransactionTemplate(null, type));
+  list.querySelector(`td.${styles.title}`).setAttribute('rowspan', list.children.length);
 }
