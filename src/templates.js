@@ -9,7 +9,7 @@ export const journalItemTemplate = (data) => (`
         <th>Number</th>
         <th>Account name</th>
         <th>Type</th>
-        <th>+/-</th>
+        <th>&plus; / &minus;</th>
         <th>Debit</th>
         <th>Credit</th>
       </tr>
