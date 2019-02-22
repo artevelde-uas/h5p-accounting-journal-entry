@@ -6,7 +6,10 @@ const postcssClean = require('postcss-clean');
 module.exports = {
   mode: 'production',
   entry: {
-    'h5p-accounting-journal-entry': './src/index.js'
+    'h5p-accounting-journal-entry': [
+      './src/polyfills.js',
+      './src/index.js'
+    ]
   },
   plugins: [
     new MiniCssExtractPlugin()
