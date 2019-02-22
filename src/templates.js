@@ -1,3 +1,5 @@
+import { formatAmount } from './helpers';
+
 import styles from './journal-entry.css';
 
 
@@ -24,8 +26,8 @@ export const journalItemTemplate = (data) => (`
     </tbody>
     <tfoot>
         <th class="${styles.totalLabel}" colspan="5">Total:</th>
-        <th class="${styles.totalDebit}">0.00</th>
-        <th class="${styles.totalCredit}">0.00</th>
+        <th class="${styles.totalDebit}">${formatAmount(0)}</th>
+        <th class="${styles.totalCredit}">${formatAmount(0)}</th>
     </tfoot>
   </table>
 `);
