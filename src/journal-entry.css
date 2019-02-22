@@ -3,54 +3,54 @@
   padding: 1em .5em;
 }
 
-table.journalItem {
+table.journal-item {
   width: 100%;
   border-collapse: collapse;
 }
 
-table.journalItem tbody.credit tr:first-child {
+table.journal-item tbody.credit tr:first-child td {
   border-top: solid 2px gray;
 }
 
-table.journalItem tbody.debit td.title,
-table.journalItem tbody.credit td.title {
+table.journal-item tbody.debit td.title,
+table.journal-item tbody.credit td.title {
   vertical-align: top;
   font-weight: bold;
 }
 
-table.journalItem td {
+table.journal-item td {
   padding: .4em;
 }
-table.journalItem td > input:first-child,
-table.journalItem td > select:first-child {
+table.journal-item td > input:first-child,
+table.journal-item td > select:first-child {
   box-sizing: border-box;
   width: 100%;
   margin: 0;
 }
-table.journalItem td.title {
+table.journal-item td.title {
   width: 3em;
 }
-table.journalItem td.account-number {
+table.journal-item td.account-number {
   width: 4em;
 }
-table.journalItem td.account-name {
+table.journal-item td.account-name {
   width: auto;
 }
-table.journalItem td.invoice-type {
+table.journal-item td.invoice-type {
   width: 7em;
 }
-table.journalItem td.plus-min {
+table.journal-item td.plus-min {
   width: 3em;
 }
-table.journalItem td.amount-debit {
+table.journal-item td.amount-debit {
   width: 5em;
 }
-table.journalItem td.amount-credit {
+table.journal-item td.amount-credit {
   width: 5em;
 }
 
-table.journalItem tfoot th.total-label,
-table.journalItem tfoot th.total-debit,
-table.journalItem tfoot th.total-credit {
+table.journal-item tfoot th.total-label,
+table.journal-item tfoot th.total-debit,
+table.journal-item tfoot th.total-credit {
   text-align: right;
 }
