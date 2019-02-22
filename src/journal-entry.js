@@ -1,3 +1,4 @@
+import { formatAmount } from './helpers';
 import { journalItemTemplate, journalTransactionTemplate } from './templates';
 
 import styles from './journal-entry.css';
@@ -93,8 +94,4 @@ function calculateTotals(table) {
 
   table.querySelector(`th.${styles.totalDebit}`).textContent = formatAmount(totalDebit);
   table.querySelector(`th.${styles.totalCredit}`).textContent = formatAmount(totalCredit);
-}
-
-function formatAmount(amount) {
-  return amount.toLocaleString(undefined, { minimumFractionDigits: 2 });
 }
