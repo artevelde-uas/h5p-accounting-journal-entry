@@ -1,4 +1,4 @@
-import { formatAmount } from './helpers';
+import { getPath, formatAmount } from './helpers';
 import { journalItemTemplate, journalTransactionTemplate } from './templates';
 
 import styles from './journal-entry.css';
@@ -15,6 +15,9 @@ export default class {
    */
   constructor(params, contentId, extras = {}) {
     
+    console.log(params);
+    
+    this.params = params;
   }
   
   /**
@@ -24,39 +27,71 @@ export default class {
    */
   attach($container) {
     var container = $container.get(0);
-    var entry = document.createElement('div');
+    var chartType = this.params.chart_type;
     
-    entry.classList.add(styles.journalEntry);
-    entry.insertAdjacentHTML('afterbegin', journalItemTemplate());
-
-    // Add or remove transaction rows if necessary
-    container.addEventListener('keyup', function (event) {
-      if (event.target.matches(`table.${styles.journalItem} td input`)) {
-        let row = event.target.closest('tr');
-        let accountNumber = row.querySelector(`td.${styles.accountNumber} input`).value;
-        let amount = row.querySelector(`td.${styles.amountDebit} input, td.${styles.amountCredit} input`).value;
-        
-        if (accountNumber === '' && amount === '') {
-          removeTransactionRow(row);
-        } else if (accountNumber !== '' || amount !== '') {
-          addTransactionRow(row);
-        }
-      }
-    });
-    
-    // Calculate debit and credit totals if necessary
-    container.addEventListener('keyup', function (event) {
-      if (event.target.matches(`td.${styles.amountDebit} input, td.${styles.amountCredit} input`)) {
-        let table = event.target.closest('table');
-        
-        calculateTotals(table);
-      }
-    });
+    getChart(chartType).then((chart) => attach(container, chart));
     
     container.classList.add('h5p-accounting-journal-entry');
-    container.appendChild(entry);
+    
+    
   }
   
+}
+
+function getChart(chartType) {
+  return fetch(getPath(`./assets/charts/${chartType}.json`))
+      .then(response => response.json())
+      .catch(console.error);
+}
+
+function attach(container, chart) {
+  var entry = document.createElement('div');
+
+  entry.classList.add(styles.journalEntry);
+  entry.insertAdjacentHTML('afterbegin', journalItemTemplate());
+
+  // Add or remove transaction rows if necessary
+  container.addEventListener('keyup', function (event) {
+    if (event.target.matches(`table.${styles.journalItem} td input`)) {
+      let row = event.target.closest('tr');
+      let accountNumber = row.querySelector(`td.${styles.accountNumber} input`).value;
+      let amount = row.querySelector(`td.${styles.amountDebit} input, td.${styles.amountCredit} input`).value;
+      
+      if (accountNumber === '' && amount === '') {
+        removeTransactionRow(row);
+      } else if (accountNumber !== '' || amount !== '') {
+        addTransactionRow(row);
+      }
+    }
+  });
+  
+  // Lookup descriptions in chart of accounts
+  container.addEventListener('keyup', function (event) {
+    if (event.target.matches(`td.${styles.accountNumber} input`)) {
+      let row = event.target.closest('tr');
+      let accountNameCell = row.querySelector(`td.${styles.accountName}`);
+      let accountNumber = event.target.value;
+      
+      if (chart.hasOwnProperty(accountNumber)) {
+        accountNameCell.textContent = chart[accountNumber];
+      } else if (accountNumber === '') {
+        accountNameCell.innerHTML = `<span class="${styles.empty}">&larr; Enter an account number</span>`;
+      } else {
+        accountNameCell.innerHTML = `<span class="${styles.invalid}">&larr; Invalid account number</span>`;
+      }
+    }
+  });
+  
+  // Calculate debit and credit totals if necessary
+  container.addEventListener('keyup', function (event) {
+    if (event.target.matches(`td.${styles.amountDebit} input, td.${styles.amountCredit} input`)) {
+      let table = event.target.closest('table');
+      
+      calculateTotals(table);
+    }
+  });
+
+  container.appendChild(entry);
 }
 
 function removeTransactionRow(row) {

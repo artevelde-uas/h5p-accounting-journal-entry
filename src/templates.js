@@ -43,6 +43,7 @@ export const journalTransactionTemplate = (data, amountType, titleSpan = false) 
       <input type="text" />
     </td>
     <td class="${styles.accountName}">
+      <span class="${styles.empty}">&larr; Enter an account number</span>
     </td>
     <td class="${styles.invoiceType}">
       <select>

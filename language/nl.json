@@ -1,6 +1,14 @@
 {
   "semantics": [
     {
+      "label": "Chart of Accounts type",
+      "options": [
+        {
+          "label": "België &ndash; Genormaliseerd rekeningstelsel (MAR)"
+        }
+      ]
+    },
+    {
       "label": "Debet",
       "field": {
         "label": "Debet item",

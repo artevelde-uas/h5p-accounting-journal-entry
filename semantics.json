@@ -1,5 +1,16 @@
 [
   {
+    "name": "chart_type",
+    "type": "select",
+    "label": "Chart of Accounts type",
+    "options": [
+      {
+        "value": "belgium-mar",
+          "label": "Belgium &ndash; Normalised Chart of Accounts (MAR)"
+      }
+    ]
+  },
+  {
     "name": "debit_list",
     "type": "list",
     "label": "Debit",

@@ -36,6 +36,12 @@ table.journal-item td.account-number {
 table.journal-item td.account-name {
   width: auto;
 }
+table.journal-item td.account-name > span.empty {
+  color: gray;
+}
+table.journal-item td.account-name > span.invalid {
+  color: red;
+}
 table.journal-item td.invoice-type {
   width: 7em;
 }

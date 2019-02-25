@@ -1,3 +1,4 @@
+const { EnvironmentPlugin } = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const postcssImport = require('postcss-import');
 const postcssPresetEnv = require('postcss-preset-env');
@@ -12,6 +13,9 @@ module.exports = {
     ]
   },
   plugins: [
+    new EnvironmentPlugin({
+      NODE_ENV: 'production'
+    }),
     new MiniCssExtractPlugin()
   ],
   module: {
