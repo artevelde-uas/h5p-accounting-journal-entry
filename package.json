@@ -5,6 +5,10 @@
     "build-dev": "webpack --progress --config ./conf/webpack.dev.config.js",
     "watch": "webpack --watch --config ./conf/webpack.dev.config.js"
   },
+  "dependencies": {
+    "@babel/polyfill": "^7.2.5",
+    "whatwg-fetch": "^3.0.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.3.3",
     "@babel/preset-env": "^7.3.1",

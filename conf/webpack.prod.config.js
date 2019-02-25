@@ -8,6 +8,8 @@ module.exports = {
   mode: 'production',
   entry: {
     'h5p-accounting-journal-entry': [
+      '@babel/polyfill',
+      'whatwg-fetch',
       './src/polyfills.js',
       './src/index.js'
     ]
