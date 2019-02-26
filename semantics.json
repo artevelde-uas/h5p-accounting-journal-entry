@@ -1,6 +1,6 @@
 [
   {
-    "name": "chart_type",
+    "name": "chartType",
     "type": "select",
     "label": "Chart of Accounts type",
     "options": [
@@ -11,30 +11,30 @@
     ]
   },
   {
-    "name": "debit_list",
+    "name": "debitList",
     "type": "list",
     "label": "Debit",
     "min": 1,
     "field": {
-      "name": "debit_item",
+      "name": "debitItem",
       "type": "group",
       "label": "Debit item",
       "importance": "high",
       "entity": "content",
       "fields": [
         {
-          "name": "account_number",
+          "name": "accountNumber",
           "type": "number",
           "label": "Account number"
         },
         {
-          "name": "account_name",
+          "name": "accountName",
           "type": "text",
           "label": "Account name",
           "expanded": true
         },
         {
-          "name": "invoice_type",
+          "name": "invoiceType",
           "type": "select",
           "label": "Type",
           "options": [
@@ -61,7 +61,7 @@
           "default": "-"
         },
         {
-          "name": "plus_minus",
+          "name": "plusMinus",
           "type": "select",
           "label": "Plus / minus",
           "options": [
@@ -77,7 +77,7 @@
           "default": "plus"
         },
         {
-          "name": "debit_amount",
+          "name": "debitAmount",
           "type": "number",
           "label": "Debit amount",
           "decimals": 2
@@ -86,30 +86,30 @@
     }
   },
   {
-    "name": "credit_list",
+    "name": "creditList",
     "type": "list",
     "label": "Credit",
     "min": 1,
     "field": {
-      "name": "credit_item",
+      "name": "creditItem",
       "type": "group",
       "label": "Credit item",
       "importance": "high",
       "entity": "content",
       "fields": [
         {
-          "name": "account_number",
+          "name": "accountNumber",
           "type": "number",
           "label": "Account number"
         },
         {
-          "name": "account_name",
+          "name": "accountName",
           "type": "text",
           "label": "Account name",
           "expanded": true
         },
         {
-          "name": "invoice_type",
+          "name": "invoiceType",
           "type": "select",
           "label": "Type",
           "options": [
@@ -136,7 +136,7 @@
           "default": "-"
         },
         {
-          "name": "plus_minus",
+          "name": "plusMinus",
           "type": "select",
           "label": "+/-",
           "options": [
@@ -152,7 +152,7 @@
           "default": "plus"
         },
         {
-          "name": "credit_amount",
+          "name": "creditAmount",
           "type": "number",
           "label": "Credit amount",
           "decimals": 2

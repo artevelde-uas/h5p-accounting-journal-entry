@@ -29,7 +29,7 @@ export default class {
   attach($container) {
     var container = $container.get(0);
     var lang = getLang(container);
-    var chartType = this.params.chart_type;
+    var chartType = this.params.chartType;
     var promise = Promise.all([getTranslations(lang), getChart(chartType)]);
     
     // Wait for all the files to load, then do initialization
