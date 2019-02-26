@@ -1,4 +1,18 @@
 {
+  "uiStrings": {
+    "number": "Number",
+    "account_name": "Account name",
+    "type": "Type",
+    "debit": "Debit",
+    "credit": "Credit",
+    "total": "Total",
+    "assets": "Assets",
+    "liabilities": "Liabilities",
+    "expenses": "Expenses",
+    "revenue": "Revenue",
+    "enter_account_number": "Enter an account number",
+    "invalid_account_number": "Invalid account number"
+  },
   "semantics": [
     {
       "label": "Chart of Accounts type",

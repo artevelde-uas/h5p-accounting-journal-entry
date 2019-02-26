@@ -1,4 +1,18 @@
 {
+  "uiStrings": {
+    "number": "Nummer",
+    "account_name": "Rekening naam",
+    "type": "Type",
+    "debit": "Debet",
+    "credit": "Credit",
+    "total": "Totaal",
+    "assets": "Activa",
+    "liabilities": "Passiva",
+    "expenses": "Kost",
+    "revenue": "Opbrengst",
+    "enter_account_number": "Geef een rekeningnummer in",
+    "invalid_account_number": "Ongeldig rekening nummer"
+  },
   "semantics": [
     {
       "label": "Chart of Accounts type",

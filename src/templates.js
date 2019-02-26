@@ -1,4 +1,4 @@
-import { formatAmount } from './helpers';
+import { translate as __, formatAmount } from './helpers';
 
 import styles from './journal-entry.css';
 
@@ -8,12 +8,12 @@ export const journalItemTemplate = (data) => (`
     <thead>
       <tr>
         <th></th>
-        <th>Number</th>
-        <th>Account name</th>
-        <th>Type</th>
+        <th>${__('number')}</th>
+        <th>${__('account_name')}</th>
+        <th>${__('type')}</th>
         <th>&plus; / &minus;</th>
-        <th>Debit</th>
-        <th>Credit</th>
+        <th>${__('debit')}</th>
+        <th>${__('credit')}</th>
       </tr>
     </thead>
     <tbody class="${styles.debit}">
@@ -25,7 +25,7 @@ export const journalItemTemplate = (data) => (`
       ${journalTransactionTemplate(data, 'credit')}
     </tbody>
     <tfoot>
-        <th class="${styles.totalLabel}" colspan="5">Total:</th>
+        <th class="${styles.totalLabel}" colspan="5">${__('total')}:</th>
         <th class="${styles.totalDebit}">${formatAmount(0)}</th>
         <th class="${styles.totalCredit}">${formatAmount(0)}</th>
     </tfoot>
@@ -36,22 +36,22 @@ export const journalTransactionTemplate = (data, amountType, titleSpan = false) 
   <tr>
     ${titleSpan ? `
       <td rowspan="${titleSpan}" class="${styles.title}">
-        ${amountType === 'debit' ? 'Debit' : 'Credit' }
+        ${__(amountType)}
       </td>
     ` : ''}
     <td class="${styles.accountNumber}">
       <input type="text" />
     </td>
     <td class="${styles.accountName}">
-      <span class="${styles.empty}">&larr; Enter an account number</span>
+      <span class="${styles.empty}">&larr; ${__('enter_account_number')}</span>
     </td>
     <td class="${styles.invoiceType}">
       <select>
         <option>&mdash;</option>
-        <option value="A">Assets</option>
-        <option value="L">Liabilities</option>
-        <option value="E">Expenses</option>
-        <option value="R">Revenue</option>
+        <option value="A">${__('assets')}</option>
+        <option value="L">${__('liabilities')}</option>
+        <option value="E">${__('expenses')}</option>
+        <option value="R">${__('revenue')}</option>
       </select>
     </td>
     <td class="${styles.plusMin}">
