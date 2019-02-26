@@ -40,13 +40,13 @@ export const journalTransactionTemplate = (data, amountType, titleSpan = false) 
       </td>
     ` : ''}
     <td class="${styles.accountNumber}">
-      <input type="text" />
+      <input type="text" name="accountNumber" />
     </td>
     <td class="${styles.accountName}">
       <span class="${styles.empty}">&larr; ${__('enter_account_number')}</span>
     </td>
     <td class="${styles.invoiceType}">
-      <select>
+      <select name="invoiceType">
         <option>&mdash;</option>
         <option value="A">${__('assets')}</option>
         <option value="L">${__('liabilities')}</option>
@@ -55,7 +55,7 @@ export const journalTransactionTemplate = (data, amountType, titleSpan = false) 
       </select>
     </td>
     <td class="${styles.plusMin}">
-      <select>
+      <select name="plusMinus">
         <option></option>
         <option value="plus">&plus;</option>
         <option value="minus">&minus;</option>
@@ -63,12 +63,12 @@ export const journalTransactionTemplate = (data, amountType, titleSpan = false) 
     </td>
     <td class="${styles.amountDebit}">
       ${amountType === 'debit' ? `
-        <input type="text" />
+        <input type="text" name="amount" />
       ` : ''}
     </td>
     <td class="${styles.amountCredit}">
       ${amountType === 'credit' ? `
-        <input type="text" />
+        <input type="text" name="amount" />
       ` : ''}
     </td>
   </tr>
