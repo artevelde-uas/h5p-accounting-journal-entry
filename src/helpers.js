@@ -4,7 +4,9 @@ import library from '../library.json';
 
 
 export function getPath(path = '') {
-  return normailizePath(`${H5PIntegration.url}/${process.env.NODE_ENV}/${library.machineName}/${path}`);
+  var librariesFolder = (process.env.NODE_ENV === 'development') ? 'development' : 'libraries';
+  
+  return normailizePath(`${H5PIntegration.url}/${librariesFolder}/${library.machineName}/${path}`);
 }
 
 export function getLang(element = document.documentElement) {
