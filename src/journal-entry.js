@@ -63,7 +63,7 @@ function attach(container, chart) {
     if (event.target.matches(`table.${styles.journalItem} td input`)) {
       let row = event.target.closest('tr');
       let accountNumber = row.querySelector(`td.${styles.accountNumber} input`).value;
-      let amount = row.querySelector(`td.${styles.amountDebit} input, td.${styles.amountCredit} input`).value;
+      let amount = row.querySelector('input[name="amount"]').value;
       
       if (accountNumber === '' && amount === '') {
         removeTransactionRow(row);
@@ -92,7 +92,7 @@ function attach(container, chart) {
   
   // Calculate debit and credit totals if necessary
   container.addEventListener('keyup', function (event) {
-    if (event.target.matches(`td.${styles.amountDebit} input, td.${styles.amountCredit} input`)) {
+    if (event.target.matches('input[name="amount"]')) {
       let table = event.target.closest('table');
       
       calculateTotals(table);
@@ -132,8 +132,8 @@ function addTransactionRow(row) {
 
 function calculateTotals(table) {
   var reducer = (sum, input) => (sum + Number(input.value));
-  var totalDebit = Array.from(table.querySelectorAll(`td.${styles.amountDebit} input`)).reduce(reducer, 0);
-  var totalCredit = Array.from(table.querySelectorAll(`td.${styles.amountCredit} input`)).reduce(reducer, 0);
+  var totalDebit = Array.from(table.querySelectorAll(`tbody.${styles.debit} input[name="amount"]`)).reduce(reducer, 0);
+  var totalCredit = Array.from(table.querySelectorAll(`tbody.${styles.credit} input[name="amount"]`)).reduce(reducer, 0);
 
   table.querySelector(`th.${styles.totalDebit}`).textContent = formatAmount(totalDebit);
   table.querySelector(`th.${styles.totalCredit}`).textContent = formatAmount(totalCredit);
