@@ -77,7 +77,7 @@
           "default": "plus"
         },
         {
-          "name": "debitAmount",
+          "name": "amount",
           "type": "number",
           "label": "Debit amount",
           "decimals": 2
@@ -152,7 +152,7 @@
           "default": "plus"
         },
         {
-          "name": "creditAmount",
+          "name": "amount",
           "type": "number",
           "label": "Credit amount",
           "decimals": 2
