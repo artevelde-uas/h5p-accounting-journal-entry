@@ -13,6 +13,12 @@ export function getLang(element = document.documentElement) {
   return element.lang || element.getAttribute('xml:lang') || 'en';
 }
 
+export function getJSON(path) {
+  return fetch(getPath(path))
+    .then(response => response.json())
+    .catch(console.error);
+}
+
 export function translate(key, vars = null) {
   return H5P.t(key, vars, library.machineName)
 }

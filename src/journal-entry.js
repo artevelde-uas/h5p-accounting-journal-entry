@@ -1,4 +1,4 @@
-import { getPath, getLang, translate as __, formatAmount } from './helpers';
+import { getJSON, getLang, translate as __, formatAmount } from './helpers';
 import { journalItemTemplate, journalTransactionTemplate } from './templates';
 
 import library from '../library.json';
@@ -48,15 +48,11 @@ export default class {
 
 
 function getTranslations(lang) {
-  return fetch(getPath(`./language/${lang}.json`))
-    .then(response => response.json())
-    .catch(console.error);
+  return getJSON(`./language/${lang}.json`);
 }
 
 function getChart(chartType) {
-  return fetch(getPath(`./assets/charts/${chartType}.json`))
-    .then(response => response.json())
-    .catch(console.error);
+  return getJSON(`./assets/charts/${chartType}.json`);
 }
 
 function attach(container, chart) {
