@@ -59,7 +59,7 @@ function attach(container, chart) {
   entry.insertAdjacentHTML('afterbegin', journalItemTemplate());
 
   // Add or remove transaction rows if necessary
-  container.addEventListener('keyup', function (event) {
+  container.addEventListener('input', function (event) {
     if (event.target.matches(`table.${styles.journalItem} td input`)) {
       let row = event.target.closest('tr');
       let accountNumber = row.querySelector(`td.${styles.accountNumber} input`).value;
@@ -74,7 +74,7 @@ function attach(container, chart) {
   });
   
   // Lookup descriptions in chart of accounts
-  container.addEventListener('keyup', function (event) {
+  container.addEventListener('input', function (event) {
     if (event.target.matches(`td.${styles.accountNumber} input`)) {
       let row = event.target.closest('tr');
       let accountNameCell = row.querySelector(`td.${styles.accountName}`);
@@ -91,7 +91,7 @@ function attach(container, chart) {
   });
   
   // Calculate debit and credit totals if necessary
-  container.addEventListener('keyup', function (event) {
+  container.addEventListener('input', function (event) {
     if (event.target.matches('input[name="amount"]')) {
       let table = event.target.closest('table');
       
