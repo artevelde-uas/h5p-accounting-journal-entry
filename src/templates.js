@@ -54,7 +54,7 @@ export const journalTransactionTemplate = (data, amountType, titleSpan = false) 
         <option value="R">${__('revenue')}</option>
       </select>
     </td>
-    <td class="${styles.plusMin}">
+    <td class="${styles.plusMinus}">
       <select name="plusMinus">
         <option></option>
         <option value="plus">&plus;</option>

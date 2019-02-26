@@ -63,7 +63,7 @@ table.journal-item td.account-name > span.invalid {
 table.journal-item td.invoice-type {
   width: 7em;
 }
-table.journal-item td.plus-min {
+table.journal-item td.plus-minus {
   width: 3em;
 }
 table.journal-item td.amount-debit,
