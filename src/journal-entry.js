@@ -1,6 +1,7 @@
-import { getPath, formatAmount } from './helpers';
+import { getPath, getLang, translate as __, formatAmount } from './helpers';
 import { journalItemTemplate, journalTransactionTemplate } from './templates';
 
+import library from '../library.json';
 import styles from './journal-entry.css';
 
 
@@ -27,21 +28,35 @@ export default class {
    */
   attach($container) {
     var container = $container.get(0);
+    var lang = getLang(container);
     var chartType = this.params.chart_type;
+    var promise = Promise.all([getTranslations(lang), getChart(chartType)]);
     
-    getChart(chartType).then((chart) => attach(container, chart));
+    // Wait for all the files to load, then do initialization
+    promise.then(function ([translations, chart]) {
+      // Store UI strings into translation tool
+      H5PIntegration.l10n[library.machineName] = translations.uiStrings;
+      
+      // Attach the content to the container
+      attach(container, chart);
+    });
     
     container.classList.add('h5p-accounting-journal-entry');
-    
-    
   }
   
 }
 
+
+function getTranslations(lang) {
+  return fetch(getPath(`./language/${lang}.json`))
+    .then(response => response.json())
+    .catch(console.error);
+}
+
 function getChart(chartType) {
   return fetch(getPath(`./assets/charts/${chartType}.json`))
-      .then(response => response.json())
-      .catch(console.error);
+    .then(response => response.json())
+    .catch(console.error);
 }
 
 function attach(container, chart) {
