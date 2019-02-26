@@ -15,9 +15,6 @@ export default class {
    * @param {object} [extras] Saved state, metadata, etc.
    */
   constructor(params, contentId, extras = {}) {
-    
-    console.log(params);
-    
     this.params = params;
   }
   
