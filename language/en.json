@@ -19,6 +19,9 @@
       "options": [
         {
           "label": "Belgium &ndash; Normalised Chart of Accounts (MAR)"
+        },
+        {
+          "label": "Luxembourg &ndash; Normalised Chart of Accounts (PCN)"
         }
       ]
     },
