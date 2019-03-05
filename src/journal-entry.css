@@ -6,6 +6,7 @@
 table.journal-item {
   width: 100%;
   border-collapse: collapse;
+  box-shadow: 0 1px 15px 1px rgba(39,39,39,.1);
 }
 
 table.journal-item tbody.credit tr:first-child td {
@@ -18,9 +19,26 @@ table.journal-item tbody.credit td.title {
   font-weight: bold;
 }
 
-table.journal-item td {
-  padding: .4em;
+table.journal-item th{
+  border: 1px solid #a0a0a0;
+  background: #e9e9e4;
+  color: #000000;  
 }
+
+table.journal-item td, table.journal-item tr {
+  padding: .5em 1.25em .5em .5em;
+  border: 1px solid #ddd;
+}
+
+table.journal-item tr {
+ /* padding: .4em; */
+  background: #fbfbfb;
+}
+
+table.journal-item tr:hover {
+  background-color: rgba(0,0,0,.05);
+}
+
 table.journal-item td > input:first-child,
 table.journal-item td > select:first-child {
   box-sizing: border-box;
@@ -61,4 +79,8 @@ table.journal-item tfoot th.total-label,
 table.journal-item tfoot th.total-debit,
 table.journal-item tfoot th.total-credit {
   text-align: right;
+}
+
+table.journal-item tfoot th{
+  border: 1px solid #a0a0a0;
 }
