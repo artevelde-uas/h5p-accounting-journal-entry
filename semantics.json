@@ -43,7 +43,7 @@
           "label": "Type",
           "options": [
             {
-              "label": "-"
+              "label": "&mdash;"
             },
             {
               "value": "A",
@@ -62,7 +62,7 @@
               "label": "Revenue"
             }
           ],
-          "default": "-"
+          "default": "&mdash;"
         },
         {
           "name": "plusMinus",

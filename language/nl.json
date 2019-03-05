@@ -40,7 +40,7 @@
             "label": "Type",
             "options": [
               {
-                "label": "-"
+                "label": "&mdash;"
               },
               {
                 "label": "Activa"
@@ -55,7 +55,7 @@
                 "label": "Opbrengst"
               }
             ],
-            "default": "-"
+            "default": "&mdash;"
           },
           {
             "label": "Plus / min",
