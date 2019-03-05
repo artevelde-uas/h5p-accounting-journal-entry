@@ -54,6 +54,10 @@ table.journal-item td.account-number {
 table.journal-item td.account-name {
   width: auto;
 }
+table.journal-item td.account-name > span.empty::before,
+table.journal-item td.account-name > span.invalid::before {
+  content: '\2190\a0'; /* &larr; + &nbsp; */
+}
 table.journal-item td.account-name > span.empty {
   color: gray;
 }

@@ -83,9 +83,9 @@ function attach(container, chart) {
       if (chart.hasOwnProperty(accountNumber)) {
         accountNameCell.textContent = chart[accountNumber];
       } else if (accountNumber === '') {
-        accountNameCell.innerHTML = `<span class="${styles.empty}">&larr; ${__('enter_account_number')}</span>`;
+        accountNameCell.innerHTML = `<span class="${styles.empty}">${__('enter_account_number')}</span>`;
       } else {
-        accountNameCell.innerHTML = `<span class="${styles.invalid}">&larr; ${__('invalid_account_number')}</span>`;
+        accountNameCell.innerHTML = `<span class="${styles.invalid}">${__('invalid_account_number')}</span>`;
       }
     }
   });

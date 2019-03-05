@@ -43,7 +43,7 @@ export const journalTransactionTemplate = (data, amountType, titleSpan = false) 
       <input type="text" name="accountNumber" />
     </td>
     <td class="${styles.accountName}">
-      <span class="${styles.empty}">&larr; ${__('enter_account_number')}</span>
+      <span class="${styles.empty}">${__('enter_account_number')}</span>
     </td>
     <td class="${styles.invoiceType}">
       <select name="invoiceType">
