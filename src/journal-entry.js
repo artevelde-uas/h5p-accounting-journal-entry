@@ -1,8 +1,7 @@
-import { getJSON, getLang, translate as __, formatAmount } from './helpers';
-import { journalItemTemplate, journalTransactionTemplate } from './templates';
+import { getJSON, getLang } from './helpers';
+import JournalItem from './JournalItem';
 
 import library from '../library.json';
-import styles from './journal-entry.css';
 
 
 export default class {
@@ -35,99 +34,12 @@ export default class {
       // Store UI strings into translation tool
       H5PIntegration.l10n[library.machineName] = translations.uiStrings;
       
-      // Attach the content to the container
-      attach(container, chart);
+      // Attach the component to the container
+      let journalItem = new JournalItem(chart);
+      journalItem.render(container);
     });
     
     container.classList.add('h5p-accounting-journal-entry');
   }
   
-}
-
-
-function attach(container, chart) {
-  var entry = document.createElement('div');
-
-  entry.classList.add(styles.journalEntry);
-  entry.insertAdjacentHTML('afterbegin', journalItemTemplate());
-
-  // Add or remove transaction rows if necessary
-  container.addEventListener('input', function (event) {
-    if (event.target.matches(`table.${styles.journalItem} td input`)) {
-      let row = event.target.closest('tr');
-      let accountNumber = row.querySelector(`td.${styles.accountNumber} input`).value;
-      let amount = row.querySelector('input[name="amount"]').value;
-      
-      if (accountNumber === '' && amount === '') {
-        removeTransactionRow(row);
-      } else if (accountNumber !== '' || amount !== '') {
-        addTransactionRow(row);
-      }
-    }
-  });
-  
-  // Lookup descriptions in chart of accounts
-  container.addEventListener('input', function (event) {
-    if (event.target.matches(`td.${styles.accountNumber} input`)) {
-      let row = event.target.closest('tr');
-      let accountNameCell = row.querySelector(`td.${styles.accountName}`);
-      let accountNumber = event.target.value;
-      
-      if (chart.hasOwnProperty(accountNumber)) {
-        accountNameCell.textContent = chart[accountNumber];
-      } else if (accountNumber === '') {
-        accountNameCell.innerHTML = `<span class="${styles.empty}">${__('enter_account_number')}</span>`;
-      } else {
-        accountNameCell.innerHTML = `<span class="${styles.invalid}">${__('invalid_account_number')}</span>`;
-      }
-    }
-  });
-  
-  // Calculate debit and credit totals if necessary
-  container.addEventListener('input', function (event) {
-    if (event.target.matches('input[name="amount"]')) {
-      let table = event.target.closest('table');
-      
-      calculateTotals(table);
-    }
-  });
-
-  container.appendChild(entry);
-}
-
-function removeTransactionRow(row) {
-  let list = row.parentNode;
-  
-  // Do not remove if there are no more than two rows
-  if (list.children.length <= 2) return false;
-  
-  // Move the title cell to the next row if on first row
-  if (row.previousElementSibling === null) {
-    let nextRow = row.nextElementSibling;
-    
-    nextRow.insertBefore(row.firstElementChild, nextRow.firstElementChild);
-  }
-  
-  list.removeChild(row);
-  list.querySelector(`td.${styles.title}`).setAttribute('rowspan', list.children.length);
-}
-
-function addTransactionRow(row) {
-  // Only insert a new row if on the last row
-  if (row.nextElementSibling !== null) return false;
-  
-  let list = row.parentNode;
-  let type = list.classList.contains(styles.debit) ? 'debit' : 'credit';
-  
-  row.insertAdjacentHTML('afterend', journalTransactionTemplate(null, type));
-  list.querySelector(`td.${styles.title}`).setAttribute('rowspan', list.children.length);
-}
-
-function calculateTotals(table) {
-  var reducer = (sum, input) => (sum + Number(input.value));
-  var totalDebit = Array.from(table.querySelectorAll(`tbody.${styles.debit} input[name="amount"]`)).reduce(reducer, 0);
-  var totalCredit = Array.from(table.querySelectorAll(`tbody.${styles.credit} input[name="amount"]`)).reduce(reducer, 0);
-
-  table.querySelector(`th.${styles.totalDebit}`).textContent = formatAmount(totalDebit);
-  table.querySelector(`th.${styles.totalCredit}`).textContent = formatAmount(totalCredit);
 }

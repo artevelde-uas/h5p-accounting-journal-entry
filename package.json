@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.2.5",
+    "events": "^3.0.0",
     "whatwg-fetch": "^3.0.0"
   },
   "devDependencies": {
@@ -20,7 +21,6 @@
     "postcss-loader": "^3.0.0",
     "postcss-preset-env": "^6.5.0",
     "style-loader": "^0.23.1",
-    "uglifyjs-webpack-plugin": "^2.1.1",
     "webpack": "^4.29.5",
     "webpack-cli": "^3.2.3"
   }
