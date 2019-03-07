@@ -18,7 +18,9 @@ export function getLang(element = document.documentElement) {
 export function getJSON(path) {
   return fetch(getPath(path))
     .then(response => response.json())
-    .catch(console.error);
+    .catch(function (error) {
+      throw error;
+    });
 }
 
 export function translate(key, vars = null) {
