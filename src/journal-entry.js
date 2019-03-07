@@ -27,10 +27,11 @@ export default class {
     var container = $container.get(0);
     var lang = getLang(container);
     var chartType = this.params.chartType;
-    var promise = Promise.all([getTranslations(lang), getChart(chartType)]);
+    var translations = getJSON(`./language/${lang}.json`);
+    var chart = getJSON(`./assets/charts/${chartType}.json`);
     
     // Wait for all the files to load, then do initialization
-    promise.then(function ([translations, chart]) {
+    Promise.all([translations, chart]).then(([translations, chart]) => {
       // Store UI strings into translation tool
       H5PIntegration.l10n[library.machineName] = translations.uiStrings;
       
@@ -43,14 +44,6 @@ export default class {
   
 }
 
-
-function getTranslations(lang) {
-  return getJSON(`./language/${lang}.json`);
-}
-
-function getChart(chartType) {
-  return getJSON(`./assets/charts/${chartType}.json`);
-}
 
 function attach(container, chart) {
   var entry = document.createElement('div');
