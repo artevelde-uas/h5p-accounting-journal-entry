@@ -2,6 +2,7 @@ import EventEmitter from 'events';
 
 
 const viewData = new WeakMap();
+const handledEvents = new WeakSet();
 
 export default class Component extends EventEmitter {
   
@@ -90,8 +91,10 @@ export default class Component extends EventEmitter {
         var name = event.target.name;
         var value = event.target.value;
         var oldValue = viewData.get(this)[name] || '';
+
+        if (handledEvents.has(event)) return;
         
-        event.stopPropagation();
+        handledEvents.add(event);
         
         if ((type === 'input' && event.target.tagName === 'SELECT') ||
             (type === 'change' && event.target.tagName !== 'SELECT') ||
