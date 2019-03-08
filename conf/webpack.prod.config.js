@@ -1,4 +1,5 @@
 const { EnvironmentPlugin } = require('webpack');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const postcssImport = require('postcss-import');
 const postcssPresetEnv = require('postcss-preset-env');
@@ -13,6 +14,11 @@ module.exports = {
       'whatwg-fetch',
       './src/polyfills.js',
       './src/index.js'
+    ]
+  },
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin()
     ]
   },
   plugins: [
