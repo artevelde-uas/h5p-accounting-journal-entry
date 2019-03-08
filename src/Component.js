@@ -85,18 +85,24 @@ export default class Component extends EventEmitter {
     
     this.element = fragment.firstElementChild;
     
-    this.element.addEventListener('input', event => {
-      var name = event.target.name;
-      var value = event.target.value;
-      var oldValue = viewData.get(this)[name] || '';
-      
-      event.stopPropagation();
-      
-      if (oldValue === value) return;
-      
-      viewData.get(this)[name] = value;
-      
-      this.emit('change', name, value, oldValue);
+    ['input', 'change'].forEach(type => {
+      this.element.addEventListener(type, event => {
+        var name = event.target.name;
+        var value = event.target.value;
+        var oldValue = viewData.get(this)[name] || '';
+        
+        event.stopPropagation();
+        
+        if ((type === 'input' && event.target.tagName === 'SELECT') ||
+            (type === 'change' && event.target.tagName !== 'SELECT') ||
+            oldValue === value) {
+          return;
+        }
+        
+        viewData.get(this)[name] = value;
+        
+        this.emit('change', name, value, oldValue);
+      });
     });
     
     container.appendChild(fragment.firstElementChild);
