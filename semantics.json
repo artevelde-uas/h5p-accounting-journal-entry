@@ -1,8 +1,13 @@
 [
   {
     "name": "description",
-    "type": "text",  
-    "label": "Description"
+    "type": "text",
+    "label": "Description",
+    "widget": "html",
+    "tags": [
+      "strong",
+      "em"
+    ]
   },
   {
     "name": "chartType",
