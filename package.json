@@ -2,6 +2,7 @@
   "private": true,
   "scripts": {
     "build": "webpack --progress --config ./conf/webpack.prod.config.js",
+    "build-stage": "webpack --progress --config ./conf/webpack.stage.config.js",
     "build-dev": "webpack --progress --config ./conf/webpack.dev.config.js",
     "watch": "webpack --watch --config ./conf/webpack.dev.config.js"
   },
