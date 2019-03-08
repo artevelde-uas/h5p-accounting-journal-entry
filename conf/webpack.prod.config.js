@@ -9,6 +9,7 @@ module.exports = {
   entry: {
     'h5p-accounting-journal-entry': [
       '@babel/polyfill',
+      'nodelist-foreach-polyfill',
       'whatwg-fetch',
       './src/polyfills.js',
       './src/index.js'
