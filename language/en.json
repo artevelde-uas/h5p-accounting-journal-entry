@@ -15,6 +15,9 @@
   },
   "semantics": [
     {
+      "label": "Description"
+    },  
+    {
       "label": "Chart of Accounts type",
       "options": [
         {

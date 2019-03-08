@@ -1,5 +1,10 @@
 [
   {
+    "name": "description",
+    "type": "text",  
+    "label": "Description"
+  },
+  {
     "name": "chartType",
     "type": "select",
     "label": "Chart of Accounts type",

@@ -31,6 +31,11 @@ H5P.AccountingJournalEntry = class {
     var translations = getJSON(`./language/${lang}.json`);
     var chart = getJSON(`./assets/charts/${chartType}.json`);
     
+    // Attach the description
+    container.insertAdjacentHTML('beforeend', `
+      <p>${this.params.description}</p>
+    `);
+      
     // Wait for all the files to load, then do initialization
     Promise.all([translations, chart]).then(([translations, chart]) => {
       // Store UI strings into translation tool
