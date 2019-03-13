@@ -71,6 +71,10 @@ export default class extends Component {
       if (transaction.element === tbody.lastElementChild) {
         this.addTransactionRow(type);
       }
+      
+      if ((this.transactions['debit'].length + this.transactions['credit'].length) === 1) {
+        this.emit('newItem');
+      }
     });
     
     // Check when all data in a row is removed
@@ -80,6 +84,10 @@ export default class extends Component {
       // Remove the row from the list but keep at least two
       if (tbody.children.length > 2) {
         transaction.remove();
+      }
+      
+      if ((this.transactions['debit'].length + this.transactions['credit'].length) === 0) {
+        this.emit('deleteItem');
       }
     });
     
