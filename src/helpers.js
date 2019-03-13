@@ -1,12 +1,12 @@
 import { normalize as normailizePath } from 'path';
 
-import library from '../library.json';
+import { machineName } from '../library.json';
 
 
 export function getPath(path = '') {
   var librariesFolder = (process.env.NODE_ENV === 'development') ? 'development' : 'libraries';
   
-  return normailizePath(`${H5PIntegration.url}/${librariesFolder}/${library.machineName}/${path}`);
+  return normailizePath(`${H5PIntegration.url}/${librariesFolder}/${machineName}/${path}`);
 }
 
 export function getLang(element = document.documentElement) {
@@ -24,7 +24,7 @@ export function getJSON(path) {
 }
 
 export function translate(key, vars = null) {
-  return H5P.t(key, vars, library.machineName)
+  return H5P.t(key, vars, machineName)
 }
 
 export function formatAmount(amount) {

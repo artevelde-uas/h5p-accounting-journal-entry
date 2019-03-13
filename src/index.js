@@ -1,7 +1,9 @@
 import { getJSON, getLang } from './helpers';
 import JournalItem from './JournalItem';
 
-import library from '../library.json';
+import { machineName } from '../library.json';
+
+import styles from './journal-entry.css';
 
 
 const H5P = window.H5P || {};
@@ -39,7 +41,7 @@ H5P.AccountingJournalEntry = class {
     // Wait for all the files to load, then do initialization
     Promise.all([translations, chart]).then(([translations, chart]) => {
       // Store UI strings into translation tool
-      H5PIntegration.l10n[library.machineName] = translations.uiStrings;
+      H5PIntegration.l10n[machineName] = translations.uiStrings;
       
       // Attach the component to the container
       let journalItem = new JournalItem(chart);
