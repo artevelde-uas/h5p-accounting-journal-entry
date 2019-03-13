@@ -1,5 +1,11 @@
 
+button.add-journal-item {}
+
 .journal-entry {
+  padding: 1em .5em;
+}
+
+.journal-entry-list {
   padding: 1em .5em;
 }
 

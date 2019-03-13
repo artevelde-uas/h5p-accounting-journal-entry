@@ -1,5 +1,6 @@
 import { getJSON, getLang } from './helpers';
-import JournalItem from './JournalItem';
+import JournalEntry from './JournalEntry';
+import { translate as __ } from './helpers';
 
 import { machineName } from '../library.json';
 
@@ -36,16 +37,18 @@ H5P.AccountingJournalEntry = class {
     // Attach the description
     container.insertAdjacentHTML('beforeend', `
       <p>${this.params.description}</p>
+      <div class="${styles.journalEntryList}">
+      </div>
     `);
-      
+    
     // Wait for all the files to load, then do initialization
     Promise.all([translations, chart]).then(([translations, chart]) => {
       // Store UI strings into translation tool
       H5PIntegration.l10n[machineName] = translations.uiStrings;
       
       // Attach the component to the container
-      let journalItem = new JournalItem(chart);
-      journalItem.render(container);
+      let journalEntry = new JournalEntry(chart);
+      journalEntry.render(container.querySelector(`div.${styles.journalEntryList}`), { replaceContainer: true });
     });
     
     container.classList.add('h5p-accounting-journal-entry');

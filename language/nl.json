@@ -11,7 +11,8 @@
     "expenses": "Kost",
     "revenue": "Opbrengst",
     "enter_account_number": "Geef een rekeningnummer in",
-    "invalid_account_number": "Ongeldig rekening nummer"
+    "invalid_account_number": "Ongeldig rekening nummer",
+    "add_journal_item": "Voeg journaalitem toe"
   },
   "semantics": [
     {
