@@ -75,7 +75,7 @@ export default class Component extends EventEmitter {
    * @param {HTMLElement} container The container element
    * @param {string} template The HTML to be rendered
    */
-  render(container, template) {
+  render(container, template, options = {}) {
     var fragment = document.createElement(container.tagName);
     
     fragment.innerHTML = template;
@@ -108,7 +108,11 @@ export default class Component extends EventEmitter {
       });
     });
     
-    container.appendChild(fragment.firstElementChild);
+    if (options.replaceContainer) {
+      container.parentNode.replaceChild(fragment.firstElementChild, container);
+    } else {
+      container.appendChild(fragment.firstElementChild);
+    }
   }
   
   /**
