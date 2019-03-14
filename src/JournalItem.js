@@ -19,6 +19,12 @@ export default class extends Component {
       debit: [],
       credit: []
     };
+    
+    Object.defineProperty(this.transactions, 'length', {
+      get: function () {
+        return this.debit.length + this.credit.length;
+      }
+    });
   }
   
   render(container) {
@@ -84,7 +90,7 @@ export default class extends Component {
         this.addTransactionRow(type);
       }
       
-      if ((this.transactions['debit'].length + this.transactions['credit'].length) === 1) {
+      if (this.transactions.length === 1) {
         this.emit('newItem');
       }
     });
@@ -98,7 +104,7 @@ export default class extends Component {
         transaction.remove();
       }
       
-      if ((this.transactions['debit'].length + this.transactions['credit'].length) === 0) {
+      if (this.transactions.length === 0) {
         this.emit('deleteItem');
       }
     });
