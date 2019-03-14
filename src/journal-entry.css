@@ -111,6 +111,7 @@ table.journal-item th.controls button {
 button.add-journal-item {}
 button.delete-journal-item::before {
   content: '\2716';
+  font-family: 'Segoe UI Symbol';
 }
 table.journal-item:only-child button.delete-journal-item {
   display: none;
