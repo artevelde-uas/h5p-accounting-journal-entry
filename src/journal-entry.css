@@ -1,6 +1,4 @@
 
-button.add-journal-item {}
-
 .journal-entry {
   padding: 1em .5em;
 }
@@ -80,6 +78,9 @@ table.journal-item td.amount-debit,
 table.journal-item td.amount-credit {
   width: 5em;
 }
+table.journal-item td.controls {
+  width: 1em;
+}
 table.journal-item td.amount-debit > input,
 table.journal-item td.amount-credit > input {
   text-align: right;
@@ -93,4 +94,24 @@ table.journal-item tfoot th.total-credit {
 
 table.journal-item tfoot th{
   border: 1px solid #a0a0a0;
+}
+
+table.journal-item th.controls {
+  padding: 0;
+  text-align: center;
+}
+table.journal-item th.controls button {
+  padding: 0 0 2px 2px;
+  height: 2em;
+  width: 2em;
+  line-height: 0;
+  font-size: 9px;
+}
+
+button.add-journal-item {}
+button.delete-journal-item::before {
+  content: '\2716';
+}
+table.journal-item:only-child button.delete-journal-item {
+  display: none;
 }

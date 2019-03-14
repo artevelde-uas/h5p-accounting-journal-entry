@@ -93,6 +93,7 @@ export default class extends Component {
             <input type="text" name="amount" />
           ` : ''}
         </td>
+        <td class="${styles.controls}"></td>
       </tr>
     `);
     

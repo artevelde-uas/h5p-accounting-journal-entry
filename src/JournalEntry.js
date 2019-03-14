@@ -23,7 +23,7 @@ export default class extends Component {
       <div class="${styles.journalEntry}">
         <div class="${styles.journalEntryList}">
         </div>
-        <button class="${styles.addJournalItem}">${__('add_journal_item')}</button>
+        <button class="h5p-core-button ${styles.addJournalItem}">${__('add_journal_item')}</button>
       </div>
     `, options);
     
@@ -39,6 +39,13 @@ export default class extends Component {
     var listDiv = this.element.querySelector(`div.${styles.journalEntryList}`);
     
     journalItem.render(listDiv);
+    
+    // Check when item is removed
+    journalItem.on('remove', () => {
+      if (this.items.includes(journalItem)) {
+        this.items.splice(this.items.indexOf(journalItem), 1);
+      }
+    })
     
     // Check for the creation of first new data in an item
     journalItem.on('newItem', () => {

@@ -12,7 +12,8 @@
     "revenue": "Revenue",
     "enter_account_number": "Enter an account number",
     "invalid_account_number": "Invalid account number",
-    "add_journal_item": "Add a jounal item"
+    "add_journal_item": "Add a jounal item",
+    "delete_journal_item": "Delete jounal item"
   },
   "semantics": [
     {

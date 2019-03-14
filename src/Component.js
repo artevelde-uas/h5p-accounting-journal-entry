@@ -121,6 +121,8 @@ export default class Component extends EventEmitter {
   remove() {
     this.element.parentNode.removeChild(this.element);
     delete this.element;
+    
+    this.emit('remove');
   }
   
   /**

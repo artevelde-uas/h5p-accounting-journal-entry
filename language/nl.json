@@ -12,7 +12,8 @@
     "revenue": "Opbrengst",
     "enter_account_number": "Geef een rekeningnummer in",
     "invalid_account_number": "Ongeldig rekening nummer",
-    "add_journal_item": "Voeg journaalitem toe"
+    "add_journal_item": "Voeg journaalitem toe",
+    "delete_journal_item": "Verwijder journaalitem"
   },
   "semantics": [
     {

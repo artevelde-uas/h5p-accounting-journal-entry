@@ -33,6 +33,9 @@ export default class extends Component {
             <th>&plus; / &minus;</th>
             <th>${__('debit')}</th>
             <th>${__('credit')}</th>
+            <th class="${styles.controls}">
+              <button class="h5p-core-button ${styles.deleteJournalItem}" title="${__('delete_journal_item')}"></button>
+            </th>
           </tr>
         </thead>
         <tbody class="${styles.debit}">
@@ -44,10 +47,19 @@ export default class extends Component {
             <th class="${styles.totalLabel}" colspan="5">${__('total')}:</th>
             <th class="${styles.totalDebit}"><output name="totalDebit">${formatAmount(0)}</output></th>
             <th class="${styles.totalCredit}"><output name="totalCredit">${formatAmount(0)}</output></th>
+            <th></th>
           </tr>
         </tfoot>
       </table>
     `);
+    
+    // Remove item if delete button is clicked
+    this.element.querySelector(`.${styles.deleteJournalItem}`).addEventListener('click', () => {
+      // Don't remove if there is only one item left
+      if (this.element.parentNode.children.length === 1) return;
+      
+      this.remove()
+    });
     
     // Add two debit and two credit rows
     this.addTransactionRow('debit');
@@ -102,6 +114,4 @@ export default class extends Component {
     });
   }
   
-  
-
 }
