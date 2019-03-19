@@ -25,151 +25,158 @@
     ]
   },
   {
-    "name": "debitList",
+    "name": "journalItemList",
     "type": "list",
-    "label": "Debit",
+    "label": "Journal items",
     "min": 1,
     "field": {
-      "name": "debitItem",
+      "name": "journalItem",
       "type": "group",
-      "label": "Debit item",
-      "importance": "high",
-      "entity": "content",
+      "label": "Journal Item",
       "fields": [
         {
-          "name": "accountNumber",
-          "type": "number",
-          "label": "Account number"
+          "name": "debitList",
+          "type": "list",
+          "label": "Debit",
+          "min": 1,
+          "field": {
+            "name": "debitItem",
+            "type": "group",
+            "label": "Debit item",
+            "fields": [
+              {
+                "name": "accountNumber",
+                "type": "number",
+                "label": "Account number"
+              },
+              {
+                "name": "accountName",
+                "type": "text",
+                "label": "Account name"
+              },
+              {
+                "name": "invoiceType",
+                "type": "select",
+                "label": "Type",
+                "options": [
+                  {
+                    "label": "&mdash;"
+                  },
+                  {
+                    "value": "A",
+                    "label": "Assets"
+                  },
+                  {
+                    "value": "L",
+                    "label": "Liabilities"
+                  },
+                  {
+                    "value": "E",
+                    "label": "Expenses"
+                  },
+                  {
+                    "value": "R",
+                    "label": "Revenue"
+                  }
+                ],
+                "default": "&mdash;"
+              },
+              {
+                "name": "plusMinus",
+                "type": "select",
+                "label": "Plus / minus",
+                "options": [
+                  {
+                    "value": "plus",
+                    "label": "+"
+                  },
+                  {
+                    "value": "minus",
+                    "label": "-"
+                  }
+                ],
+                "default": "plus"
+              },
+              {
+                "name": "amount",
+                "type": "number",
+                "label": "Debit amount",
+                "decimals": 2
+              }
+            ]
+          }
         },
         {
-          "name": "accountName",
-          "type": "text",
-          "label": "Account name",
-          "expanded": true
-        },
-        {
-          "name": "invoiceType",
-          "type": "select",
-          "label": "Type",
-          "options": [
-            {
-              "label": "&mdash;"
-            },
-            {
-              "value": "A",
-              "label": "Assets"
-            },
-            {
-              "value": "L",
-              "label": "Liabilities"
-            },
-            {
-              "value": "E",
-              "label": "Expenses"
-            },
-            {
-              "value": "R",
-              "label": "Revenue"
-            }
-          ],
-          "default": "&mdash;"
-        },
-        {
-          "name": "plusMinus",
-          "type": "select",
-          "label": "Plus / minus",
-          "options": [
-            {
-              "value": "plus",
-              "label": "+"
-            },
-            {
-              "value": "minus",
-              "label": "-"
-            }
-          ],
-          "default": "plus"
-        },
-        {
-          "name": "amount",
-          "type": "number",
-          "label": "Debit amount",
-          "decimals": 2
-        }
-      ]
-    }
-  },
-  {
-    "name": "creditList",
-    "type": "list",
-    "label": "Credit",
-    "min": 1,
-    "field": {
-      "name": "creditItem",
-      "type": "group",
-      "label": "Credit item",
-      "importance": "high",
-      "entity": "content",
-      "fields": [
-        {
-          "name": "accountNumber",
-          "type": "number",
-          "label": "Account number"
-        },
-        {
-          "name": "accountName",
-          "type": "text",
-          "label": "Account name",
-          "expanded": true
-        },
-        {
-          "name": "invoiceType",
-          "type": "select",
-          "label": "Type",
-          "options": [
-            {
-              "label": "-"
-            },
-            {
-              "value": "A",
-              "label": "Assets"
-            },
-            {
-              "value": "L",
-              "label": "Liabilities"
-            },
-            {
-              "value": "E",
-              "label": "Expenses"
-            },
-            {
-              "value": "R",
-              "label": "Revenue"
-            }
-          ],
-          "default": "-"
-        },
-        {
-          "name": "plusMinus",
-          "type": "select",
-          "label": "+/-",
-          "options": [
-            {
-              "value": "plus",
-              "label": "+"
-            },
-            {
-              "value": "minus",
-              "label": "-"
-            }
-          ],
-          "default": "plus"
-        },
-        {
-          "name": "amount",
-          "type": "number",
-          "label": "Credit amount",
-          "decimals": 2
+          "name": "creditList",
+          "type": "list",
+          "label": "Credit",
+          "min": 1,
+          "field": {
+            "name": "creditItem",
+            "type": "group",
+            "label": "Credit item",
+            "fields": [
+              {
+                "name": "accountNumber",
+                "type": "number",
+                "label": "Account number"
+              },
+              {
+                "name": "accountName",
+                "type": "text",
+                "label": "Account name"
+              },
+              {
+                "name": "invoiceType",
+                "type": "select",
+                "label": "Type",
+                "options": [
+                  {
+                    "label": "-"
+                  },
+                  {
+                    "value": "A",
+                    "label": "Assets"
+                  },
+                  {
+                    "value": "L",
+                    "label": "Liabilities"
+                  },
+                  {
+                    "value": "E",
+                    "label": "Expenses"
+                  },
+                  {
+                    "value": "R",
+                    "label": "Revenue"
+                  }
+                ],
+                "default": "-"
+              },
+              {
+                "name": "plusMinus",
+                "type": "select",
+                "label": "+/-",
+                "options": [
+                  {
+                    "value": "plus",
+                    "label": "+"
+                  },
+                  {
+                    "value": "minus",
+                    "label": "-"
+                  }
+                ],
+                "default": "plus"
+              },
+              {
+                "name": "amount",
+                "type": "number",
+                "label": "Credit amount",
+                "decimals": 2
+              }
+            ]
+          }
         }
       ]
     }
