@@ -18,9 +18,9 @@
   "semantics": [
     {
       "label": "Omschrijving"
-    },    
+    },
     {
-      "label": "Chart of Accounts type",
+      "label": "Type rekeningstelsel",
       "options": [
         {
           "label": "België &ndash; Genormaliseerd rekeningstelsel (MAR)"
@@ -31,14 +31,14 @@
       ]
     },
     {
-      "label": "Journal items",
+      "label": "Journaalitems",
       "field": {
-        "label": "Journal Item",
+        "label": "Journaalitem",
         "fields": [
           {
-            "label": "Debet",
+            "label": "Debettransacties",
             "field": {
-              "label": "Debet item",
+              "label": "Debettransactie",
               "fields": [
                 {
                   "label": "Rekening nummer"
@@ -86,9 +86,9 @@
             }
           },
           {
-            "label": "Credit",
+            "label": "Credittransacties",
             "field": {
-              "label": "Credit item",
+              "label": "Credittransactie",
               "fields": [
                 {
                   "label": "Rekening nummer"

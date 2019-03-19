@@ -25,7 +25,7 @@
     ]
   },
   {
-    "name": "journalItemList",
+    "name": "journalItems",
     "type": "list",
     "label": "Journal items",
     "min": 1,
@@ -35,14 +35,14 @@
       "label": "Journal Item",
       "fields": [
         {
-          "name": "debitList",
+          "name": "debitTransactions",
           "type": "list",
-          "label": "Debit",
+          "label": "Debit transaction",
           "min": 1,
           "field": {
-            "name": "debitItem",
+            "name": "debitTransaction",
             "type": "group",
-            "label": "Debit item",
+            "label": "Debit transaction",
             "fields": [
               {
                 "name": "accountNumber",
@@ -107,14 +107,14 @@
           }
         },
         {
-          "name": "creditList",
+          "name": "creditTransactions",
           "type": "list",
-          "label": "Credit",
+          "label": "Credit transactions",
           "min": 1,
           "field": {
-            "name": "creditItem",
+            "name": "creditTransaction",
             "type": "group",
-            "label": "Credit item",
+            "label": "Credit transaction",
             "fields": [
               {
                 "name": "accountNumber",

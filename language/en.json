@@ -18,7 +18,7 @@
   "semantics": [
     {
       "label": "Description"
-    },  
+    },
     {
       "label": "Chart of Accounts type",
       "options": [
@@ -36,9 +36,9 @@
         "label": "Journal Item",
         "fields": [
           {
-            "label": "Debit",
+            "label": "Debit transactions",
             "field": {
-              "label": "Debit item",
+              "label": "Debit transaction",
               "fields": [
                 {
                   "label": "Account number"
@@ -86,9 +86,9 @@
             }
           },
           {
-            "label": "Credit",
+            "label": "Credit transactions",
             "field": {
-              "label": "Credit item",
+              "label": "Credit transaction",
               "fields": [
                 {
                   "label": "Account number"
