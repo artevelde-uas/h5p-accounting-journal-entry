@@ -2,16 +2,15 @@ import { normalize as normailizePath } from 'path';
 
 import { machineName } from '../library.json';
 
-
 export function getPath(path = '') {
   var librariesFolder = (process.env.NODE_ENV === 'development') ? 'development' : 'libraries';
-  
+
   return normailizePath(`${H5PIntegration.url}/${librariesFolder}/${machineName}/${path}`);
 }
 
 export function getLang(element = document.documentElement) {
   element = element.closest('[lang]') || document.documentElement;
-  
+
   return element.lang || element.getAttribute('xml:lang') || 'en';
 }
 

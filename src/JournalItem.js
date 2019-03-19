@@ -4,7 +4,6 @@ import { translate as __, formatAmount } from './helpers';
 
 import styles from './journal-entry.css';
 
-
 export default class extends Component {
 
   /**
@@ -13,20 +12,20 @@ export default class extends Component {
    */
   constructor(chart) {
     super();
-    
+
     this.chart = chart;
     this.transactions = {
       debit: [],
       credit: []
     };
-    
+
     Object.defineProperty(this.transactions, 'length', {
       get: function () {
         return this.debit.length + this.credit.length;
       }
     });
   }
-  
+
   render(container) {
     super.render(container, `
       <table class="${styles.journalItem}">
@@ -58,57 +57,57 @@ export default class extends Component {
         </tfoot>
       </table>
     `);
-    
+
     // Remove item if delete button is clicked
     this.element.querySelector(`.${styles.deleteJournalItem}`).addEventListener('click', () => {
       // Don't remove if there is only one item left
       if (this.element.parentNode.children.length === 1) return;
-      
+
       this.remove()
     });
-    
+
     // Add two debit and two credit rows
     this.addTransactionRow('debit');
     this.addTransactionRow('debit');
     this.addTransactionRow('credit');
     this.addTransactionRow('credit');
   }
-  
+
   addTransactionRow(type, data) {
     var transactions = this.transactions[type];
     var transaction = new JournalTransaction(type, this.chart);
     var tbody = this.element.querySelector(`tbody.${styles[type]}`);
-    
+
     transaction.render(tbody, data);
-    
+
     // Check for the creation of first new data in a row
     transaction.on('newTransaction', () => {
       transactions.push(transaction);
-      
+
       // If new data is added on the last row, append a new row to the list
       if (transaction.element === tbody.lastElementChild) {
         this.addTransactionRow(type);
       }
-      
+
       if (this.transactions.length === 1) {
         this.emit('newItem');
       }
     });
-    
+
     // Check when all data in a row is removed
     transaction.on('deleteTransaction', () => {
       transactions.splice(transactions.indexOf(transaction), 1);
-      
+
       // Remove the row from the list but keep at least two
       if (tbody.children.length > 2) {
         transaction.remove();
       }
-      
+
       if (this.transactions.length === 0) {
         this.emit('deleteItem');
       }
     });
-    
+
     // Recalculate the totals if one of the amounts change
     transaction.onChange('amount', () => {
       var reducer = (sum, transaction) => (sum + Number(transaction.get('amount')));
@@ -119,5 +118,5 @@ export default class extends Component {
       this.set('totalCredit', formatAmount(totalCredit));
     });
   }
-  
+
 }
