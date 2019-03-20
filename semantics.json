@@ -50,11 +50,6 @@
                 "label": "Account number"
               },
               {
-                "name": "accountName",
-                "type": "text",
-                "label": "Account name"
-              },
-              {
                 "name": "invoiceType",
                 "type": "select",
                 "label": "Type",
@@ -120,11 +115,6 @@
                 "name": "accountNumber",
                 "type": "number",
                 "label": "Account number"
-              },
-              {
-                "name": "accountName",
-                "type": "text",
-                "label": "Account name"
               },
               {
                 "name": "invoiceType",

@@ -44,9 +44,6 @@
                   "label": "Rekening nummer"
                 },
                 {
-                  "label": "Rekening naam"
-                },
-                {
                   "label": "Type",
                   "options": [
                     {
@@ -92,9 +89,6 @@
               "fields": [
                 {
                   "label": "Rekening nummer"
-                },
-                {
-                  "label": "Rekening naam"
                 },
                 {
                   "label": "Type",
