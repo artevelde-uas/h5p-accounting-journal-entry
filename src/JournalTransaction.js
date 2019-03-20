@@ -54,7 +54,7 @@ export default class extends Component {
     });
   }
 
-  render(container, data) {
+  render(container) {
     super.render(container, `
       <tr>
         ${(container.children.length === 0) ? `
@@ -98,12 +98,18 @@ export default class extends Component {
       </tr>
     `);
 
-    if (data !== undefined) {
-      this.setData(data);
-    }
-
     // Calculate the correct row span for the added row
     container.querySelector(`th.${styles.title}`).setAttribute('rowspan', container.children.length);
+  }
+
+  setData(data) {
+    var accountNameCell = this.element.querySelector(`td.${styles.accountName}`);
+
+    if (data === undefined) return;
+
+    super.setData(data);
+
+    accountNameCell.textContent = this.chart[data.accountNumber];
   }
 
   remove() {

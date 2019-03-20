@@ -38,11 +38,27 @@ export default class extends Component {
     this.addJournalItem();
   }
 
-  addJournalItem(type, data) {
+  setData(data) {
+    var listDiv = this.element.querySelector(`div.${styles.journalEntry}`);
+
+    if (data === undefined) return;
+
+    // Remove all current journal items
+    listDiv.innerHTML = '';
+    this.items = [];
+
+    // Add new journal items
+    data.journalItems.forEach(item => {
+      this.addJournalItem(item);
+    });
+  }
+
+  addJournalItem(data) {
     var journalItem = new JournalItem(this.chart, this.isSolution);
     var listDiv = this.element.querySelector(`div.${styles.journalEntryList}`);
 
     journalItem.render(listDiv);
+    journalItem.setData(data);
 
     // Check when item is removed
     journalItem.on('remove', () => {

@@ -78,12 +78,38 @@ export default class extends Component {
     this.addTransactionRow('credit');
   }
 
+  setData(data) {
+    if (data === undefined) return;
+
+    // Remove all current transactions
+    this.transactions.debit = [];
+    this.transactions.credit = [];
+    this.element.querySelector(`tbody.${styles.debit}`).innerHTML = '';
+    this.element.querySelector(`tbody.${styles.credit}`).innerHTML = '';
+
+    // Add new transaction
+    data.debitTransactions.forEach(transaction => {
+      this.transactions.debit.push(this.addTransactionRow('debit', transaction));
+    });
+    data.creditTransactions.forEach(transaction => {
+      this.transactions.credit.push(this.addTransactionRow('credit', transaction));
+    });
+
+    this.calculateTotals();
+
+    if (!this.isSolution) {
+      this.addTransactionRow('debit');
+      this.addTransactionRow('credit');
+    }
+  }
+
   addTransactionRow(type, data) {
     var transactions = this.transactions[type];
     var transaction = new JournalTransaction(type, this.chart, this.isSolution);
     var tbody = this.element.querySelector(`tbody.${styles[type]}`);
 
-    transaction.render(tbody, data);
+    transaction.render(tbody);
+    transaction.setData(data);
 
     // Check for the creation of first new data in a row
     transaction.on('newTransaction', () => {
@@ -115,13 +141,19 @@ export default class extends Component {
 
     // Recalculate the totals if one of the amounts change
     transaction.onChange('amount', () => {
-      var reducer = (sum, transaction) => (sum + Number(transaction.get('amount')));
-      var totalDebit = this.transactions['debit'].reduce(reducer, 0);
-      var totalCredit = this.transactions['credit'].reduce(reducer, 0);
-
-      this.set('totalDebit', formatAmount(totalDebit));
-      this.set('totalCredit', formatAmount(totalCredit));
+      this.calculateTotals();
     });
+
+    return transaction;
+  }
+
+  calculateTotals() {
+    var reducer = (sum, transaction) => (sum + Number(transaction.get('amount')));
+    var totalDebit = this.transactions.debit.reduce(reducer, 0);
+    var totalCredit = this.transactions.credit.reduce(reducer, 0);
+
+    this.set('totalDebit', formatAmount(totalDebit));
+    this.set('totalCredit', formatAmount(totalCredit));
   }
 
 }
