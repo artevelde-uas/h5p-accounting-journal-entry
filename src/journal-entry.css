@@ -1,11 +1,9 @@
 
-.journal-entry {
-  padding: 1em .5em;
+:global .h5p-accounting-journal-entry {
+  padding: 1em;
 }
 
-.journal-entry-list {
-  padding: 1em .5em;
-}
+.journal-entry {}
 
 table.journal-item {
   width: 100%;
@@ -108,13 +106,19 @@ table.journal-item th.controls button {
   font-size: 9px;
 }
 
-button.add-journal-item {
+div#question {}
+div#solution {}
+
+button#add-journal-item {
   float: right;
+  margin: 0 0 .5em;
 }
-button.delete-journal-item::before {
+button#show-solution {}
+
+table.journal-item th.controls button.delete-journal-item::before {
   content: '\2716';
   font-family: 'Segoe UI Symbol';
 }
-table.journal-item:only-child button.delete-journal-item {
+table.journal-item:only-child th.controls button.delete-journal-item {
   display: none;
 }

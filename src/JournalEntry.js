@@ -20,8 +20,8 @@ export default class extends Component {
 
   render(container, options) {
     super.render(container, `
-      <div class="${styles.journalEntry}">
-        <div class="${styles.journalEntryList}">
+      <div>
+        <div class="${styles.journalEntry}">
         </div>
         ${this.isSolution ? '' : `
           <button id="${styles.addJournalItem}" class="h5p-core-button">${__('add_journal_item')}</button>
@@ -55,7 +55,7 @@ export default class extends Component {
 
   addJournalItem(data) {
     var journalItem = new JournalItem(this.chart, this.isSolution);
-    var listDiv = this.element.querySelector(`div.${styles.journalEntryList}`);
+    var listDiv = this.element.querySelector(`div.${styles.journalEntry}`);
 
     journalItem.render(listDiv);
     journalItem.setData(data);

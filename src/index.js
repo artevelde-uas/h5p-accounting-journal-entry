@@ -33,21 +33,34 @@ H5P.AccountingJournalEntry = class {
     var translations = getJSON(`./language/${lang}.json`);
     var chart = getJSON(`./assets/charts/${chartType}.json`);
 
-    // Attach the description
-    container.insertAdjacentHTML('beforeend', `
-      <p>${this.params.description}</p>
-      <div class="${styles.journalEntryList}">
-      </div>
-    `);
-
     // Wait for all the files to load, then do initialization
     Promise.all([translations, chart]).then(([translations, chart]) => {
       // Store UI strings into translation tool
       H5PIntegration.l10n[machineName] = translations.uiStrings;
 
+      // Render the HTML
+      container.insertAdjacentHTML('beforeend', `
+        <div>
+          ${this.params.description}
+        </div>
+        <div id="${styles.question}">
+        </div>
+        <div id="${styles.solution}">
+          <button id="${styles.showSolution}" class="h5p-core-button">${__('show_solution')}</button>
+        </div>
+      `);
+
+      container.querySelector(`#${styles.showSolution}`).addEventListener('click', () => {
+        let journalEntry = new JournalEntry(chart, true);
+
+        journalEntry.render(container.querySelector(`#${styles.solution}`), { replaceContainer: true });
+        journalEntry.setData(this.params);
+      });
+
       // Attach the component to the container
       let journalEntry = new JournalEntry(chart);
-      journalEntry.render(container.querySelector(`div.${styles.journalEntryList}`), { replaceContainer: true });
+
+      journalEntry.render(container.querySelector(`#${styles.question}`), { replaceContainer: true });
     });
 
     container.classList.add('h5p-accounting-journal-entry');
