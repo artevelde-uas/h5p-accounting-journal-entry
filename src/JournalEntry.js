@@ -10,10 +10,11 @@ export default class extends Component {
    * @constructor
    * @param {object} chart The 'Chart of Accounts' to be used
    */
-  constructor(chart) {
+  constructor(chart, isSolution) {
     super();
 
     this.chart = chart;
+    this.isSolution = isSolution;
     this.items = [];
   }
 
@@ -22,19 +23,23 @@ export default class extends Component {
       <div class="${styles.journalEntry}">
         <div class="${styles.journalEntryList}">
         </div>
-        <button class="h5p-core-button ${styles.addJournalItem}">${__('add_journal_item')}</button>
+        ${this.isSolution ? '' : `
+          <button id="${styles.addJournalItem}" class="h5p-core-button">${__('add_journal_item')}</button>
+        `}
       </div>
     `, options);
 
-    this.element.querySelector(`.${styles.addJournalItem}`).addEventListener('click', () => {
-      this.addJournalItem();
-    });
+    if (!this.isSolution) {
+      this.element.querySelector(`#${styles.addJournalItem}`).addEventListener('click', () => {
+        this.addJournalItem();
+      });
+    }
 
     this.addJournalItem();
   }
 
   addJournalItem(type, data) {
-    var journalItem = new JournalItem(this.chart);
+    var journalItem = new JournalItem(this.chart, this.isSolution);
     var listDiv = this.element.querySelector(`div.${styles.journalEntryList}`);
 
     journalItem.render(listDiv);

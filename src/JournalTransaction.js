@@ -11,11 +11,12 @@ export default class extends Component {
    * @param {string} type The type of transaction, either 'debit' or 'credit'
    * @param {object} chart The 'Chart of Accounts' to be used
    */
-  constructor(type, chart) {
+  constructor(type, chart, isSolution) {
     super();
 
     this.type = type;
     this.chart = chart;
+    this.isSolution = isSolution;
 
     // When the account number changes, lookup the number in the chart of accounts
     this.onChange('accountNumber', accountNumber => {
@@ -62,13 +63,13 @@ export default class extends Component {
           </th>
         ` : ''}
         <td class="${styles.accountNumber}">
-          <input type="text" name="accountNumber" />
+          <input type="text" name="accountNumber" ${this.isSolution ? 'disabled' : ''} />
         </td>
         <td class="${styles.accountName}">
           <span class="${styles.empty}">${__('enter_account_number')}</span>
         </td>
         <td class="${styles.invoiceType}">
-          <select name="invoiceType">
+          <select name="invoiceType" ${this.isSolution ? 'disabled' : ''}>
             <option value="">&mdash;</option>
             <option value="A">${__('assets')}</option>
             <option value="L">${__('liabilities')}</option>
@@ -77,7 +78,7 @@ export default class extends Component {
           </select>
         </td>
         <td class="${styles.plusMinus}">
-          <select name="plusMinus">
+          <select name="plusMinus" ${this.isSolution ? 'disabled' : ''}>
             <option></option>
             <option value="plus">&plus;</option>
             <option value="minus">&minus;</option>
@@ -85,12 +86,12 @@ export default class extends Component {
         </td>
         <td class="${styles.amountDebit}">
           ${this.type === 'debit' ? `
-            <input type="text" name="amount" />
+            <input type="text" name="amount" ${this.isSolution ? 'disabled' : ''} />
           ` : ''}
         </td>
         <td class="${styles.amountCredit}">
           ${this.type === 'credit' ? `
-            <input type="text" name="amount" />
+            <input type="text" name="amount" ${this.isSolution ? 'disabled' : ''} />
           ` : ''}
         </td>
         <td class="${styles.controls}"></td>

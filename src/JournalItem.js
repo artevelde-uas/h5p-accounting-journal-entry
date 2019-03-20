@@ -10,10 +10,11 @@ export default class extends Component {
    * @constructor
    * @param {object} chart The 'Chart of Accounts' to be used
    */
-  constructor(chart) {
+  constructor(chart, isSolution) {
     super();
 
     this.chart = chart;
+    this.isSolution = isSolution;
     this.transactions = {
       debit: [],
       credit: []
@@ -39,7 +40,9 @@ export default class extends Component {
             <th>${__('debit')}</th>
             <th>${__('credit')}</th>
             <th class="${styles.controls}">
-              <button class="h5p-core-button ${styles.deleteJournalItem}" title="${__('delete_journal_item')}"></button>
+              ${this.isSolution ? '' : `
+                <button class="h5p-core-button ${styles.deleteJournalItem}" title="${__('delete_journal_item')}"></button>
+              `}
             </th>
           </tr>
         </thead>
@@ -59,12 +62,14 @@ export default class extends Component {
     `);
 
     // Remove item if delete button is clicked
-    this.element.querySelector(`.${styles.deleteJournalItem}`).addEventListener('click', () => {
-      // Don't remove if there is only one item left
-      if (this.element.parentNode.children.length === 1) return;
+    if (!this.isSolution) {
+      this.element.querySelector(`.${styles.deleteJournalItem}`).addEventListener('click', () => {
+        // Don't remove if there is only one item left
+        if (this.element.parentNode.children.length === 1) return;
 
-      this.remove()
-    });
+        this.remove()
+      });
+    }
 
     // Add two debit and two credit rows
     this.addTransactionRow('debit');
@@ -75,7 +80,7 @@ export default class extends Component {
 
   addTransactionRow(type, data) {
     var transactions = this.transactions[type];
-    var transaction = new JournalTransaction(type, this.chart);
+    var transaction = new JournalTransaction(type, this.chart, this.isSolution);
     var tbody = this.element.querySelector(`tbody.${styles[type]}`);
 
     transaction.render(tbody, data);
