@@ -30,7 +30,7 @@ table.journal-item th{
 }
 
 table.journal-item td, table.journal-item tr {
-  padding: .5em 1.25em .5em .5em;
+  padding: .5em;
   border: 1px solid #ddd;
 }
 
