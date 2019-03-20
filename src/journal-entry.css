@@ -108,7 +108,9 @@ table.journal-item th.controls button {
   font-size: 9px;
 }
 
-button.add-journal-item {}
+button.add-journal-item {
+  float: right;
+}
 button.delete-journal-item::before {
   content: '\2716';
   font-family: 'Segoe UI Symbol';
