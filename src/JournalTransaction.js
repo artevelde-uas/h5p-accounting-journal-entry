@@ -102,6 +102,15 @@ export default class extends Component {
     container.querySelector(`th.${styles.title}`).setAttribute('rowspan', container.children.length);
   }
 
+  getData() {
+    return {
+      accountNumber: Number(this.get('accountNumber')),
+      amount: Number(this.get('amount')),
+      invoiceType: this.get('invoiceType'),
+      plusMinus: this.get('plusMinus')
+    };
+  }
+
   setData(data) {
     var accountNameCell = this.element.querySelector(`td.${styles.accountName}`);
 

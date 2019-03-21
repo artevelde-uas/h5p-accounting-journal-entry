@@ -78,6 +78,13 @@ export default class extends Component {
     this.addTransactionRow('credit');
   }
 
+  getData() {
+    return {
+      debitTransactions: this.transactions.debit.map(transaction => transaction.getData()),
+      creditTransactions: this.transactions.credit.map(transaction => transaction.getData())
+    };
+  }
+
   setData(data) {
     if (data === undefined) return;
 

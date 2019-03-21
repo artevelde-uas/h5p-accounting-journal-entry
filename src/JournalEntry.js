@@ -38,6 +38,10 @@ export default class extends Component {
     this.addJournalItem();
   }
 
+  getData() {
+    return this.items.map(item => item.getData());
+  }
+
   setData(data) {
     var listDiv = this.element.querySelector(`div.${styles.journalEntry}`);
 
