@@ -35,7 +35,7 @@ export default class extends Component {
       // Fire an event if data is added for the first time
       this.onChange(name, function onChange(name, value, oldValue) {
         var isNewTransaction = Object.entries(this.getData()).every(([key, value]) => {
-          return (key === name) ? (oldValue === '') : (value === '')
+          return (key === name) ? !Boolean(oldValue) : !Boolean(value);
         });
 
         if (isNewTransaction) {
@@ -45,7 +45,7 @@ export default class extends Component {
 
       // Fire an event when all the fields become empty
       this.onChange(name, () => {
-        var deleteTransaction = !Object.values(this.getData()).some(value => (value !== ''));
+        var deleteTransaction = !Object.values(this.getData()).some(value => Boolean(value));
 
         if (deleteTransaction) {
           this.emit('deleteTransaction');
