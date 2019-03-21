@@ -54,7 +54,7 @@ H5P.AccountingJournalEntry = class {
         let journalEntry = new JournalEntry(chart, true);
 
         journalEntry.render(container.querySelector(`#${styles.solution}`), { replaceContainer: true });
-        journalEntry.setData(this.params);
+        journalEntry.setData(this.params.journalItems);
       });
 
       // Attach the component to the container

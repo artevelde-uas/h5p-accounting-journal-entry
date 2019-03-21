@@ -48,7 +48,7 @@ export default class extends Component {
     this.items = [];
 
     // Add new journal items
-    data.journalItems.forEach(item => {
+    data.forEach(item => {
       this.addJournalItem(item);
     });
   }
