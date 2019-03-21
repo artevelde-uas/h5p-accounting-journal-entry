@@ -49,7 +49,7 @@ export default class extends Component {
 
     // Add new journal items
     data.forEach(item => {
-      this.addJournalItem(item);
+      this.items.push(this.addJournalItem(item));
     });
   }
 
@@ -76,6 +76,8 @@ export default class extends Component {
     journalItem.on('deleteItem', () => {
       this.items.splice(this.items.indexOf(journalItem), 1);
     });
+
+    return journalItem;
   }
 
 }
