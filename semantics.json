@@ -170,5 +170,92 @@
         }
       ]
     }
-  }
+  },
+    {
+      "name": "behaviour",
+      "type": "group",
+      "label": "Behavioural settings.",
+      "importance": "low",
+      "description": "These options will let you control how the task behaves.",
+      "optional": false,
+      "fields": [
+          {
+            "label": "Enable \"Retry\"",
+            "importance": "low",
+            "name": "enableRetry",
+            "type": "boolean",
+            "default": true,
+            "optional": true
+          },
+          {
+            "name": "ALER",
+            "type": "select",
+            "label": "ALER column",
+            "description": "Show or hide the ALER column and include them in the score",
+            "options": [
+              {
+                "value": "hidden",
+                "label": "hide"
+              },
+              {
+                "value": "showWithScoring",
+                "label": "show with scoring"
+              },
+              {
+                "value": "showWithoutScoring",
+                "label": "show without scoring"
+              }
+            ],
+            "default": "showWithScoring"
+          },
+          {
+            "name": "positiveNegative",
+            "type": "select",
+            "label": "Positive / negative column",
+            "description": "Show or hide the positive / negative column and include them in the score",
+            "options": [
+              {
+                "value": "hidden",
+                "label": "hide"
+              },
+              {
+                "value": "showWithScoring",
+                "label": "show with scoring"
+              },
+              {
+                "value": "showWithoutScoring",
+                "label": "show without scoring"
+              }
+            ],
+            "default": "showWithScoring"
+          },
+          {
+            "label": "Score 0 or 1 per row",
+            "description": "Each row gets 1 point if correct, otherwise 0 points are given.",
+            "importance": "low",
+            "name": "scoreRowOption",
+            "type": "boolean",
+            "default": true,
+            "optional": true
+          },
+          {
+            "label": "Debit and credit must be equal",
+            "description": "If debit and credit are not the same value, the final score is 0, no matter the other values.",
+            "importance": "low",
+            "name": "debetCreditEqual",
+            "type": "boolean",
+            "default": false,
+            "optional": true
+          },
+          {
+            "label": "noExtraLines",
+            "description": "If the answer contains more lines the correct solution, the final score is 0.",
+            "importance": "low",
+            "name": "noExtraLines",
+            "type": "boolean",
+            "default": false,
+            "optional": true
+          }
+        ]
+    }
 ]
