@@ -8,7 +8,7 @@ import styles from './journal-entry.css';
 
 const H5P = window.H5P || {};
 
-H5P.AccountingJournalEntry = class {
+H5P.AccountingJournalEntry = class extends H5P.Question {
 
   /**
    * @constructor
@@ -18,16 +18,16 @@ H5P.AccountingJournalEntry = class {
    * @param {object} [extras] Saved state, metadata, etc.
    */
   constructor(params, contentId, extras = {}) {
+    super();
+
     this.params = params;
   }
 
   /**
-   * Attach function called by H5P framework to insert H5P content into page
-   *
-   * @param {jQuery} $container
+   * Register the DOM elements with H5P.Question
    */
-  attach($container) {
-    var container = $container.get(0);
+  registerDomElements() {
+    var container = document.createElement('div');
     var lang = getLang(container);
     var chartType = this.params.chartType;
     var translations = getJSON(`./language/${lang}.json`);
@@ -40,9 +40,6 @@ H5P.AccountingJournalEntry = class {
 
       // Render the HTML
       container.insertAdjacentHTML('beforeend', `
-        <div>
-          ${this.params.description}
-        </div>
         <div id="${styles.question}">
         </div>
         <div id="${styles.solution}">
@@ -63,7 +60,10 @@ H5P.AccountingJournalEntry = class {
       journalEntry.render(container.querySelector(`#${styles.question}`), { replaceContainer: true });
     });
 
-    container.classList.add('h5p-accounting-journal-entry');
+    // Register Introduction
+    this.setIntroduction(this.params.description);
+
+    this.setContent(container);
   }
 
 };

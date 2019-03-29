@@ -1,6 +1,7 @@
 {
   "title": "H5P.AccountingJournalEntry",
   "description": "Accounting - Journal Entry",
+  "contentType": "Question",
   "majorVersion": 0,
   "minorVersion": 1,
   "patchVersion": 0,
@@ -21,5 +22,12 @@
     {
       "path": "dist/h5p-accounting-journal-entry.css"
     }
-  ]
+  ],
+  "preloadedDependencies": [
+    {
+      "machineName": "H5P.Question",
+      "majorVersion": 1,
+      "minorVersion": 4
+    }
+]
 }
