@@ -28,6 +28,7 @@
     "name": "journalItems",
     "type": "list",
     "label": "Journal items",
+    "importance": "high",
     "min": 1,
     "field": {
       "name": "journalItem",
@@ -38,6 +39,7 @@
           "name": "debitTransactions",
           "type": "list",
           "label": "Debit transaction",
+          "importance": "low",
           "min": 1,
           "field": {
             "name": "debitTransaction",
@@ -105,6 +107,7 @@
           "name": "creditTransactions",
           "type": "list",
           "label": "Credit transactions",
+          "importance": "low",
           "min": 1,
           "field": {
             "name": "creditTransaction",
