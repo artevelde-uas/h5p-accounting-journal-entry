@@ -12,8 +12,8 @@
     "revenue": "Revenue",
     "enter_account_number": "Enter an account number",
     "invalid_account_number": "Invalid account number",
-    "add_journal_item": "Add a jounal item",
-    "delete_journal_item": "Delete jounal item",
+    "add_journal_entry": "Add a jounal entry",
+    "delete_journal_entry": "Delete jounal entry",
     "show_solution": "Show the solution"
   },
   "semantics": [
@@ -83,14 +83,14 @@
       ]
     },
     {
-      "label": "Journal items",
+      "label": "Journal entries",
       "field": {
-        "label": "Journal Item",
+        "label": "Journal entry",
         "fields": [
           {
-            "label": "Debit transactions",
+            "label": "Debit items",
             "field": {
-              "label": "Debit transaction",
+              "label": "Debit item",
               "fields": [
                 {
                   "label": "Account number"
@@ -135,9 +135,9 @@
             }
           },
           {
-            "label": "Credit transactions",
+            "label": "Credit items",
             "field": {
-              "label": "Credit transaction",
+              "label": "Credit item",
               "fields": [
                 {
                   "label": "Account number"

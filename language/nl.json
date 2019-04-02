@@ -12,8 +12,8 @@
     "revenue": "Opbrengst",
     "enter_account_number": "Geef een rekeningnummer in",
     "invalid_account_number": "Ongeldig rekening nummer",
-    "add_journal_item": "Voeg journaalitem toe",
-    "delete_journal_item": "Verwijder journaalitem",
+    "add_journal_entry": "Voeg journaalpost toe",
+    "delete_journal_entry": "Verwijder journaalpost",
     "show_solution": "Bekijk de oplossing"
   },
   "semantics": [
@@ -83,14 +83,14 @@
       ]
     },
     {
-      "label": "Journaalitems",
+      "label": "Journaalposten",
       "field": {
-        "label": "Journaalitem",
+        "label": "Journaalpost",
         "fields": [
           {
-            "label": "Debettransacties",
+            "label": "Debetlijnen",
             "field": {
-              "label": "Debettransactie",
+              "label": "Debetlijn",
               "fields": [
                 {
                   "label": "Rekening nummer"
@@ -135,9 +135,9 @@
             }
           },
           {
-            "label": "Credittransacties",
+            "label": "Creditlijnen",
             "field": {
-              "label": "Credittransactie",
+              "label": "Creditlijn",
               "fields": [
                 {
                   "label": "Rekening nummer"
