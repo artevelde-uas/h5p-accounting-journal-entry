@@ -32,6 +32,57 @@
       ]
     },
     {
+      "label": "Behavioural settings.",
+      "description": "These options will let you control how the task behaves.",
+      "fields": [
+        {
+          "label": "Enable 'Retry'"
+        },
+        {
+          "label": "A/L/E/R column",
+          "description": "Show or hide the A/L/E/R column and use for scoring",
+          "options": [
+            {
+              "label": "Hide"
+            },
+            {
+              "label": "Show with scoring"
+            },
+            {
+              "label": "Show without scoring"
+            }
+          ]
+        },
+        {
+          "label": "Positive / negative column",
+          "description": "Show or hide the positive / negative column and use for scoring",
+          "options": [
+            {
+              "label": "Hide"
+            },
+            {
+              "label": "Show with scoring"
+            },
+            {
+              "label": "Show without scoring"
+            }
+          ]
+        },
+        {
+          "label": "Score 0 or 1 per row",
+          "description": "Each row gets 1 point if correct, otherwise 0 points are given."
+        },
+        {
+          "label": "Debit and credit must be equal",
+          "description": "If debit and credit are not the same value, the final score is 0, no matter the other values."
+        },
+        {
+          "label": "No extra lines allowed",
+          "description": "If the answer contains more lines the correct solution, the final score is 0."
+        }
+      ]
+    },
+    {
       "label": "Journal items",
       "field": {
         "label": "Journal Item",

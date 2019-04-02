@@ -32,6 +32,57 @@
       ]
     },
     {
+      "label": "Behavioural settings.",
+      "description": "Deze opties geven je controle over hoe de taak zich gedraagt.",
+      "fields": [
+        {
+          "label": "Activeer 'Opnieuw'"
+        },
+        {
+          "label": "A/P/K/O kolom",
+          "description": "Toon of verberg de A/P/K/O kolom en gebruik voor berekenen van score",
+          "options": [
+            {
+              "label": "Verberg"
+            },
+            {
+              "label": "Toon met scoring"
+            },
+            {
+              "label": "Toon zonder scoring"
+            }
+          ]
+        },
+        {
+          "label": "Positive / negative column",
+          "description": "Toon of verberg de positief / negatief kolom en gebruik voor berekenen van score",
+          "options": [
+            {
+              "label": "Verberg"
+            },
+            {
+              "label": "Toon met scoring"
+            },
+            {
+              "label": "Toon zonder scoring"
+            }
+          ]
+        },
+        {
+          "label": "Score 0 of 1 per lijn",
+          "description": "Elke lijn krijgt 1 punt indien correct, anders wordt 0 gegeven."
+        },
+        {
+          "label": "Debit and credit must be equal",
+          "description": "Indien debet en credit niet gelijk zijn, is de score 0, ongeacht de waarde van de andere velden."
+        },
+        {
+          "label": "Geen extra lijnen toegelaten",
+          "description": "Als het antwoord meer lijnen bevat dan de correcte oplossing dan is de eindscore 0."
+        }
+      ]
+    },
+    {
       "label": "Journaalitems",
       "field": {
         "label": "Journaalitem",

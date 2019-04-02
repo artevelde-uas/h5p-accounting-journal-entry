@@ -29,5 +29,12 @@
       "majorVersion": 1,
       "minorVersion": 4
     }
-]
+  ],
+  "editorDependencies": [
+    {
+      "machineName": "H5PEditor.ShowWhen",
+      "majorVersion": 1,
+      "minorVersion": 0
+    }
+  ]
 }
