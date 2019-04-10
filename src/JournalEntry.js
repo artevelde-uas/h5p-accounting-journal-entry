@@ -15,73 +15,152 @@ export default class extends Component {
 
     this.chart = chart;
     this.isSolution = isSolution;
-    this.items = [];
+    this.items = {
+      debit: [],
+      credit: []
+    };
+
+    Object.defineProperty(this.items, 'length', {
+      get: function () {
+        return this.debit.length + this.credit.length;
+      }
+    });
   }
 
-  render(container, options) {
+  render(container) {
     super.render(container, `
-      <div>
-        <div class="${styles.journalEntry}">
-        </div>
-        ${this.isSolution ? '' : `
-          <button id="${styles.addJournalItem}" class="h5p-core-button">${__('add_journal_item')}</button>
-        `}
-      </div>
-    `, options);
+      <table class="${styles.entry}">
+        <thead>
+          <tr>
+            <th></th>
+            <th>${__('number')}</th>
+            <th>${__('account_name')}</th>
+            <th>${__('type')}</th>
+            <th>&plus; / &minus;</th>
+            <th>${__('debit')}</th>
+            <th>${__('credit')}</th>
+            <th class="${styles.controls}">
+              ${this.isSolution ? '' : `
+                <button class="h5p-core-button ${styles.deleteEntry}" title="${__('delete_journal_entry')}"></button>
+              `}
+            </th>
+          </tr>
+        </thead>
+        <tbody class="${styles.debit}">
+        </tbody>
+        <tbody class="${styles.credit}">
+        </tbody>
+        <tfoot>
+          <tr>
+            <th class="${styles.totalLabel}" colspan="5">${__('total')}:</th>
+            <th class="${styles.totalDebit}"><output name="totalDebit">${formatAmount(0)}</output></th>
+            <th class="${styles.totalCredit}"><output name="totalCredit">${formatAmount(0)}</output></th>
+            <th></th>
+          </tr>
+        </tfoot>
+      </table>
+    `);
 
+    // Remove item if delete button is clicked
     if (!this.isSolution) {
-      this.element.querySelector(`#${styles.addJournalItem}`).addEventListener('click', () => {
-        this.addJournalItem();
+      this.element.querySelector(`.${styles.deleteEntry}`).addEventListener('click', () => {
+        // Don't remove if there is only one item left
+        if (this.element.parentNode.children.length === 1) return;
+
+        this.remove()
       });
     }
 
-    this.addJournalItem();
+    // Add two debit and two credit rows
+    this.addItemRow('debit');
+    this.addItemRow('debit');
+    this.addItemRow('credit');
+    this.addItemRow('credit');
   }
 
   getData() {
-    return this.items.map(item => item.getData());
+    return {
+      debitItems: this.items.debit.map(item => item.getData()),
+      creditItems: this.items.credit.map(item => item.getData())
+    };
   }
 
   setData(data) {
-    var listDiv = this.element.querySelector(`div.${styles.journalEntry}`);
-
     if (data === undefined) return;
 
-    // Remove all current journal items
-    listDiv.innerHTML = '';
-    this.items = [];
+    // Remove all current items
+    this.items.debit = [];
+    this.items.credit = [];
+    this.element.querySelector(`tbody.${styles.debit}`).innerHTML = '';
+    this.element.querySelector(`tbody.${styles.credit}`).innerHTML = '';
 
-    // Add new journal items
-    data.forEach(item => {
-      this.items.push(this.addJournalItem(item));
+    // Add new item
+    data.debitItems.forEach(item => {
+      this.items.debit.push(this.addItemRow('debit', item));
     });
+    data.creditItems.forEach(item => {
+      this.items.credit.push(this.addItemRow('credit', item));
+    });
+
+    this.calculateTotals();
+
+    if (!this.isSolution) {
+      this.addItemRow('debit');
+      this.addItemRow('credit');
+    }
   }
 
-  addJournalItem(data) {
-    var journalItem = new JournalItem(this.chart, this.isSolution);
-    var listDiv = this.element.querySelector(`div.${styles.journalEntry}`);
+  addItemRow(type, data) {
+    var items = this.items[type];
+    var item = new JournalItem(type, this.chart, this.isSolution);
+    var tbody = this.element.querySelector(`tbody.${styles[type]}`);
 
-    journalItem.render(listDiv);
-    journalItem.setData(data);
+    item.render(tbody);
+    item.setData(data);
 
-    // Check when item is removed
-    journalItem.on('remove', () => {
-      if (this.items.includes(journalItem)) {
-        this.items.splice(this.items.indexOf(journalItem), 1);
+    // Check for the creation of first new data in a row
+    item.on('newItem', () => {
+      items.push(item);
+
+      // If new data is added on the last row, append a new row to the list
+      if (item.element === tbody.lastElementChild) {
+        this.addItemRow(type);
       }
-    })
 
-    // Check for the creation of first new data in an item
-    journalItem.on('newItem', () => {
-      this.items.push(journalItem);
+      if (this.items.length === 1) {
+        this.emit('newEntry');
+      }
     });
 
-    // Check when all data in an item is removed
-    journalItem.on('deleteItem', () => {
-      this.items.splice(this.items.indexOf(journalItem), 1);
+    // Check when all data in a row is removed
+    item.on('deleteItem', () => {
+      items.splice(items.indexOf(item), 1);
+
+      // Remove the row from the list but keep at least two
+      if (tbody.children.length > 2) {
+        item.remove();
+      }
+
+      if (this.items.length === 0) {
+        this.emit('deleteEntry');
+      }
     });
 
-    return journalItem;
+    // Recalculate the totals if one of the amounts change
+    item.onChange('amount', () => {
+      this.calculateTotals();
+    });
+
+    return item;
+  }
+
+  calculateTotals() {
+    var reducer = (sum, item) => (sum + Number(item.get('amount')));
+    var totalDebit = this.items.debit.reduce(reducer, 0);
+    var totalCredit = this.items.credit.reduce(reducer, 0);
+
+    this.set('totalDebit', formatAmount(totalDebit));
+    this.set('totalCredit', formatAmount(totalCredit));
   }
 
 }

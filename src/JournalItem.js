@@ -1,166 +1,142 @@
 import Component from './Component';
-import JournalTransaction from './JournalTransaction';
 import { translate as __, formatAmount } from './helpers';
 
 import styles from './journal-entry.css';
+
 
 export default class extends Component {
 
   /**
    * @constructor
+   * @param {string} type The type of item, either 'debit' or 'credit'
    * @param {object} chart The 'Chart of Accounts' to be used
    */
-  constructor(chart, isSolution) {
+  constructor(type, chart, isSolution) {
     super();
 
+    this.type = type;
     this.chart = chart;
     this.isSolution = isSolution;
-    this.transactions = {
-      debit: [],
-      credit: []
-    };
 
-    Object.defineProperty(this.transactions, 'length', {
-      get: function () {
-        return this.debit.length + this.credit.length;
+    // When the account number changes, lookup the number in the chart of accounts
+    this.onChange('accountNumber', accountNumber => {
+      var accountNameCell = this.element.querySelector(`td.${styles.accountName}`);
+
+      if (this.chart.hasOwnProperty(accountNumber)) {
+        accountNameCell.textContent = this.chart[accountNumber];
+      } else if (accountNumber === '') {
+        accountNameCell.innerHTML = `<span class="${styles.empty}">${__('enter_account_number')}</span>`;
+      } else {
+        accountNameCell.innerHTML = `<span class="${styles.invalid}">${__('invalid_account_number')}</span>`;
       }
+    });
+
+    ['accountNumber', 'invoiceType', 'plusMinus', 'amount'].forEach(name => {
+      // Fire an event if data is added for the first time
+      this.onChange(name, function onChange(name, value, oldValue) {
+        var isNewItem = Object.entries(this.getData()).every(([key, value]) => {
+          return (key === name) ? !Boolean(oldValue) : !Boolean(value);
+        });
+
+        if (isNewItem) {
+          this.emit('newItem');
+        };
+      }.bind(this, name));
+
+      // Fire an event when all the fields become empty
+      this.onChange(name, () => {
+        var deleteItem = !Object.values(this.getData()).some(value => Boolean(value));
+
+        if (deleteItem) {
+          this.emit('deleteItem');
+        };
+      });
     });
   }
 
   render(container) {
     super.render(container, `
-      <table class="${styles.journalItem}">
-        <thead>
-          <tr>
-            <th></th>
-            <th>${__('number')}</th>
-            <th>${__('account_name')}</th>
-            <th>${__('type')}</th>
-            <th>&plus; / &minus;</th>
-            <th>${__('debit')}</th>
-            <th>${__('credit')}</th>
-            <th class="${styles.controls}">
-              ${this.isSolution ? '' : `
-                <button class="h5p-core-button ${styles.deleteJournalItem}" title="${__('delete_journal_item')}"></button>
-              `}
-            </th>
-          </tr>
-        </thead>
-        <tbody class="${styles.debit}">
-        </tbody>
-        <tbody class="${styles.credit}">
-        </tbody>
-        <tfoot>
-          <tr>
-            <th class="${styles.totalLabel}" colspan="5">${__('total')}:</th>
-            <th class="${styles.totalDebit}"><output name="totalDebit">${formatAmount(0)}</output></th>
-            <th class="${styles.totalCredit}"><output name="totalCredit">${formatAmount(0)}</output></th>
-            <th></th>
-          </tr>
-        </tfoot>
-      </table>
+      <tr>
+        ${(container.children.length === 0) ? `
+          <th class="${styles.title}">
+            ${__(this.type)}
+          </th>
+        ` : ''}
+        <td class="${styles.accountNumber}">
+          <input type="text" name="accountNumber" ${this.isSolution ? 'disabled' : ''} />
+        </td>
+        <td class="${styles.accountName}">
+          <span class="${styles.empty}">${__('enter_account_number')}</span>
+        </td>
+        <td class="${styles.invoiceType}">
+          <select name="invoiceType" ${this.isSolution ? 'disabled' : ''}>
+            <option value="">&mdash;</option>
+            <option value="A">${__('assets')}</option>
+            <option value="L">${__('liabilities')}</option>
+            <option value="E">${__('expenses')}</option>
+            <option value="R">${__('revenue')}</option>
+          </select>
+        </td>
+        <td class="${styles.plusMinus}">
+          <select name="plusMinus" ${this.isSolution ? 'disabled' : ''}>
+            <option></option>
+            <option value="plus">&plus;</option>
+            <option value="minus">&minus;</option>
+          </select>
+        </td>
+        <td class="${styles.amountDebit}">
+          ${this.type === 'debit' ? `
+            <input type="text" name="amount" ${this.isSolution ? 'disabled' : ''} />
+          ` : ''}
+        </td>
+        <td class="${styles.amountCredit}">
+          ${this.type === 'credit' ? `
+            <input type="text" name="amount" ${this.isSolution ? 'disabled' : ''} />
+          ` : ''}
+        </td>
+        <td class="${styles.controls}"></td>
+      </tr>
     `);
 
-    // Remove item if delete button is clicked
-    if (!this.isSolution) {
-      this.element.querySelector(`.${styles.deleteJournalItem}`).addEventListener('click', () => {
-        // Don't remove if there is only one item left
-        if (this.element.parentNode.children.length === 1) return;
-
-        this.remove()
-      });
-    }
-
-    // Add two debit and two credit rows
-    this.addTransactionRow('debit');
-    this.addTransactionRow('debit');
-    this.addTransactionRow('credit');
-    this.addTransactionRow('credit');
+    // Calculate the correct row span for the added row
+    container.querySelector(`th.${styles.title}`).setAttribute('rowspan', container.children.length);
   }
 
   getData() {
     return {
-      debitTransactions: this.transactions.debit.map(transaction => transaction.getData()),
-      creditTransactions: this.transactions.credit.map(transaction => transaction.getData())
+      accountNumber: Number(this.get('accountNumber')),
+      amount: Number(this.get('amount')),
+      invoiceType: this.get('invoiceType'),
+      plusMinus: this.get('plusMinus')
     };
   }
 
   setData(data) {
+    var accountNameCell = this.element.querySelector(`td.${styles.accountName}`);
+
     if (data === undefined) return;
 
-    // Remove all current transactions
-    this.transactions.debit = [];
-    this.transactions.credit = [];
-    this.element.querySelector(`tbody.${styles.debit}`).innerHTML = '';
-    this.element.querySelector(`tbody.${styles.credit}`).innerHTML = '';
+    super.setData(data);
 
-    // Add new transaction
-    data.debitTransactions.forEach(transaction => {
-      this.transactions.debit.push(this.addTransactionRow('debit', transaction));
-    });
-    data.creditTransactions.forEach(transaction => {
-      this.transactions.credit.push(this.addTransactionRow('credit', transaction));
-    });
+    accountNameCell.textContent = this.chart[data.accountNumber];
+  }
 
-    this.calculateTotals();
+  remove() {
+    var container = this.element.parentNode;
 
-    if (!this.isSolution) {
-      this.addTransactionRow('debit');
-      this.addTransactionRow('credit');
+    // If the first element is being removed, move the spanned header cell to the next row
+    if (this.element.previousElementSibling === null && container.children.length > 0) {
+      let nextRow = this.element.nextElementSibling;
+
+      nextRow.insertBefore(this.element.firstElementChild, nextRow.firstElementChild);
     }
-  }
 
-  addTransactionRow(type, data) {
-    var transactions = this.transactions[type];
-    var transaction = new JournalTransaction(type, this.chart, this.isSolution);
-    var tbody = this.element.querySelector(`tbody.${styles[type]}`);
+    super.remove();
 
-    transaction.render(tbody);
-    transaction.setData(data);
+    if (container.children.length === 0) return;
 
-    // Check for the creation of first new data in a row
-    transaction.on('newTransaction', () => {
-      transactions.push(transaction);
-
-      // If new data is added on the last row, append a new row to the list
-      if (transaction.element === tbody.lastElementChild) {
-        this.addTransactionRow(type);
-      }
-
-      if (this.transactions.length === 1) {
-        this.emit('newItem');
-      }
-    });
-
-    // Check when all data in a row is removed
-    transaction.on('deleteTransaction', () => {
-      transactions.splice(transactions.indexOf(transaction), 1);
-
-      // Remove the row from the list but keep at least two
-      if (tbody.children.length > 2) {
-        transaction.remove();
-      }
-
-      if (this.transactions.length === 0) {
-        this.emit('deleteItem');
-      }
-    });
-
-    // Recalculate the totals if one of the amounts change
-    transaction.onChange('amount', () => {
-      this.calculateTotals();
-    });
-
-    return transaction;
-  }
-
-  calculateTotals() {
-    var reducer = (sum, transaction) => (sum + Number(transaction.get('amount')));
-    var totalDebit = this.transactions.debit.reduce(reducer, 0);
-    var totalCredit = this.transactions.credit.reduce(reducer, 0);
-
-    this.set('totalDebit', formatAmount(totalDebit));
-    this.set('totalCredit', formatAmount(totalCredit));
+    // Calculate the correct row span for the added row
+    container.querySelector(`th.${styles.title}`).setAttribute('rowspan', container.children.length);
   }
 
 }

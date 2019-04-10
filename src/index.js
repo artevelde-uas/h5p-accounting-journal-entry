@@ -1,5 +1,5 @@
 import { getJSON, getLang } from './helpers';
-import JournalEntry from './JournalEntry';
+import JournalEntryList from './JournalEntryList';
 import { translate as __ } from './helpers';
 
 import { machineName } from '../library.json';
@@ -48,21 +48,22 @@ H5P.AccountingJournalEntry = class extends H5P.Question {
       `);
 
       container.querySelector(`#${styles.showSolution}`).addEventListener('click', () => {
-        let journalEntry = new JournalEntry(chart, true);
+        let journalEntryList = new JournalEntryList(chart, true);
 
-        journalEntry.render(container.querySelector(`#${styles.solution}`), { replaceContainer: true });
-        journalEntry.setData(this.params.journalItems);
+        journalEntryList.render(container.querySelector(`#${styles.solution}`), { replaceContainer: true });
+        journalEntryList.setData(this.params.journalEntries);
       });
 
       // Attach the component to the container
-      let journalEntry = new JournalEntry(chart);
+      let journalEntryList = new JournalEntryList(chart);
 
-      journalEntry.render(container.querySelector(`#${styles.question}`), { replaceContainer: true });
+      journalEntryList.render(container.querySelector(`#${styles.question}`), { replaceContainer: true });
     });
 
     // Register Introduction
     this.setIntroduction(this.params.description);
 
+    // Register content
     this.setContent(container);
   }
 

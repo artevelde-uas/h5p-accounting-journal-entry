@@ -1,104 +1,100 @@
 
-:global .h5p-accounting-journal-entry {
-  padding: 1em;
-}
+.entry-list {}
 
-.journal-entry {}
-
-table.journal-item {
+table.entry {
   width: 100%;
   border-collapse: collapse;
   box-shadow: 0 1px 15px 1px rgba(39,39,39,.1);
 }
 
-table.journal-item tbody.credit tr:first-child td {
+table.entry tbody.credit tr:first-child td {
   border-top: solid 2px gray;
 }
 
-table.journal-item tbody.debit td.title,
-table.journal-item tbody.credit td.title {
+table.entry tbody.debit td.title,
+table.entry tbody.credit td.title {
   vertical-align: top;
   font-weight: bold;
 }
 
-table.journal-item th{
+table.entry th {
   border: 1px solid #a0a0a0;
   background: #e9e9e4;
   color: #000000;  
 }
 
-table.journal-item td, table.journal-item tr {
+table.entry td, table.entry tr {
   padding: .5em;
   border: 1px solid #ddd;
 }
 
-table.journal-item tr {
+table.entry tr {
  /* padding: .4em; */
   background: #fbfbfb;
 }
 
-table.journal-item tr:hover {
+table.entry tr:hover {
   background-color: rgba(0,0,0,.05);
 }
 
-table.journal-item td > input:first-child,
-table.journal-item td > select:first-child {
+table.entry td > input:first-child,
+table.entry td > select:first-child {
   box-sizing: border-box;
   width: 100%;
   margin: 0;
 }
-table.journal-item td.title {
+table.entry td.title {
   width: 3em;
 }
-table.journal-item td.account-number {
+table.entry td.account-number {
   width: 4em;
 }
-table.journal-item td.account-name {
+table.entry td.account-name {
   width: auto;
 }
-table.journal-item td.account-name > span.empty::before,
-table.journal-item td.account-name > span.invalid::before {
+table.entry td.account-name > span.empty::before,
+table.entry td.account-name > span.invalid::before {
   content: '\2190\a0'; /* &larr; + &nbsp; */
 }
-table.journal-item td.account-name > span.empty {
+table.entry td.account-name > span.empty {
   color: gray;
 }
-table.journal-item td.account-name > span.invalid {
+table.entry td.account-name > span.invalid {
   color: red;
 }
-table.journal-item td.invoice-type {
+table.entry td.invoice-type {
   width: 7em;
 }
-table.journal-item td.plus-minus {
+table.entry td.plus-minus {
   width: 3em;
 }
-table.journal-item td.amount-debit,
-table.journal-item td.amount-credit {
+table.entry td.amount-debit,
+table.entry td.amount-credit {
   width: 5em;
 }
-table.journal-item td.controls {
+table.entry td.controls {
   width: 1em;
 }
-table.journal-item td.amount-debit > input,
-table.journal-item td.amount-credit > input {
+table.entry td.amount-debit > input,
+table.entry td.amount-credit > input {
   text-align: right;
 }
 
-table.journal-item tfoot th.total-label,
-table.journal-item tfoot th.total-debit,
-table.journal-item tfoot th.total-credit {
+table.entry tfoot th.total-label,
+table.entry tfoot th.total-debit,
+table.entry tfoot th.total-credit {
   text-align: right;
 }
 
-table.journal-item tfoot th{
+table.entry tfoot th {
   border: 1px solid #a0a0a0;
 }
 
-table.journal-item th.controls {
+table.entry th.controls {
   padding: 0;
   text-align: center;
 }
-table.journal-item th.controls button {
+table.entry th.controls button {
   padding: 0 0 2px 2px;
   height: 2em;
   width: 2em;
@@ -109,16 +105,16 @@ table.journal-item th.controls button {
 div#question {}
 div#solution {}
 
-button#add-journal-item {
+button#add-entry {
   float: right;
   margin: 0 0 .5em;
 }
 button#show-solution {}
 
-table.journal-item th.controls button.delete-journal-item::before {
+table.entry th.controls button.delete-entry::before {
   content: '\2716';
   font-family: 'Segoe UI Symbol';
 }
-table.journal-item:only-child th.controls button.delete-journal-item {
+table.entry:only-child th.controls button.delete-entry {
   display: none;
 }
