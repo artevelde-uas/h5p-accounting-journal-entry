@@ -18,7 +18,7 @@ H5P.AccountingJournalEntry = class extends H5P.Question {
    * @param {object} [extras] Saved state, metadata, etc.
    */
   constructor(params, contentId, extras = {}) {
-    super();
+    super('accounting-journal-entry');
 
     this.params = params;
   }
