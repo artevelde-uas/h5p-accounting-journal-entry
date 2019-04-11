@@ -38,14 +38,12 @@ export default class extends Component {
     this.addJournalEntry();
   }
 
-  getData() {
+  get data() {
     return this.entries.map(entry => entry.getData());
   }
 
-  setData(data) {
+  set data(data) {
     var listDiv = this.element.querySelector(`div.${styles.entryList}`);
-
-    if (data === undefined) return;
 
     // Remove all current journal entries
     listDiv.innerHTML = '';
@@ -62,7 +60,10 @@ export default class extends Component {
     var listDiv = this.element.querySelector(`div.${styles.entryList}`);
 
     journalEntry.render(listDiv);
-    journalEntry.setData(data);
+
+    if (data !== undefined) {
+      journalEntry.data = data;
+    }
 
     // Check when entry is removed
     journalEntry.on('remove', () => {

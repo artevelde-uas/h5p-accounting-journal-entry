@@ -53,8 +53,8 @@ export default class extends Component {
         <tfoot>
           <tr>
             <th class="${styles.totalLabel}" colspan="5">${__('total')}:</th>
-            <th class="${styles.totalDebit}"><output name="totalDebit">${formatAmount(0)}</output></th>
-            <th class="${styles.totalCredit}"><output name="totalCredit">${formatAmount(0)}</output></th>
+            <th class="${styles.totalDebit}"><output name="total-debit">${formatAmount(0)}</output></th>
+            <th class="${styles.totalCredit}"><output name="total-credit">${formatAmount(0)}</output></th>
             <th></th>
           </tr>
         </tfoot>
@@ -78,16 +78,14 @@ export default class extends Component {
     this.addItemRow('credit');
   }
 
-  getData() {
+  get data() {
     return {
       debitItems: this.items.debit.map(item => item.getData()),
       creditItems: this.items.credit.map(item => item.getData())
     };
   }
 
-  setData(data) {
-    if (data === undefined) return;
-
+  set data(data) {
     // Remove all current items
     this.items.debit = [];
     this.items.credit = [];
@@ -116,7 +114,10 @@ export default class extends Component {
     var tbody = this.element.querySelector(`tbody.${styles[type]}`);
 
     item.render(tbody);
-    item.setData(data);
+
+    if (data !== undefined) {
+      item.data = data;
+    }
 
     // Check for the creation of first new data in a row
     item.on('newItem', () => {
@@ -147,7 +148,9 @@ export default class extends Component {
     });
 
     // Recalculate the totals if one of the amounts change
-    item.onChange('amount', () => {
+    item.on('itemChange', name => {
+      if (name !== 'amount') return;
+
       this.calculateTotals();
     });
 
@@ -155,12 +158,12 @@ export default class extends Component {
   }
 
   calculateTotals() {
-    var reducer = (sum, item) => (sum + Number(item.get('amount')));
+    var reducer = (sum, item) => (sum + item.amount);
     var totalDebit = this.items.debit.reduce(reducer, 0);
     var totalCredit = this.items.credit.reduce(reducer, 0);
 
-    this.set('totalDebit', formatAmount(totalDebit));
-    this.set('totalCredit', formatAmount(totalCredit));
+    this.element.querySelector('[name="total-debit"]').value = formatAmount(totalDebit);
+    this.element.querySelector('[name="total-credit"]').value = formatAmount(totalCredit);
   }
 
 }

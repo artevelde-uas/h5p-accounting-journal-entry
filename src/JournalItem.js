@@ -3,8 +3,55 @@ import { translate as __, formatAmount } from './helpers';
 
 import styles from './journal-entry.css';
 
+const data = new WeakMap();
 
 export default class extends Component {
+
+  get accountNumber() {
+    return Number(this.element.querySelector('[name="account-number"]').value);
+  }
+  set accountNumber(value) {
+    this.element.querySelector('[name="account-number"]').value = value;
+
+    // Update the account name
+    this.element.querySelector(`td.${styles.accountName}`).textContent = this.chart[value];
+  }
+
+  get invoiceType() {
+    return this.element.querySelector('[name="invoice-type"]').value;
+  }
+  set invoiceType(value) {
+    this.element.querySelector('[name="invoice-type"]').value = value;
+  }
+
+  get plusMinus() {
+    return this.element.querySelector('[name="plus-minus"]').value;
+  }
+  set plusMinus(value) {
+    this.element.querySelector('[name="plus-minus"]').value = value;
+  }
+
+  get amount() {
+    return Number(this.element.querySelector('[name="amount"]').value);
+  }
+  set amount(value) {
+    this.element.querySelector('[name="amount"]').value = value;
+  }
+
+  get data() {
+    return {
+      accountNumber: this.accountNumber,
+      invoiceType: this.invoiceType,
+      plusMinus: this.plusMinus,
+      amount: this.amount
+    }
+  }
+  set data(value) {
+    this.accountNumber = value.accountNumber;
+    this.invoiceType = value.invoiceType;
+    this.plusMinus = value.plusMinus;
+    this.amount = value.amount;
+  }
 
   /**
    * @constructor
@@ -14,43 +61,54 @@ export default class extends Component {
   constructor(type, chart, isSolution) {
     super();
 
+    data.set(this, Object.create(null));
+
     this.type = type;
     this.chart = chart;
     this.isSolution = isSolution;
 
     // When the account number changes, lookup the number in the chart of accounts
-    this.onChange('accountNumber', accountNumber => {
-      var accountNameCell = this.element.querySelector(`td.${styles.accountName}`);
+    this.on('itemChange', (name, oldValue, newValue) => {
+      let accountNameCell = this.element.querySelector(`td.${styles.accountName}`);
 
-      if (this.chart.hasOwnProperty(accountNumber)) {
-        accountNameCell.textContent = this.chart[accountNumber];
-      } else if (accountNumber === '') {
+      if (name !== 'account-number') return;
+
+      if (this.chart.hasOwnProperty(newValue)) {
+        accountNameCell.textContent = this.chart[newValue];
+      } else if (newValue === '') {
         accountNameCell.innerHTML = `<span class="${styles.empty}">${__('enter_account_number')}</span>`;
       } else {
         accountNameCell.innerHTML = `<span class="${styles.invalid}">${__('invalid_account_number')}</span>`;
       }
     });
 
-    ['accountNumber', 'invoiceType', 'plusMinus', 'amount'].forEach(name => {
-      // Fire an event if data is added for the first time
-      this.onChange(name, function onChange(name, value, oldValue) {
-        var isNewItem = Object.entries(this.getData()).every(([key, value]) => {
-          return (key === name) ? !Boolean(oldValue) : !Boolean(value);
-        });
+    // Fire an event if data is added for the first time
+    this.on('itemChange', (name, oldValue, newValue) => {
+      let keys = ['account-number', 'invoice-type', 'plus-minus', 'amount'];
+      let isNewItem = keys.every(key => {
+        let value = this.element.querySelector(`[name=${key}]`).value;
 
-        if (isNewItem) {
-          this.emit('newItem');
-        };
-      }.bind(this, name));
-
-      // Fire an event when all the fields become empty
-      this.onChange(name, () => {
-        var deleteItem = !Object.values(this.getData()).some(value => Boolean(value));
-
-        if (deleteItem) {
-          this.emit('deleteItem');
-        };
+        return !Boolean((key === name) ? oldValue : value);
       });
+
+      if (isNewItem) {
+        this.emit('newItem');
+      };
+    });
+
+    // Fire an event when all the fields become empty
+    this.on('itemChange', (name, oldValue, newValue) => {
+      let keys = ['account-number', 'invoice-type', 'plus-minus', 'amount'];
+      //let deleteItem = !Object.values(this.getData()).some(value => Boolean(value));
+      let deleteItem = !keys.some(key => {
+        let value = this.element.querySelector(`[name=${key}]`).value;
+
+        return Boolean(value);
+      });
+
+      if (deleteItem) {
+        this.emit('deleteItem');
+      };
     });
   }
 
@@ -63,13 +121,13 @@ export default class extends Component {
           </th>
         ` : ''}
         <td class="${styles.accountNumber}">
-          <input type="text" name="accountNumber" ${this.isSolution ? 'disabled' : ''} />
+          <input type="text" name="account-number" ${this.isSolution ? 'disabled' : ''} />
         </td>
         <td class="${styles.accountName}">
           <span class="${styles.empty}">${__('enter_account_number')}</span>
         </td>
         <td class="${styles.invoiceType}">
-          <select name="invoiceType" ${this.isSolution ? 'disabled' : ''}>
+          <select name="invoice-type" ${this.isSolution ? 'disabled' : ''}>
             <option value="">&mdash;</option>
             <option value="A">${__('assets')}</option>
             <option value="L">${__('liabilities')}</option>
@@ -78,7 +136,7 @@ export default class extends Component {
           </select>
         </td>
         <td class="${styles.plusMinus}">
-          <select name="plusMinus" ${this.isSolution ? 'disabled' : ''}>
+          <select name="plus-minus" ${this.isSolution ? 'disabled' : ''}>
             <option></option>
             <option value="plus">&plus;</option>
             <option value="minus">&minus;</option>
@@ -98,27 +156,24 @@ export default class extends Component {
       </tr>
     `);
 
+    ['account-number', 'invoice-type', 'plus-minus', 'amount'].forEach(name => {
+      let element = this.element.querySelector(`[name="${name}"]`);
+      let type = (element.tagName === 'SELECT') ? 'change' : 'input';
+
+      element.addEventListener(type, event => {
+        let newValue = event.target.value;
+        let oldValue = data.get(this)[name] || '';
+
+        if (newValue === oldValue) return;
+
+        this.emit('itemChange', name, oldValue, newValue);
+
+        data.get(this)[name] = newValue;
+      });
+    });
+
     // Calculate the correct row span for the added row
     container.querySelector(`th.${styles.title}`).setAttribute('rowspan', container.children.length);
-  }
-
-  getData() {
-    return {
-      accountNumber: Number(this.get('accountNumber')),
-      amount: Number(this.get('amount')),
-      invoiceType: this.get('invoiceType'),
-      plusMinus: this.get('plusMinus')
-    };
-  }
-
-  setData(data) {
-    var accountNameCell = this.element.querySelector(`td.${styles.accountName}`);
-
-    if (data === undefined) return;
-
-    super.setData(data);
-
-    accountNameCell.textContent = this.chart[data.accountNumber];
   }
 
   remove() {
