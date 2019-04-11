@@ -31,15 +31,15 @@ export default class extends Component {
 
     if (!this.isSolution) {
       this.element.querySelector(`#${styles.addEntry}`).addEventListener('click', () => {
-        this.addJournalItem();
+        this.addJournalEntry();
       });
     }
 
-    this.addJournalItem();
+    this.addJournalEntry();
   }
 
   getData() {
-    return this.entries.map(item => item.getData());
+    return this.entries.map(entry => entry.getData());
   }
 
   setData(data) {
@@ -47,36 +47,36 @@ export default class extends Component {
 
     if (data === undefined) return;
 
-    // Remove all current journal items
+    // Remove all current journal entries
     listDiv.innerHTML = '';
     this.entries = [];
 
-    // Add new journal items
-    data.forEach(item => {
-      this.entries.push(this.addJournalItem(item));
+    // Add new journal entries
+    data.forEach(entry => {
+      this.entries.push(this.addJournalEntry(entry));
     });
   }
 
-  addJournalItem(data) {
+  addJournalEntry(data) {
     var journalEntry = new JournalEntry(this.chart, this.isSolution);
     var listDiv = this.element.querySelector(`div.${styles.entryList}`);
 
     journalEntry.render(listDiv);
     journalEntry.setData(data);
 
-    // Check when item is removed
+    // Check when entry is removed
     journalEntry.on('remove', () => {
       if (this.entries.includes(journalEntry)) {
         this.entries.splice(this.entries.indexOf(journalEntry), 1);
       }
     });
 
-    // Check for the creation of first new data in an item
+    // Check for the creation of first new data in an entry
     journalEntry.on('newEntry', () => {
       this.entries.push(journalEntry);
     });
 
-    // Check when all data in an item is removed
+    // Check when all data in an entry is removed
     journalEntry.on('deleteEntry', () => {
       this.entries.splice(this.entries.indexOf(journalEntry), 1);
     });

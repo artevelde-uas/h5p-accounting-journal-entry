@@ -61,10 +61,10 @@ export default class extends Component {
       </table>
     `);
 
-    // Remove item if delete button is clicked
+    // Remove entry if delete button is clicked
     if (!this.isSolution) {
       this.element.querySelector(`.${styles.deleteEntry}`).addEventListener('click', () => {
-        // Don't remove if there is only one item left
+        // Don't remove if there is only one entry left
         if (this.element.parentNode.children.length === 1) return;
 
         this.remove()
@@ -94,7 +94,7 @@ export default class extends Component {
     this.element.querySelector(`tbody.${styles.debit}`).innerHTML = '';
     this.element.querySelector(`tbody.${styles.credit}`).innerHTML = '';
 
-    // Add new item
+    // Add new items
     data.debitItems.forEach(item => {
       this.items.debit.push(this.addItemRow('debit', item));
     });
