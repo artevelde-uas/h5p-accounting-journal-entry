@@ -13,8 +13,8 @@ module.exports = {
       '@babel/polyfill',
       'nodelist-foreach-polyfill',
       'whatwg-fetch',
-      './src/polyfills.js',
-      './src/index.js'
+      './src/scripts/polyfills.js',
+      './src/entries/h5p-accounting-journal-entry.js'
     ]
   },
   performance: {

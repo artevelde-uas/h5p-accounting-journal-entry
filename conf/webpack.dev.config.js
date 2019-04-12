@@ -7,7 +7,7 @@ module.exports = {
   mode: 'development',
   devtool: 'inline-source-map',
   entry: {
-    'h5p-accounting-journal-entry': './src/index.js'
+    'h5p-accounting-journal-entry': './src/entries/h5p-accounting-journal-entry.js'
   },
   optimization: {
     minimize: false

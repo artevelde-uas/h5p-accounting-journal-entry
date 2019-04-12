@@ -1,6 +1,6 @@
 import { normalize as normailizePath } from 'path';
 
-import { machineName } from '../library.json';
+import { machineName } from '../../library.json';
 
 export function getPath(path = '') {
   var librariesFolder = (process.env.NODE_ENV === 'development') ? 'development' : 'libraries';

@@ -1,8 +1,8 @@
-import Component from './Component';
+import Component from '../Component';
 import JournalItem from './JournalItem';
-import { translate as __, formatAmount } from './helpers';
+import { translate as __, formatAmount } from '../helpers';
 
-import styles from './journal-entry.css';
+import styles from '../../styles/h5p-accounting-journal-entry.css';
 
 export default class extends Component {
 

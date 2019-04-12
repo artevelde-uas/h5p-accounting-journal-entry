@@ -1,14 +1,12 @@
 import { getJSON, getLang } from './helpers';
-import JournalEntryList from './JournalEntryList';
+import JournalEntryList from './components/JournalEntryList';
 import { translate as __ } from './helpers';
 
-import { machineName } from '../library.json';
+import { machineName } from '../../library.json';
 
-import styles from './journal-entry.css';
+import styles from '../styles/h5p-accounting-journal-entry.css';
 
-const H5P = window.H5P || {};
-
-H5P.AccountingJournalEntry = class extends H5P.Question {
+export default class extends H5P.Question {
 
   /**
    * @constructor
@@ -67,4 +65,4 @@ H5P.AccountingJournalEntry = class extends H5P.Question {
     this.setContent(container);
   }
 
-};
+}

@@ -1,7 +1,7 @@
-import Component from './Component';
-import { translate as __, formatAmount } from './helpers';
+import Component from '../Component';
+import { translate as __, formatAmount } from '../helpers';
 
-import styles from './journal-entry.css';
+import styles from '../../styles/h5p-accounting-journal-entry.css';
 
 const data = new WeakMap();
 
