@@ -114,7 +114,6 @@
     "type": "list",
     "label": "Journal entries",
     "importance": "high",
-    "optional": true,
     "min": 1,
     "field": {
       "name": "journalEntry",
@@ -125,93 +124,99 @@
           "name": "debitItems",
           "type": "list",
           "label": "Debit items",
-          "optional": true,
-          "importance": "low",
+          "importance": "medium",
           "min": 1,
           "field": {
             "name": "debitItem",
-            "type": "group",
+            "type": "list",
             "label": "Debit item",
-            "fields": [
-              {
-                "name": "accountNumber",
-                "type": "number",
-                "label": "Account number"
-              },
-              {
-                "name": "invoiceType",
-                "type": "select",
-                "label": "Type",
-                "widget": "showWhen",
-                "showWhen": {
-                  "rules": [
-                    {
-                      "field": "../../../../behaviour/ALER",
-                      "equals": [
-                        "showWithScoring",
-                        "showWithoutScoring"
-                      ]
-                    }
-                  ]
+            "importance": "low",
+            "min": 1,
+            "field": {
+              "name": "debitItemOption",
+              "type": "group",
+              "label": "Debit item option",
+              "fields": [
+                {
+                  "name": "accountNumber",
+                  "type": "number",
+                  "label": "Account number"
                 },
-                "options": [
-                  {
-                    "label": "&mdash;"
+                {
+                  "name": "invoiceType",
+                  "type": "select",
+                  "label": "Type",
+                  "widget": "showWhen",
+                  "showWhen": {
+                    "rules": [
+                      {
+                        "field": "../../../../../behaviour/ALER",
+                        "equals": [
+                          "showWithScoring",
+                          "showWithoutScoring"
+                        ]
+                      }
+                    ]
                   },
-                  {
-                    "value": "A",
-                    "label": "Assets"
-                  },
-                  {
-                    "value": "L",
-                    "label": "Liabilities"
-                  },
-                  {
-                    "value": "E",
-                    "label": "Expenses"
-                  },
-                  {
-                    "value": "R",
-                    "label": "Revenue"
-                  }
-                ],
-                "default": "&mdash;"
-              },
-              {
-                "name": "plusMinus",
-                "type": "select",
-                "label": "Plus / minus",
-                "widget": "showWhen",
-                "showWhen": {
-                  "rules": [
+                  "options": [
                     {
-                      "field": "../../../../behaviour/positiveNegative",
-                      "equals": [
-                        "showWithScoring",
-                        "showWithoutScoring"
-                      ]
+                      "label": "&mdash;"
+                    },
+                    {
+                      "value": "A",
+                      "label": "Assets"
+                    },
+                    {
+                      "value": "L",
+                      "label": "Liabilities"
+                    },
+                    {
+                      "value": "E",
+                      "label": "Expenses"
+                    },
+                    {
+                      "value": "R",
+                      "label": "Revenue"
                     }
-                  ]
+                  ],
+                  "default": "&mdash;"
                 },
-                "options": [
-                  {
-                    "value": "plus",
-                    "label": "+"
+                {
+                  "name": "plusMinus",
+                  "type": "select",
+                  "label": "Plus / minus",
+                  "widget": "showWhen",
+                  "showWhen": {
+                    "rules": [
+                      {
+                        "field": "../../../../../behaviour/positiveNegative",
+                        "equals": [
+                          "showWithScoring",
+                          "showWithoutScoring"
+                        ]
+                      }
+                    ]
                   },
-                  {
-                    "value": "minus",
-                    "label": "-"
-                  }
-                ],
-                "default": "plus"
-              },
-              {
-                "name": "amount",
-                "type": "number",
-                "label": "Debit amount",
-                "decimals": 2
-              }
-            ]
+                  "options": [
+                    {
+                      "value": "plus",
+                      "label": "+"
+                    },
+                    {
+                      "value": "minus",
+                      "label": "-"
+                    }
+                  ],
+                  "default": "plus"
+                },
+                {
+                  "name": "amount",
+                  "type": "number",
+                  "label": "Debit amount",
+                  "decimals": 2
+                }
+              ]
+            }
           }
         },
         {
@@ -223,88 +228,93 @@
           "min": 1,
           "field": {
             "name": "creditItem",
-            "type": "group",
-            "label": "Credit transaction",
-            "fields": [
-              {
-                "name": "accountNumber",
-                "type": "number",
-                "label": "Account number"
-              },
-              {
-                "name": "invoiceType",
-                "type": "select",
-                "label": "Type",
-                "widget": "showWhen",
-                "showWhen": {
-                  "rules": [
-                    {
-                      "field": "../../../../behaviour/ALER",
-                      "equals": [
-                        "showWithScoring",
-                        "showWithoutScoring"
-                      ]
-                    }
-                  ]
+            "type": "list",
+            "label": "Credit item",
+            "field": {
+              "name": "creditItemOption",
+              "type": "group",
+              "label": "Credit item option",
+              "fields": [
+                {
+                  "name": "accountNumber",
+                  "type": "number",
+                  "label": "Account number"
                 },
-                "options": [
-                  {
-                    "label": "-"
+                {
+                  "name": "invoiceType",
+                  "type": "select",
+                  "label": "Type",
+                  "widget": "showWhen",
+                  "showWhen": {
+                    "rules": [
+                      {
+                        "field": "../../../../../behaviour/ALER",
+                        "equals": [
+                          "showWithScoring",
+                          "showWithoutScoring"
+                        ]
+                      }
+                    ]
                   },
-                  {
-                    "value": "A",
-                    "label": "Assets"
-                  },
-                  {
-                    "value": "L",
-                    "label": "Liabilities"
-                  },
-                  {
-                    "value": "E",
-                    "label": "Expenses"
-                  },
-                  {
-                    "value": "R",
-                    "label": "Revenue"
-                  }
-                ],
-                "default": "-"
-              },
-              {
-                "name": "plusMinus",
-                "type": "select",
-                "label": "+/-",
-                "widget": "showWhen",
-                "showWhen": {
-                  "rules": [
+                  "options": [
                     {
-                      "field": "../../../../behaviour/positiveNegative",
-                      "equals": [
-                        "showWithScoring",
-                        "showWithoutScoring"
-                      ]
+                      "label": "-"
+                    },
+                    {
+                      "value": "A",
+                      "label": "Assets"
+                    },
+                    {
+                      "value": "L",
+                      "label": "Liabilities"
+                    },
+                    {
+                      "value": "E",
+                      "label": "Expenses"
+                    },
+                    {
+                      "value": "R",
+                      "label": "Revenue"
                     }
-                  ]
+                  ],
+                  "default": "-"
                 },
-                "options": [
-                  {
-                    "value": "plus",
-                    "label": "+"
+                {
+                  "name": "plusMinus",
+                  "type": "select",
+                  "label": "+/-",
+                  "widget": "showWhen",
+                  "showWhen": {
+                    "rules": [
+                      {
+                        "field": "../../../../../behaviour/positiveNegative",
+                        "equals": [
+                          "showWithScoring",
+                          "showWithoutScoring"
+                        ]
+                      }
+                    ]
                   },
-                  {
-                    "value": "minus",
-                    "label": "-"
-                  }
-                ],
-                "default": "plus"
-              },
-              {
-                "name": "amount",
-                "type": "number",
-                "label": "Credit amount",
-                "decimals": 2
-              }
-            ]
+                  "options": [
+                    {
+                      "value": "plus",
+                      "label": "+"
+                    },
+                    {
+                      "value": "minus",
+                      "label": "-"
+                    }
+                  ],
+                  "default": "plus"
+                },
+                {
+                  "name": "amount",
+                  "type": "number",
+                  "label": "Credit amount",
+                  "decimals": 2
+                }
+              ]
+            }
           }
         }
       ]
