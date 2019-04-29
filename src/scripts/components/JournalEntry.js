@@ -41,7 +41,7 @@ class JournalEntry extends Component {
             <th>${__('credit')}</th>
             <th class="${styles.controls}">
               ${this.isSolution ? '' : `
-                <button class="h5p-core-button ${styles.deleteEntry}" title="${__('delete_journal_entry')}"></button>
+                <button class="${styles.deleteEntry}" title="${__('delete_journal_entry')}"></button>
               `}
             </th>
           </tr>

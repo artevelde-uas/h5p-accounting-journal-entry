@@ -95,11 +95,13 @@ table.entry th.controls {
   text-align: center;
 }
 table.entry th.controls button {
-  padding: 0 0 2px 2px;
-  height: 2em;
-  width: 2em;
-  line-height: 0;
-  font-size: 9px;
+  appearance: none;
+  padding: 0;
+  border: none;
+  background: transparent;
+  font-family: 'H5P';
+  font-size: 2em;
+  cursor: pointer;
 }
 
 div#question {}
@@ -112,8 +114,7 @@ button#add-entry {
 button#show-solution {}
 
 table.entry th.controls button.delete-entry::before {
-  content: '\2716';
-  font-family: 'Segoe UI Symbol';
+  content: "\e890";
 }
 table.entry:only-child th.controls button.delete-entry {
   display: none;
