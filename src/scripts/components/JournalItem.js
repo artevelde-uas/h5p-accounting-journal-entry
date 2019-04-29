@@ -5,7 +5,7 @@ import styles from '../../styles/h5p-accounting-journal-entry.css';
 
 const data = new WeakMap();
 
-export default class extends Component {
+class JournalItem extends Component {
 
   get accountNumber() {
     return Number(this.element.querySelector('[name="account-number"]').value);
@@ -195,3 +195,5 @@ export default class extends Component {
   }
 
 }
+
+export default JournalItem;

@@ -4,7 +4,7 @@ import { translate as __, formatAmount } from '../helpers';
 
 import styles from '../../styles/h5p-accounting-journal-entry.css';
 
-export default class extends Component {
+class JournalEntry extends Component {
 
   /**
    * @constructor
@@ -167,3 +167,5 @@ export default class extends Component {
   }
 
 }
+
+export default JournalEntry;

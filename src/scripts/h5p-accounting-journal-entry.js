@@ -6,7 +6,7 @@ import { machineName } from '../../library.json';
 
 import styles from '../styles/h5p-accounting-journal-entry.css';
 
-export default class extends H5P.Question {
+class AccountingJournalEntry extends H5P.Question {
 
   /**
    * @constructor
@@ -66,3 +66,5 @@ export default class extends H5P.Question {
   }
 
 }
+
+export default AccountingJournalEntry;
