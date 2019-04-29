@@ -99,7 +99,6 @@ class JournalItem extends Component {
     // Fire an event when all the fields become empty
     this.on('itemChange', (name, oldValue, newValue) => {
       let keys = ['account-number', 'invoice-type', 'plus-minus', 'amount'];
-      //let deleteItem = !Object.values(this.getData()).some(value => Boolean(value));
       let deleteItem = !keys.some(key => {
         let value = this.element.querySelector(`[name=${key}]`).value;
 
