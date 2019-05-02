@@ -91,94 +91,100 @@
             "label": "Debetlijnen",
             "field": {
               "label": "Debetlijn",
-              "fields": [
-                {
-                  "label": "Rekening nummer"
-                },
-                {
-                  "label": "Type",
-                  "options": [
-                    {
-                      "label": "&mdash;"
-                    },
-                    {
-                      "label": "Activa"
-                    },
-                    {
-                      "label": "Passiva"
-                    },
-                    {
-                      "label": "Kost"
-                    },
-                    {
-                      "label": "Opbrengst"
-                    }
-                  ],
-                  "default": "&mdash;"
-                },
-                {
-                  "label": "Plus / min",
-                  "options": [
-                    {
-                      "label": "+"
-                    },
-                    {
-                      "label": "-"
-                    }
-                  ],
-                  "default": "plus"
-                },
-                {
-                  "label": "Debet bedrag"
-                }
-              ]
+              "field": {
+                "label": "Debetlijn optie",
+                "fields": [
+                  {
+                    "label": "Rekening nummer"
+                  },
+                  {
+                    "label": "Type",
+                    "options": [
+                      {
+                        "label": "&mdash;"
+                      },
+                      {
+                        "label": "Activa"
+                      },
+                      {
+                        "label": "Passiva"
+                      },
+                      {
+                        "label": "Kost"
+                      },
+                      {
+                        "label": "Opbrengst"
+                      }
+                    ],
+                    "default": "&mdash;"
+                  },
+                  {
+                    "label": "Plus / min",
+                    "options": [
+                      {
+                        "label": "+"
+                      },
+                      {
+                        "label": "-"
+                      }
+                    ],
+                    "default": "plus"
+                  },
+                  {
+                    "label": "Debet bedrag"
+                  }
+                ]
+              }
             }
           },
           {
             "label": "Creditlijnen",
             "field": {
               "label": "Creditlijn",
-              "fields": [
-                {
-                  "label": "Rekening nummer"
-                },
-                {
-                  "label": "Type",
-                  "options": [
-                    {
-                      "label": "-"
-                    },
-                    {
-                      "label": "Activa"
-                    },
-                    {
-                      "label": "Passiva"
-                    },
-                    {
-                      "label": "Kost"
-                    },
-                    {
-                      "label": "Opbrengst"
-                    }
-                  ],
-                  "default": "-"
-                },
-                {
-                  "label": "Plus / min",
-                  "options": [
-                    {
-                      "label": "+"
-                    },
-                    {
-                      "label": "-"
-                    }
-                  ],
-                  "default": "plus"
-                },
-                {
-                  "label": "Credit bedrag"
-                }
-              ]
+              "field": {
+                "label": "Creditlijn optie",
+                "fields": [
+                  {
+                    "label": "Rekening nummer"
+                  },
+                  {
+                    "label": "Type",
+                    "options": [
+                      {
+                        "label": "-"
+                      },
+                      {
+                        "label": "Activa"
+                      },
+                      {
+                        "label": "Passiva"
+                      },
+                      {
+                        "label": "Kost"
+                      },
+                      {
+                        "label": "Opbrengst"
+                      }
+                    ],
+                    "default": "-"
+                  },
+                  {
+                    "label": "Plus / min",
+                    "options": [
+                      {
+                        "label": "+"
+                      },
+                      {
+                        "label": "-"
+                      }
+                    ],
+                    "default": "plus"
+                  },
+                  {
+                    "label": "Credit bedrag"
+                  }
+                ]
+              }
             }
           }
         ]
