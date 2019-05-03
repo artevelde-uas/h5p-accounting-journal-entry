@@ -224,12 +224,13 @@
           "type": "list",
           "label": "Credit items",
           "optional": true,
-          "importance": "low",
+          "importance": "medium",
           "min": 1,
           "field": {
             "name": "creditItem",
             "type": "list",
             "label": "Credit item",
+            "importance": "low",
             "field": {
               "name": "creditItemOption",
               "type": "group",
