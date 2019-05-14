@@ -35,8 +35,8 @@
         "name": "enableRetry",
         "type": "boolean",
         "label": "Enable 'Retry'",
-        "importance": "low",
-        "default": true
+        "default": true,
+        "optional": true
       },
       {
         "name": "enableSolutionsButton",
@@ -64,7 +64,8 @@
             "label": "Show without scoring"
           }
         ],
-        "default": "showWithScoring"
+        "default": "showWithScoring",
+        "optional": true
       },
       {
         "name": "positiveNegative",
@@ -85,14 +86,14 @@
             "label": "Show without scoring"
           }
         ],
-        "default": "showWithScoring"
+        "default": "showWithScoring",
+        "optional": true
       },
       {
         "name": "scoreRowOption",
         "type": "boolean",
         "label": "Score 0 or 1 per row",
         "description": "Each row gets 1 point if correct, otherwise 0 points are given.",
-        "importance": "low",
         "default": true,
         "optional": true
       },
@@ -101,8 +102,7 @@
         "type": "boolean",
         "label": "Debit and credit must be equal",
         "description": "If debit and credit are not the same value, the final score is 0, no matter the other values.",
-        "importance": "low",
-        "default": false,
+        "default": true,
         "optional": true
       },
       {
@@ -110,7 +110,6 @@
         "type": "boolean",
         "label": "No extra lines allowed",
         "description": "If the answer contains more lines the correct solution, the final score is 0.",
-        "importance": "low",
         "default": false,
         "optional": true
       }
