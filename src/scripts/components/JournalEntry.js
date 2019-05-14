@@ -6,6 +6,36 @@ import styles from '../../styles/h5p-accounting-journal-entry.css';
 
 class JournalEntry extends Component {
 
+  get data() {
+    return {
+      debitItems: this.items.debit.map(item => item.getData()),
+      creditItems: this.items.credit.map(item => item.getData())
+    };
+  }
+
+  set data(data) {
+    // Remove all current items
+    this.items.debit = [];
+    this.items.credit = [];
+    this.element.querySelector(`tbody.${styles.debit}`).innerHTML = '';
+    this.element.querySelector(`tbody.${styles.credit}`).innerHTML = '';
+
+    // Add new items
+    data.debitItems.forEach(item => {
+      this.items.debit.push(this.addItemRow('debit', item));
+    });
+    data.creditItems.forEach(item => {
+      this.items.credit.push(this.addItemRow('credit', item));
+    });
+
+    this.calculateTotals();
+
+    if (!this.isSolution) {
+      this.addItemRow('debit');
+      this.addItemRow('credit');
+    }
+  }
+
   /**
    * @constructor
    * @param {object} chart The 'Chart of Accounts' to be used
@@ -76,36 +106,6 @@ class JournalEntry extends Component {
     this.addItemRow('debit');
     this.addItemRow('credit');
     this.addItemRow('credit');
-  }
-
-  get data() {
-    return {
-      debitItems: this.items.debit.map(item => item.getData()),
-      creditItems: this.items.credit.map(item => item.getData())
-    };
-  }
-
-  set data(data) {
-    // Remove all current items
-    this.items.debit = [];
-    this.items.credit = [];
-    this.element.querySelector(`tbody.${styles.debit}`).innerHTML = '';
-    this.element.querySelector(`tbody.${styles.credit}`).innerHTML = '';
-
-    // Add new items
-    data.debitItems.forEach(item => {
-      this.items.debit.push(this.addItemRow('debit', item));
-    });
-    data.creditItems.forEach(item => {
-      this.items.credit.push(this.addItemRow('credit', item));
-    });
-
-    this.calculateTotals();
-
-    if (!this.isSolution) {
-      this.addItemRow('debit');
-      this.addItemRow('credit');
-    }
   }
 
   addItemRow(type, data) {

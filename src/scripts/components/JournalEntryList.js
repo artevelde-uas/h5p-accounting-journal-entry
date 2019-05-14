@@ -6,6 +6,23 @@ import styles from '../../styles/h5p-accounting-journal-entry.css';
 
 class JournalEntryList extends Component {
 
+  get data() {
+    return this.entries.map(entry => entry.getData());
+  }
+
+  set data(data) {
+    var listDiv = this.element.querySelector(`div.${styles.entryList}`);
+
+    // Remove all current journal entries
+    listDiv.innerHTML = '';
+    this.entries = [];
+
+    // Add new journal entries
+    data.forEach(entry => {
+      this.entries.push(this.addJournalEntry(entry));
+    });
+  }
+
   /**
    * @constructor
    * @param {object} chart The 'Chart of Accounts' to be used
@@ -36,23 +53,6 @@ class JournalEntryList extends Component {
     }
 
     this.addJournalEntry();
-  }
-
-  get data() {
-    return this.entries.map(entry => entry.getData());
-  }
-
-  set data(data) {
-    var listDiv = this.element.querySelector(`div.${styles.entryList}`);
-
-    // Remove all current journal entries
-    listDiv.innerHTML = '';
-    this.entries = [];
-
-    // Add new journal entries
-    data.forEach(entry => {
-      this.entries.push(this.addJournalEntry(entry));
-    });
   }
 
   addJournalEntry(data) {
