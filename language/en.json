@@ -39,6 +39,9 @@
           "label": "Enable 'Retry'"
         },
         {
+          "label": "Enable 'Solution'"
+        },
+        {
           "label": "A/L/E/R column",
           "description": "Show or hide the A/L/E/R column and use for scoring",
           "options": [

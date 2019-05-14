@@ -39,6 +39,9 @@
           "label": "Activeer 'Opnieuw'"
         },
         {
+          "label": "Activeer 'Oplossing'"
+        },
+        {
           "label": "A/P/K/O kolom",
           "description": "Toon of verberg de A/P/K/O kolom en gebruik voor berekenen van score",
           "options": [

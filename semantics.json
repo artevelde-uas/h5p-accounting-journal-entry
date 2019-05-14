@@ -39,6 +39,13 @@
         "default": true
       },
       {
+        "name": "enableSolutionsButton",
+        "type": "boolean",
+        "label": "Enable 'Solution'",
+        "default": true,
+        "optional": true
+      },
+      {
         "name": "ALER",
         "type": "select",
         "label": "A/L/E/R column",
