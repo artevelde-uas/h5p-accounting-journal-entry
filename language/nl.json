@@ -14,7 +14,9 @@
     "invalid_account_number": "Ongeldig rekening nummer",
     "add_journal_entry": "Voeg journaalpost toe",
     "delete_journal_entry": "Verwijder journaalpost",
-    "show_solution": "Bekijk de oplossing"
+    "check_answer": "Controleer het antwoord",
+    "show_solution": "Bekijk de oplossing",
+    "try_again": "Probeer het opnieuw"
   },
   "semantics": [
     {

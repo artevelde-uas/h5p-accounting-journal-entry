@@ -36,26 +36,49 @@ class AccountingJournalEntry extends H5P.Question {
       // Store UI strings into translation tool
       H5PIntegration.l10n[machineName] = translations.uiStrings;
 
+      // Store chart
+      this.chart = chart;
+
       // Render the HTML
       container.insertAdjacentHTML('beforeend', `
         <div id="${styles.question}">
         </div>
         <div id="${styles.solution}">
-          <button id="${styles.showSolution}" class="h5p-core-button">${__('show_solution')}</button>
         </div>
       `);
 
-      container.querySelector(`#${styles.showSolution}`).addEventListener('click', () => {
-        let journalEntryList = new JournalEntryList(chart, true);
-
-        journalEntryList.render(container.querySelector(`#${styles.solution}`), { replaceContainer: true });
-        journalEntryList.data = this.params.journalEntries;
-      });
+      this.questionContainer = container.querySelector(`#${styles.question}`);
+      this.solutionContainer = container.querySelector(`#${styles.solution}`);
 
       // Attach the component to the container
       let journalEntryList = new JournalEntryList(chart);
 
-      journalEntryList.render(container.querySelector(`#${styles.question}`), { replaceContainer: true });
+      journalEntryList.render(this.questionContainer);
+
+      // Add 'Check answer' button
+      this.addButton('check-answer', __('check_answer'), () => {
+        this.hideButton('check-answer');
+        this.showButton('show-solution');
+        this.showButton('try-again');
+
+        this.showFeedback();
+      });
+
+      // Add 'Show solution' button
+      if (this.params.behaviour.enableSolutionsButton) {
+        this.addButton('show-solution', __('show_solution'), () => {
+          this.hideButton('show-solution');
+
+          this.showSolutions();
+        }, false);
+      }
+
+      // Add 'Retry' button
+      if (this.params.behaviour.enableRetry) {
+        this.addButton('try-again', __('try_again'), () => {
+          this.resetTask();
+        }, false);
+      }
     });
 
     // Register Introduction
@@ -99,7 +122,10 @@ class AccountingJournalEntry extends H5P.Question {
    * Displays the solution(s) for this task, should also hide all buttons.
    */
   showSolutions() {
-    //TODO Show solutions
+    let journalEntryList = new JournalEntryList(this.chart, true);
+
+    journalEntryList.render(this.solutionContainer);
+    journalEntryList.data = this.params.journalEntries;
   }
 
   /**
@@ -140,6 +166,16 @@ class AccountingJournalEntry extends H5P.Question {
   getXAPIData() {
     //TODO return xAPI data
     return {};
+  }
+
+  showFeedback() {
+    this.setExplanation([], 'Explanation');
+
+    this.setFeedback('Feedback text.', this.getScore(), this.getMaxScore());
+  }
+
+  hideSolution() {
+    this.solutionContainer.innerHTML = '';
   }
 
 }

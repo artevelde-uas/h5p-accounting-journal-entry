@@ -14,7 +14,9 @@
     "invalid_account_number": "Invalid account number",
     "add_journal_entry": "Add a jounal entry",
     "delete_journal_entry": "Delete jounal entry",
-    "show_solution": "Show the solution"
+    "check_answer": "Check the answer",
+    "show_solution": "Show the solution",
+    "try_again": "Try again"
   },
   "semantics": [
     {
