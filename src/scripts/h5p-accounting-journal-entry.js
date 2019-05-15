@@ -51,9 +51,8 @@ class AccountingJournalEntry extends H5P.Question {
       this.solutionContainer = container.querySelector(`.${styles.solution}`);
 
       // Attach the component to the container
-      let journalEntryList = new JournalEntryList(chart);
-
-      journalEntryList.render(this.questionContainer);
+      this.question = new JournalEntryList(chart);
+      this.question.render(this.questionContainer);
 
       // Add 'Check answer' button
       this.addButton('check-answer', __('check_answer'), () => {
@@ -61,6 +60,7 @@ class AccountingJournalEntry extends H5P.Question {
         this.showButton('show-solution');
         this.showButton('try-again');
 
+        this.setReadonly();
         this.showFeedback();
       });
 
@@ -135,6 +135,7 @@ class AccountingJournalEntry extends H5P.Question {
     this.setExplanation();
     this.removeFeedback();
     this.hideSolution();
+    this.setReadonly(false);
 
     this.showButton('check-answer');
     this.hideButton('show-solution');
@@ -176,6 +177,21 @@ class AccountingJournalEntry extends H5P.Question {
 
   hideSolution() {
     this.solutionContainer.innerHTML = '';
+  }
+
+  /**
+   * Disables (or enables) all input elements and buttons of the question element.
+   *
+   * @param {boolean} value TRUE to disable, FALSE to enable.
+   */
+  setReadonly(readonly = true) {
+    var inputs = this.question.element.querySelectorAll('input, button, select');
+
+    inputs.forEach(readonly ? element => {
+      element.setAttribute('disabled', 'disabled');
+    } : element => {
+      element.removeAttribute('disabled');
+    });
   }
 
 }
