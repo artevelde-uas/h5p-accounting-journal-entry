@@ -7,7 +7,7 @@ import styles from '../../styles/h5p-accounting-journal-entry.css';
 class JournalEntryList extends Component {
 
   get data() {
-    return this.entries.map(entry => entry.getData());
+    return this.entries.map(entry => entry.data);
   }
 
   set data(data) {

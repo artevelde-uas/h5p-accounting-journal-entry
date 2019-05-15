@@ -8,8 +8,8 @@ class JournalEntry extends Component {
 
   get data() {
     return {
-      debitItems: this.items.debit.map(item => item.getData()),
-      creditItems: this.items.credit.map(item => item.getData())
+      debitItems: this.items.debit.map(item => item.data),
+      creditItems: this.items.credit.map(item => item.data)
     };
   }
 
