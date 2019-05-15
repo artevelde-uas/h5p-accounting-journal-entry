@@ -17,6 +17,10 @@ class JournalEntryList extends Component {
     listDiv.innerHTML = '';
     this.entries = [];
 
+    if (data === null || data.length === 0) {
+      this.addJournalEntry();
+    }
+
     // Add new journal entries
     data.forEach(entry => {
       this.entries.push(this.addJournalEntry(entry));
