@@ -41,7 +41,7 @@ class JournalEntryList extends Component {
         <div class="${styles.entryList}">
         </div>
         ${this.isSolution ? '' : `
-          <button class="h5p-core-button ${styles.addEntry}">${__('add_journal_entry')}</button>
+          <button class="h5p-joubelui-button truncated ${styles.addEntry}" title="${__('add_journal_entry')}"></button>
         `}
       </div>
     `, options);

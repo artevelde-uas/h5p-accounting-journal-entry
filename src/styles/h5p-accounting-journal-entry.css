@@ -54,7 +54,9 @@ table.entry td.account-name {
 }
 table.entry td.account-name > span.empty::before,
 table.entry td.account-name > span.invalid::before {
-  content: '\2190\a0'; /* &larr; + &nbsp; */
+  font-family: 'H5PFontAwesome4';
+  content: '\f060';
+  padding-right: .5em;
 }
 table.entry td.account-name > span.empty {
   color: gray;
@@ -99,8 +101,8 @@ table.entry th.controls button {
   padding: 0;
   border: none;
   background: transparent;
-  font-family: 'H5P';
-  font-size: 2em;
+  font-family: 'H5PFontAwesome4';
+  font-size: 1.5em;
   cursor: pointer;
 }
 
@@ -111,10 +113,12 @@ button.add-entry {
   float: right;
   margin: 0 0 .5em;
 }
-button.show-solution {}
+button.add-entry::before {
+  content: '\f067';
+}
 
 table.entry th.controls button.delete-entry::before {
-  content: "\e890";
+  content: '\f057';
 }
 table.entry:only-child th.controls button.delete-entry {
   display: none;
