@@ -22,9 +22,17 @@ class JournalEntry extends Component {
 
     // Add new items
     data.debitItems.forEach(item => {
+      if (item instanceof Array) {
+        item = item[0];
+      }
+
       this.items.debit.push(this.addItemRow('debit', item));
     });
     data.creditItems.forEach(item => {
+      if (item instanceof Array) {
+        item = item[0];
+      }
+
       this.items.credit.push(this.addItemRow('credit', item));
     });
 
