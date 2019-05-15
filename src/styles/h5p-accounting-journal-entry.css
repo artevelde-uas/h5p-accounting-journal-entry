@@ -104,14 +104,14 @@ table.entry th.controls button {
   cursor: pointer;
 }
 
-div#question {}
-div#solution {}
+div.question {}
+div.solution {}
 
-button#add-entry {
+button.add-entry {
   float: right;
   margin: 0 0 .5em;
 }
-button#show-solution {}
+button.show-solution {}
 
 table.entry th.controls button.delete-entry::before {
   content: "\e890";

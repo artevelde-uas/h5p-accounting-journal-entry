@@ -41,14 +41,14 @@ class AccountingJournalEntry extends H5P.Question {
 
       // Render the HTML
       container.insertAdjacentHTML('beforeend', `
-        <div id="${styles.question}">
+        <div class="${styles.question}">
         </div>
-        <div id="${styles.solution}">
+        <div class="${styles.solution}">
         </div>
       `);
 
-      this.questionContainer = container.querySelector(`#${styles.question}`);
-      this.solutionContainer = container.querySelector(`#${styles.solution}`);
+      this.questionContainer = container.querySelector(`.${styles.question}`);
+      this.solutionContainer = container.querySelector(`.${styles.solution}`);
 
       // Attach the component to the container
       let journalEntryList = new JournalEntryList(chart);

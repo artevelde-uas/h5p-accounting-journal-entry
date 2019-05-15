@@ -41,13 +41,13 @@ class JournalEntryList extends Component {
         <div class="${styles.entryList}">
         </div>
         ${this.isSolution ? '' : `
-          <button id="${styles.addEntry}" class="h5p-core-button">${__('add_journal_entry')}</button>
+          <button class="h5p-core-button ${styles.addEntry}">${__('add_journal_entry')}</button>
         `}
       </div>
     `, options);
 
     if (!this.isSolution) {
-      this.element.querySelector(`#${styles.addEntry}`).addEventListener('click', () => {
+      this.element.querySelector(`.${styles.addEntry}`).addEventListener('click', () => {
         this.addJournalEntry();
       });
     }
