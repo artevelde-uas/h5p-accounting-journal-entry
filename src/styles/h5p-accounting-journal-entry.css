@@ -106,7 +106,9 @@ table.entry th.controls button {
   cursor: pointer;
 }
 
-div.question {}
+div.question {
+  overflow: auto;
+}
 div.solution {}
 
 button.add-entry {
