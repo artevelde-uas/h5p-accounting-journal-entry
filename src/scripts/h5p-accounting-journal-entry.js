@@ -32,13 +32,13 @@ class AccountingJournalEntry extends H5P.Question {
    * Register the DOM elements with H5P.Question
    */
   registerDomElements() {
-    var questionContainer = document.createElement('div');
-    var lang = getLang(questionContainer);
+    var answerContainer = document.createElement('div');
+    var lang = getLang(answerContainer);
     var chartType = this.params.chartType;
     var translations = getJSON(`./language/${lang}.json`);
     var chart = getJSON(`./assets/charts/${chartType}.json`);
 
-    questionContainer.className = styles.questionContainer;
+    answerContainer.className = styles.answerContainer;
 
     // Wait for all the files to load, then do initialization
     Promise.all([translations, chart]).then(([translations, chart]) => {
@@ -49,8 +49,8 @@ class AccountingJournalEntry extends H5P.Question {
       this.chart = chart;
 
       // Attach the component to the container
-      this.question = new JournalEntryList(chart);
-      this.question.render(questionContainer);
+      this.answer = new JournalEntryList(chart);
+      this.answer.render(answerContainer);
 
       // Add 'Check answer' button
       this.addButton('check-answer', __('check_answer'), () => {
@@ -83,7 +83,7 @@ class AccountingJournalEntry extends H5P.Question {
     this.setIntroduction(this.params.description);
 
     // Register content
-    this.setContent(questionContainer);
+    this.setContent(answerContainer);
   }
 
   /**
@@ -171,7 +171,7 @@ class AccountingJournalEntry extends H5P.Question {
     this.hideButton('show-solution');
     this.hideButton('try-again');
 
-    this.question.data = [];
+    this.answer.data = [];
   }
 
   /**
@@ -214,12 +214,12 @@ class AccountingJournalEntry extends H5P.Question {
   }
 
   /**
-   * Disables (or enables) all input elements and buttons of the question element.
+   * Disables (or enables) all input elements and buttons of the answer element.
    *
    * @param {boolean} value TRUE to disable, FALSE to enable.
    */
   setReadonly(readonly = true) {
-    var inputs = this.question.element.querySelectorAll('input, button, select');
+    var inputs = this.answer.element.querySelectorAll('input, button, select');
 
     inputs.forEach(readonly ? element => {
       element.setAttribute('disabled', 'disabled');
