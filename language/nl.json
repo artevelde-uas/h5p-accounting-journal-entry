@@ -76,11 +76,29 @@
           ]
         },
         {
+          "label": "Scoringmechanisme",
+          "description": "Systeemscore: de default score berekend door het systeem. Herberekende score: de systeemscore wordt herberekend naar de ingestelde score.",
+          "options": [
+            {
+              "label": "Systeemscore"
+            },
+            {
+              "label": "Herberekende score"
+            }
+          ]
+        },
+        {
+          "label": "Minimum score"
+        },
+        {
+          "label": "Maximum score"
+        },
+        {
           "label": "Score 0 of 1 per lijn",
           "description": "Elke lijn krijgt 1 punt indien correct, anders wordt 0 gegeven."
         },
         {
-          "label": "Debit and credit must be equal",
+          "label": "Debet en credit moeten gelijk zijn",
           "description": "Indien debet en credit niet gelijk zijn, is de score 0, ongeacht de waarde van de andere velden."
         },
         {

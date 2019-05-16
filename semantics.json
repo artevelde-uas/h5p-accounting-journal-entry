@@ -90,6 +90,55 @@
         "optional": true
       },
       {
+        "name": "scoringMechanism",
+        "type": "select",
+        "label": "Scoring mechanism",
+        "description": "System score: the default score calculated by the system. Recalculated score: the system score recalculated to the preset score.",
+        "options": [
+          {
+            "value": "system",
+            "label": "System score"
+          },
+          {
+            "value": "recalculated",
+            "label": "Recalculated score"
+          }
+        ],
+        "default": "system",
+        "optional": true
+      },
+      {
+        "name": "minScore",
+        "type": "number",
+        "step": 1,
+        "default": 0,
+        "label": "Minimum score",
+        "widget": "showWhen",
+        "showWhen": {
+          "rules": [
+            {
+              "field": "scoringMechanism",
+              "equals": "recalculated"
+            }
+          ]
+        }
+      },
+      {
+        "name": "maxScore",
+        "type": "number",
+        "step": 1,
+        "label": "Maximum score",
+        "widget": "showWhen",
+        "showWhen": {
+          "rules": [
+            {
+              "field": "scoringMechanism",
+              "equals": "recalculated"
+            }
+          ]
+        }
+      },
+      {
         "name": "scoreRowOption",
         "type": "boolean",
         "label": "Score 0 or 1 per row",

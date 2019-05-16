@@ -112,8 +112,14 @@ class AccountingJournalEntry extends H5P.Question {
    * @returns {number} Max score achievable for this task.
    */
   getMaxScore() {
-    //TODO Calculate maximum score
-    return 10;
+    switch (this.params.behaviour.scoringMechanism) {
+      case 'recalculated':
+        return this.params.behaviour.maxScore;
+      default:
+        return this.params.journalEntries.reduce((sum, entry) => {
+          return sum + entry.creditItems.length + entry.debitItems.length;
+        }, 0);
+    }
   }
 
   /**

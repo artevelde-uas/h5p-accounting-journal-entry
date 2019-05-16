@@ -76,6 +76,24 @@
           ]
         },
         {
+          "label": "Scoring mechanism",
+          "description": "System score: the default score calculated by the system. Recalculated score: the system score recalculated to the preset score.",
+          "options": [
+            {
+              "label": "System score"
+            },
+            {
+              "label": "Recalculated score"
+            }
+          ]
+        },
+        {
+          "label": "Minimum score"
+        },
+        {
+          "label": "Maximum score"
+        },
+        {
           "label": "Score 0 or 1 per row",
           "description": "Each row gets 1 point if correct, otherwise 0 points are given."
         },
