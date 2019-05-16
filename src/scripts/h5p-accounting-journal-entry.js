@@ -19,17 +19,26 @@ class AccountingJournalEntry extends H5P.Question {
     super('accounting-journal-entry');
 
     this.params = params;
+
+    // Hack to override attach method
+    let super_attach = this.attach;
+    this.attach = function($container) {
+      this.container = $container[0];
+      super_attach($container);
+    }
   }
 
   /**
    * Register the DOM elements with H5P.Question
    */
   registerDomElements() {
-    var container = document.createElement('div');
-    var lang = getLang(container);
+    var questionContainer = document.createElement('div');
+    var lang = getLang(questionContainer);
     var chartType = this.params.chartType;
     var translations = getJSON(`./language/${lang}.json`);
     var chart = getJSON(`./assets/charts/${chartType}.json`);
+
+    questionContainer.className = styles.questionContainer;
 
     // Wait for all the files to load, then do initialization
     Promise.all([translations, chart]).then(([translations, chart]) => {
@@ -39,20 +48,9 @@ class AccountingJournalEntry extends H5P.Question {
       // Store chart
       this.chart = chart;
 
-      // Render the HTML
-      container.insertAdjacentHTML('beforeend', `
-        <div class="${styles.question}">
-        </div>
-        <div class="${styles.solution}">
-        </div>
-      `);
-
-      this.questionContainer = container.querySelector(`.${styles.question}`);
-      this.solutionContainer = container.querySelector(`.${styles.solution}`);
-
       // Attach the component to the container
       this.question = new JournalEntryList(chart);
-      this.question.render(this.questionContainer);
+      this.question.render(questionContainer);
 
       // Add 'Check answer' button
       this.addButton('check-answer', __('check_answer'), () => {
@@ -85,7 +83,7 @@ class AccountingJournalEntry extends H5P.Question {
     this.setIntroduction(this.params.description);
 
     // Register content
-    this.setContent(container);
+    this.setContent(questionContainer);
   }
 
   /**
@@ -123,9 +121,35 @@ class AccountingJournalEntry extends H5P.Question {
    */
   showSolutions() {
     let journalEntryList = new JournalEntryList(this.chart, true);
+    let solutionContainer = this.container.querySelector(`.${styles.solutionContainer}`);
 
-    journalEntryList.render(this.solutionContainer);
-    journalEntryList.data = this.params.journalEntries;
+    // Create the solution if it doesn't exist
+    if (solutionContainer === null) {
+      solutionContainer = document.createElement('div');
+      solutionContainer.className = styles.solutionContainer;
+      solutionContainer.insertAdjacentHTML('beforeend', `
+        <div class="${styles.solutionTitle}">
+          ${__('solution_title')}
+        </div>
+        <div class="${styles.solutionIntroduction}">
+          ${__('solution_introduction')}
+        </div>
+        <div class="${styles.solutionSample}">
+        </div>
+      `);
+
+      let solutionSample = solutionContainer.querySelector(`.${styles.solutionSample}`);
+
+      // Render the solution
+      journalEntryList.render(solutionSample);
+      journalEntryList.data = this.params.journalEntries;
+
+      // Insert the solution before the feedback
+      this.container.insertBefore(solutionContainer, this.container.querySelector('.h5p-question-feedback'));
+    }
+
+    // Unhide the solution
+    solutionContainer.removeAttribute('hidden');
   }
 
   /**
@@ -176,7 +200,11 @@ class AccountingJournalEntry extends H5P.Question {
   }
 
   hideSolution() {
-    this.solutionContainer.innerHTML = '';
+    let solutionContainer = this.container.querySelector(`.${styles.solutionContainer}`);
+
+    if (solutionContainer === null) return;
+
+    solutionContainer.setAttribute('hidden', 'hidden');
   }
 
   /**

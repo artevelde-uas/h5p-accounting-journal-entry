@@ -105,10 +105,21 @@ table.entry th.controls button {
   cursor: pointer;
 }
 
-div.question {
+div.question-container {
   overflow: auto;
+  padding: 0 1em;
 }
-div.solution {}
+div.solution-container {
+  padding: 1em;
+  background: #FAFAFA;
+}
+div.solution-container .solution-title {
+  font-size: 1.125em;
+  margin-bottom: 0.5em;
+}
+div.solution-container .solution-introduction {
+  margin-bottom: 1em;}
+div.solution-container .solution-sample {}
 
 button.add-entry {
   float: right;

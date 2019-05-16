@@ -16,6 +16,8 @@
     "delete_journal_entry": "Delete jounal entry",
     "check_answer": "Check the answer",
     "show_solution": "Show the solution",
+    "solution_title": "Solution",
+    "solution_introduction": "Please remember that this is only one possible answer. There could be variations that are also correct.",
     "try_again": "Try again"
   },
   "semantics": [
