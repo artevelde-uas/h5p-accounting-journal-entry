@@ -50,7 +50,7 @@ module.exports = {
         loader: 'css-loader',
         options: {
           modules: true,
-          localIdentName: 'h5p-accounting-journal-entry__[local]',
+          localIdentName: 'h5p-accounting-journal-entry-[local]',
           camelCase: 'only'
         }
       }, {
