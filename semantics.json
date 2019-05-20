@@ -46,6 +46,22 @@
         "optional": true
       },
       {
+        "name": "clearAnswerOnRetry",
+        "type": "boolean",
+        "label": "Clear answer on retry",
+        "widget": "showWhen",
+        "showWhen": {
+          "rules": [
+            {
+              "field": "enableRetry",
+              "equals": true
+            }
+          ]
+        },
+        "default": false,
+        "optional": true
+      },
+      {
         "name": "ALER",
         "type": "select",
         "label": "A/L/E/R column",

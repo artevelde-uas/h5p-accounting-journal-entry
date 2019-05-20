@@ -171,7 +171,9 @@ class AccountingJournalEntry extends H5P.Question {
     this.hideButton('show-solution');
     this.hideButton('try-again');
 
-    this.answer.data = [];
+    if (this.params.behaviour.clearAnswerOnRetry) {
+      this.answer.data = [];
+    }
   }
 
   /**

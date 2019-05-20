@@ -46,6 +46,9 @@
           "label": "Activeer 'Oplossing'"
         },
         {
+          "label": "Antwoord leegmaken bij nieuwe poging"
+        },
+        {
           "label": "A/P/K/O kolom",
           "description": "Toon of verberg de A/P/K/O kolom en gebruik voor berekenen van score",
           "options": [
