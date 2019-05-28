@@ -66,7 +66,7 @@ table.entry td.account-name > span.invalid {
 table.entry td.invoice-type {
   width: 7em;
 }
-table.entry td.plus-minus {
+table.entry td.pos-neg {
   width: 3em;
 }
 table.entry td.amount-debit,

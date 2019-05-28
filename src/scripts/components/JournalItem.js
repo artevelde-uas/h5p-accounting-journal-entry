@@ -24,11 +24,11 @@ class JournalItem extends Component {
     this.element.querySelector('[name="invoice-type"]').value = value;
   }
 
-  get plusMinus() {
-    return this.element.querySelector('[name="plus-minus"]').value;
+  get posNeg() {
+    return this.element.querySelector('[name="pos-neg"]').value;
   }
-  set plusMinus(value) {
-    this.element.querySelector('[name="plus-minus"]').value = value;
+  set posNeg(value) {
+    this.element.querySelector('[name="pos-neg"]').value = value;
   }
 
   get amount() {
@@ -42,14 +42,14 @@ class JournalItem extends Component {
     return {
       accountNumber: this.accountNumber,
       invoiceType: this.invoiceType,
-      plusMinus: this.plusMinus,
+      posNeg: this.posNeg,
       amount: this.amount
     }
   }
   set data(value) {
     this.accountNumber = value.accountNumber;
     this.invoiceType = value.invoiceType;
-    this.plusMinus = value.plusMinus;
+    this.posNeg = value.posNeg;
     this.amount = value.amount;
   }
 
@@ -84,7 +84,7 @@ class JournalItem extends Component {
 
     // Fire an event if data is added for the first time
     this.on('itemChange', (name, oldValue, newValue) => {
-      let keys = ['account-number', 'invoice-type', 'plus-minus', 'amount'];
+      let keys = ['account-number', 'invoice-type', 'pos-neg', 'amount'];
       let isNewItem = keys.every(key => {
         let value = this.element.querySelector(`[name=${key}]`).value;
 
@@ -98,7 +98,7 @@ class JournalItem extends Component {
 
     // Fire an event when all the fields become empty
     this.on('itemChange', (name, oldValue, newValue) => {
-      let keys = ['account-number', 'invoice-type', 'plus-minus', 'amount'];
+      let keys = ['account-number', 'invoice-type', 'pos-neg', 'amount'];
       let deleteItem = !keys.some(key => {
         let value = this.element.querySelector(`[name=${key}]`).value;
 
@@ -134,11 +134,11 @@ class JournalItem extends Component {
             <option value="R">${__('revenue')}</option>
           </select>
         </td>
-        <td class="${styles.plusMinus}">
-          <select name="plus-minus" ${this.isSolution ? 'disabled' : ''}>
+        <td class="${styles.posNeg}">
+          <select name="pos-neg" ${this.isSolution ? 'disabled' : ''}>
             <option></option>
-            <option value="plus">&plus;</option>
-            <option value="minus">&minus;</option>
+            <option value="pos">&plus;</option>
+            <option value="neg">&minus;</option>
           </select>
         </td>
         <td class="${styles.amountDebit}">
@@ -155,7 +155,7 @@ class JournalItem extends Component {
       </tr>
     `);
 
-    ['account-number', 'invoice-type', 'plus-minus', 'amount'].forEach(name => {
+    ['account-number', 'invoice-type', 'pos-neg', 'amount'].forEach(name => {
       let element = this.element.querySelector(`[name="${name}"]`);
       let type = (element.tagName === 'SELECT') ? 'change' : 'input';
 

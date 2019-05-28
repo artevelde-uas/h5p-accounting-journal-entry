@@ -25,7 +25,7 @@
       "label": "Omschrijving"
     },
     {
-      "label": "Type rekeningstelsel",
+      "label": "Rekeningstelsel",
       "options": [
         {
           "label": "België &ndash; Genormaliseerd rekeningstelsel (MAR)"
@@ -64,8 +64,8 @@
           ]
         },
         {
-          "label": "Positive / negative column",
-          "description": "Toon of verberg de positief / negatief kolom en gebruik voor berekenen van score",
+          "label": "Positief / negatief kolom",
+          "description": "Toon of verberg de 'Positief / negatief'-kolom en gebruik voor berekenen van score",
           "options": [
             {
               "label": "Verberg"
@@ -143,20 +143,18 @@
                       {
                         "label": "Opbrengst"
                       }
-                    ],
-                    "default": "&mdash;"
+                    ]
                   },
                   {
                     "label": "Plus / min",
                     "options": [
                       {
-                        "label": "+"
+                        "label": "&plus;"
                       },
                       {
-                        "label": "-"
+                        "label": "&minus;"
                       }
-                    ],
-                    "default": "plus"
+                    ]
                   },
                   {
                     "label": "Debet bedrag"
@@ -179,7 +177,7 @@
                     "label": "Type",
                     "options": [
                       {
-                        "label": "-"
+                        "label": "&mdash;"
                       },
                       {
                         "label": "Activa"
@@ -193,20 +191,18 @@
                       {
                         "label": "Opbrengst"
                       }
-                    ],
-                    "default": "-"
+                    ]
                   },
                   {
                     "label": "Plus / min",
                     "options": [
                       {
-                        "label": "+"
+                        "label": "&plus;"
                       },
                       {
-                        "label": "-"
+                        "label": "&minus;"
                       }
-                    ],
-                    "default": "plus"
+                    ]
                   },
                   {
                     "label": "Credit bedrag"

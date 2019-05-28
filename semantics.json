@@ -62,7 +62,7 @@
         "optional": true
       },
       {
-        "name": "ALER",
+        "name": "invoiceTypeVisibility",
         "type": "select",
         "label": "A/L/E/R column",
         "description": "Show or hide the A/L/E/R column and use for scoring",
@@ -84,7 +84,7 @@
         "optional": true
       },
       {
-        "name": "positiveNegative",
+        "name": "posNegVisibility",
         "type": "select",
         "label": "Positive / negative column",
         "description": "Show or hide the positive / negative column and use for scoring",
@@ -221,7 +221,7 @@
                   "showWhen": {
                     "rules": [
                       {
-                        "field": "../../../../../behaviour/ALER",
+                        "field": "../../../../../behaviour/invoiceTypeVisibility",
                         "equals": [
                           "showWithScoring",
                           "showWithoutScoring"
@@ -231,7 +231,7 @@
                   },
                   "options": [
                     {
-                      "label": "&mdash;"
+                      "label": "-"
                     },
                     {
                       "value": "A",
@@ -253,14 +253,14 @@
                   "default": "&mdash;"
                 },
                 {
-                  "name": "plusMinus",
+                  "name": "posNeg",
                   "type": "select",
-                  "label": "Plus / minus",
+                  "label": "Positive / negative",
                   "widget": "showWhen",
                   "showWhen": {
                     "rules": [
                       {
-                        "field": "../../../../../behaviour/positiveNegative",
+                        "field": "../../../../../behaviour/posNegVisibility",
                         "equals": [
                           "showWithScoring",
                           "showWithoutScoring"
@@ -270,7 +270,7 @@
                   },
                   "options": [
                     {
-                      "value": "plus",
+                      "value": "pos",
                       "label": "+"
                     },
                     {
@@ -278,7 +278,7 @@
                       "label": "-"
                     }
                   ],
-                  "default": "plus"
+                  "default": "pos"
                 },
                 {
                   "name": "amount",
@@ -320,7 +320,7 @@
                   "showWhen": {
                     "rules": [
                       {
-                        "field": "../../../../../behaviour/ALER",
+                        "field": "../../../../../behaviour/invoiceTypeVisibility",
                         "equals": [
                           "showWithScoring",
                           "showWithoutScoring"
@@ -352,14 +352,14 @@
                   "default": "-"
                 },
                 {
-                  "name": "plusMinus",
+                  "name": "posNeg",
                   "type": "select",
                   "label": "+/-",
                   "widget": "showWhen",
                   "showWhen": {
                     "rules": [
                       {
-                        "field": "../../../../../behaviour/positiveNegative",
+                        "field": "../../../../../behaviour/posNegVisibility",
                         "equals": [
                           "showWithScoring",
                           "showWithoutScoring"
@@ -369,7 +369,7 @@
                   },
                   "options": [
                     {
-                      "value": "plus",
+                      "value": "pos",
                       "label": "+"
                     },
                     {
@@ -377,7 +377,7 @@
                       "label": "-"
                     }
                   ],
-                  "default": "plus"
+                  "default": "pos"
                 },
                 {
                   "name": "amount",
