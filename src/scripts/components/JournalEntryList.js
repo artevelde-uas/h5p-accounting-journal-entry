@@ -31,11 +31,13 @@ class JournalEntryList extends Component {
    * @constructor
    * @param {object} chart The 'Chart of Accounts' to be used
    */
-  constructor(chart, isSolution) {
+  constructor(chart, isSolution, showInvoiceType, showPosNeg) {
     super();
 
     this.chart = chart;
     this.isSolution = isSolution;
+    this.showInvoiceType = showInvoiceType;
+    this.showPosNeg = showPosNeg;
     this.entries = [];
   }
 
@@ -60,7 +62,7 @@ class JournalEntryList extends Component {
   }
 
   addJournalEntry(data) {
-    var journalEntry = new JournalEntry(this.chart, this.isSolution);
+    var journalEntry = new JournalEntry(this.chart, this.isSolution, this.showInvoiceType, this.showPosNeg);
     var listDiv = this.element.querySelector(`div.${styles.entryList}`);
 
     journalEntry.render(listDiv);

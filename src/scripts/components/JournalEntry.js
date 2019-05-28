@@ -48,11 +48,13 @@ class JournalEntry extends Component {
    * @constructor
    * @param {object} chart The 'Chart of Accounts' to be used
    */
-  constructor(chart, isSolution) {
+  constructor(chart, isSolution, showInvoiceType, showPosNeg) {
     super();
 
     this.chart = chart;
     this.isSolution = isSolution;
+    this.showInvoiceType = showInvoiceType;
+    this.showPosNeg = showPosNeg;
     this.items = {
       debit: [],
       credit: []
@@ -66,6 +68,11 @@ class JournalEntry extends Component {
   }
 
   render(container) {
+    var totalColSpan = 3;
+
+    if (this.showInvoiceType) totalColSpan++;
+    if (this.showPosNeg) totalColSpan++;
+
     super.render(container, `
       <table class="${styles.entry}">
         <thead>
@@ -73,8 +80,12 @@ class JournalEntry extends Component {
             <th></th>
             <th>${__('number')}</th>
             <th>${__('account_name')}</th>
-            <th>${__('type')}</th>
-            <th>&plus; / &minus;</th>
+            ${this.showInvoiceType ? `
+              <th>${__('type')}</th>
+            ` : ''}
+            ${this.showPosNeg ? `
+              <th>&plus; / &minus;</th>
+            ` : ''}
             <th>${__('debit')}</th>
             <th>${__('credit')}</th>
             <th class="${styles.controls}">
@@ -90,7 +101,7 @@ class JournalEntry extends Component {
         </tbody>
         <tfoot>
           <tr>
-            <th class="${styles.totalLabel}" colspan="5">${__('total')}:</th>
+            <th class="${styles.totalLabel}" colspan="${totalColSpan}">${__('total')}:</th>
             <th class="${styles.totalDebit}"><output name="total-debit">${formatAmount(0)}</output></th>
             <th class="${styles.totalCredit}"><output name="total-credit">${formatAmount(0)}</output></th>
             <th></th>
@@ -118,7 +129,7 @@ class JournalEntry extends Component {
 
   addItemRow(type, data) {
     var items = this.items[type];
-    var item = new JournalItem(type, this.chart, this.isSolution);
+    var item = new JournalItem(type, this.chart, this.isSolution, this.showInvoiceType, this.showPosNeg);
     var tbody = this.element.querySelector(`tbody.${styles[type]}`);
 
     item.render(tbody);

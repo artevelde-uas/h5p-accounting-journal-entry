@@ -18,17 +18,21 @@ class JournalItem extends Component {
   }
 
   get invoiceType() {
-    return this.element.querySelector('[name="invoice-type"]').value;
+    return this.showInvoiceType ? this.element.querySelector('[name="invoice-type"]').value : undefined;
   }
   set invoiceType(value) {
-    this.element.querySelector('[name="invoice-type"]').value = value;
+    if (this.showInvoiceType) {
+      this.element.querySelector('[name="invoice-type"]').value = value;
+    }
   }
 
   get posNeg() {
-    return this.element.querySelector('[name="pos-neg"]').value;
+    return this.showPosNeg ? this.element.querySelector('[name="pos-neg"]').value : undefined;
   }
   set posNeg(value) {
-    this.element.querySelector('[name="pos-neg"]').value = value;
+    if (this.showPosNeg) {
+      this.element.querySelector('[name="pos-neg"]').value = value;
+    }
   }
 
   get amount() {
@@ -58,7 +62,7 @@ class JournalItem extends Component {
    * @param {string} type The type of item, either 'debit' or 'credit'
    * @param {object} chart The 'Chart of Accounts' to be used
    */
-  constructor(type, chart, isSolution) {
+  constructor(type, chart, isSolution, showInvoiceType, showPosNeg) {
     super();
 
     data.set(this, Object.create(null));
@@ -66,6 +70,16 @@ class JournalItem extends Component {
     this.type = type;
     this.chart = chart;
     this.isSolution = isSolution;
+    this.showInvoiceType = showInvoiceType;
+    this.showPosNeg = showPosNeg;
+    this.inputNames = ['account-number', 'amount'];
+
+    if (this.showInvoiceType) {
+      this.inputNames.push('invoice-type');
+    }
+    if (this.showPosNeg) {
+      this.inputNames.push('pos-neg');
+    }
 
     // When the account number changes, lookup the number in the chart of accounts
     this.on('itemChange', (name, oldValue, newValue) => {
@@ -84,8 +98,7 @@ class JournalItem extends Component {
 
     // Fire an event if data is added for the first time
     this.on('itemChange', (name, oldValue, newValue) => {
-      let keys = ['account-number', 'invoice-type', 'pos-neg', 'amount'];
-      let isNewItem = keys.every(key => {
+      let isNewItem = this.inputNames.every(key => {
         let value = this.element.querySelector(`[name=${key}]`).value;
 
         return !Boolean((key === name) ? oldValue : value);
@@ -98,8 +111,7 @@ class JournalItem extends Component {
 
     // Fire an event when all the fields become empty
     this.on('itemChange', (name, oldValue, newValue) => {
-      let keys = ['account-number', 'invoice-type', 'pos-neg', 'amount'];
-      let deleteItem = !keys.some(key => {
+      let deleteItem = !this.inputNames.some(key => {
         let value = this.element.querySelector(`[name=${key}]`).value;
 
         return Boolean(value);
@@ -125,22 +137,26 @@ class JournalItem extends Component {
         <td class="${styles.accountName}">
           <span class="${styles.empty}">${__('enter_account_number')}</span>
         </td>
-        <td class="${styles.invoiceType}">
-          <select name="invoice-type" ${this.isSolution ? 'disabled' : ''}>
-            <option value="">&mdash;</option>
-            <option value="A">${__('assets')}</option>
-            <option value="L">${__('liabilities')}</option>
-            <option value="E">${__('expenses')}</option>
-            <option value="R">${__('revenue')}</option>
-          </select>
-        </td>
-        <td class="${styles.posNeg}">
-          <select name="pos-neg" ${this.isSolution ? 'disabled' : ''}>
-            <option></option>
-            <option value="pos">&plus;</option>
-            <option value="neg">&minus;</option>
-          </select>
-        </td>
+        ${this.showInvoiceType ? `
+          <td class="${styles.invoiceType}">
+            <select name="invoice-type" ${this.isSolution ? 'disabled' : ''}>
+              <option value="">&mdash;</option>
+              <option value="A">${__('assets')}</option>
+              <option value="L">${__('liabilities')}</option>
+              <option value="E">${__('expenses')}</option>
+              <option value="R">${__('revenue')}</option>
+            </select>
+          </td>
+        ` : ''}
+        ${this.showPosNeg ? `
+          <td class="${styles.posNeg}">
+            <select name="pos-neg" ${this.isSolution ? 'disabled' : ''}>
+              <option></option>
+              <option value="pos">&plus;</option>
+              <option value="neg">&minus;</option>
+            </select>
+          </td>
+        ` : ''}
         <td class="${styles.amountDebit}">
           ${this.type === 'debit' ? `
             <input type="text" name="amount" ${this.isSolution ? 'disabled' : ''} />
@@ -155,7 +171,7 @@ class JournalItem extends Component {
       </tr>
     `);
 
-    ['account-number', 'invoice-type', 'pos-neg', 'amount'].forEach(name => {
+    this.inputNames.forEach(name => {
       let element = this.element.querySelector(`[name="${name}"]`);
       let type = (element.tagName === 'SELECT') ? 'change' : 'input';
 

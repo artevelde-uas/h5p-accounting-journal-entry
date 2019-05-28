@@ -49,7 +49,9 @@ class AccountingJournalEntry extends H5P.Question {
       this.chart = chart;
 
       // Attach the component to the container
-      this.answer = new JournalEntryList(chart);
+      let showInvoiceType = this.params.behaviour.invoiceTypeVisibility !== 'hidden';
+      let showPosNeg = this.params.behaviour.posNegVisibility !== 'hidden';
+      this.answer = new JournalEntryList(chart, false, showInvoiceType, showPosNeg);
       this.answer.render(answerContainer);
 
       // Add 'Check answer' button
@@ -126,7 +128,9 @@ class AccountingJournalEntry extends H5P.Question {
    * Displays the solution(s) for this task, should also hide all buttons.
    */
   showSolutions() {
-    let journalEntryList = new JournalEntryList(this.chart, true);
+    let showInvoiceType = this.params.behaviour.invoiceTypeVisibility !== 'hidden';
+    let showPosNeg = this.params.behaviour.posNegVisibility !== 'hidden';
+    let journalEntryList = new JournalEntryList(this.chart, true, showInvoiceType, showPosNeg);
     let solutionContainer = this.container.querySelector(`.${styles.solutionContainer}`);
 
     // Create the solution if it doesn't exist
