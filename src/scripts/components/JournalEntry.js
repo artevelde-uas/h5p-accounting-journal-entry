@@ -17,8 +17,16 @@ class JournalEntry extends Component {
     // Remove all current items
     this.items.debit = [];
     this.items.credit = [];
-    this.element.querySelector(`tbody.${styles.debit}`).innerHTML = '';
-    this.element.querySelector(`tbody.${styles.credit}`).innerHTML = '';
+    this.element.querySelector(`tbody.${styles.debit}`).innerHTML = `
+      <tr>
+        <th class="${styles.title}">${__('debit')}</th>
+      </tr>
+    `;
+    this.element.querySelector(`tbody.${styles.credit}`).innerHTML = `
+      <tr>
+        <th class="${styles.title}">${__('credit')}</th>
+      </tr>
+    `;
 
     // Add new items
     data.debitItems.forEach(item => {
@@ -96,8 +104,14 @@ class JournalEntry extends Component {
           </tr>
         </thead>
         <tbody class="${styles.debit}">
+          <tr>
+            <th class="${styles.title}">${__('debit')}</th>
+          </tr>
         </tbody>
         <tbody class="${styles.credit}">
+          <tr>
+            <th class="${styles.title}">${__('credit')}</th>
+          </tr>
         </tbody>
         <tfoot>
           <tr>
@@ -132,7 +146,13 @@ class JournalEntry extends Component {
     var item = new JournalItem(type, this.chart, this.isSolution, this.showInvoiceType, this.showPosNeg);
     var tbody = this.element.querySelector(`tbody.${styles[type]}`);
 
+    // Calculate the correct row span for the added row
+    function setRowspan() {
+      tbody.querySelector(`th.${styles.title}`).setAttribute('rowspan', tbody.children.length);
+    }
+
     item.render(tbody);
+    setRowspan();
 
     if (data !== undefined) {
       item.data = data;
@@ -156,9 +176,10 @@ class JournalEntry extends Component {
     item.on('deleteItem', () => {
       items.splice(items.indexOf(item), 1);
 
-      // Remove the row from the list but keep at least two
-      if (tbody.children.length > 2) {
+      // Remove the row from the list but keep at least two (+ title row)
+      if (tbody.children.length > 3) {
         item.remove();
+        setRowspan();
       }
 
       if (this.items.length === 0) {

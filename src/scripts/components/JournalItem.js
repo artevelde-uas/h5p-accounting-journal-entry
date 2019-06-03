@@ -126,11 +126,6 @@ class JournalItem extends Component {
   render(container) {
     super.render(container, `
       <tr>
-        ${(container.children.length === 0) ? `
-          <th class="${styles.title}">
-            ${__(this.type)}
-          </th>
-        ` : ''}
         <td class="${styles.accountNumber}">
           <input type="text" name="account-number" ${this.isSolution ? 'disabled' : ''} />
         </td>
@@ -186,27 +181,6 @@ class JournalItem extends Component {
         data.get(this)[name] = newValue;
       });
     });
-
-    // Calculate the correct row span for the added row
-    container.querySelector(`th.${styles.title}`).setAttribute('rowspan', container.children.length);
-  }
-
-  remove() {
-    var container = this.element.parentNode;
-
-    // If the first element is being removed, move the spanned header cell to the next row
-    if (this.element.previousElementSibling === null && container.children.length > 0) {
-      let nextRow = this.element.nextElementSibling;
-
-      nextRow.insertBefore(this.element.firstElementChild, nextRow.firstElementChild);
-    }
-
-    super.remove();
-
-    if (container.children.length === 0) return;
-
-    // Calculate the correct row span for the added row
-    container.querySelector(`th.${styles.title}`).setAttribute('rowspan', container.children.length);
   }
 
 }

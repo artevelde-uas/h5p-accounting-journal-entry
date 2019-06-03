@@ -42,7 +42,7 @@ table.entry td > select:first-child {
   width: 100%;
   margin: 0;
 }
-table.entry td.title {
+table.entry th.title {
   width: 3em;
 }
 table.entry td.account-number {
