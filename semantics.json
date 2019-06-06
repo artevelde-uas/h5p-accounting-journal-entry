@@ -5,8 +5,11 @@
     "label": "Description",
     "widget": "html",
     "tags": [
+      "p",
+      "br",
       "strong",
-      "em"
+      "em",
+      "u"
     ]
   },
   {
