@@ -14,42 +14,30 @@ class JournalEntry extends Component {
   }
 
   set data(data) {
-    // Remove all current items
-    this.items.debit = [];
-    this.items.credit = [];
-    this.element.querySelector(`tbody.${styles.debit}`).innerHTML = `
-      <tr>
-        <th class="${styles.title}">${__('debit')}</th>
-      </tr>
-    `;
-    this.element.querySelector(`tbody.${styles.credit}`).innerHTML = `
-      <tr>
-        <th class="${styles.title}">${__('credit')}</th>
-      </tr>
-    `;
+    ['debit', 'credit'].forEach(type => {
+      // Remove all current items
+      this.items[type] = [];
+      this.element.querySelector(`tbody.${styles[type]}`).innerHTML = `
+        <tr>
+          <th class="${styles.title}">${__(type)}</th>
+        </tr>
+      `;
 
-    // Add new items
-    data.debitItems.forEach(item => {
-      if (item instanceof Array) {
-        item = item[0];
+      // Add new items
+      data[`${type}Items`].forEach(item => {
+        if (item instanceof Array) {
+          item = item[0];
+        }
+
+        this.items[type].push(this.addItemRow(type, item));
+      });
+
+      if (!this.isSolution) {
+        this.addItemRow(type);
       }
-
-      this.items.debit.push(this.addItemRow('debit', item));
-    });
-    data.creditItems.forEach(item => {
-      if (item instanceof Array) {
-        item = item[0];
-      }
-
-      this.items.credit.push(this.addItemRow('credit', item));
     });
 
     this.calculateTotals();
-
-    if (!this.isSolution) {
-      this.addItemRow('debit');
-      this.addItemRow('credit');
-    }
   }
 
   /**
