@@ -253,7 +253,8 @@
                       "label": "Revenue"
                     }
                   ],
-                  "default": "&mdash;"
+                  "default": "&mdash;",
+                  "optional": true
                 },
                 {
                   "name": "posNeg",
@@ -281,7 +282,8 @@
                       "label": "-"
                     }
                   ],
-                  "default": "pos"
+                  "default": "pos",
+                  "optional": true
                 },
                 {
                   "name": "amount",
@@ -352,7 +354,8 @@
                       "label": "Revenue"
                     }
                   ],
-                  "default": "-"
+                  "default": "-",
+                  "optional": true
                 },
                 {
                   "name": "posNeg",
@@ -380,7 +383,8 @@
                       "label": "-"
                     }
                   ],
-                  "default": "pos"
+                  "default": "pos",
+                  "optional": true
                 },
                 {
                   "name": "amount",
