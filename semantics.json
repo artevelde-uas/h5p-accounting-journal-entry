@@ -174,7 +174,7 @@
         "name": "noExtraLines",
         "type": "boolean",
         "label": "No extra lines allowed",
-        "description": "If the answer contains more lines the correct solution, the final score is 0.",
+        "description": "If the answer contains more lines than the correct solution, the final score is 0.",
         "default": false,
         "optional": true
       }
