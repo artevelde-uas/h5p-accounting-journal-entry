@@ -1,6 +1,10 @@
 
 .entry-list {}
 
+:global .h5p-accounting-journal-entry .h5p-question-introduction p {
+  margin: 1em 0;
+}
+
 table.entry {
   width: 100%;
   border-collapse: collapse;
