@@ -167,7 +167,7 @@ class AccountingJournalEntry extends H5P.Question {
    */
   resetTask() {
     this.setExplanation();
-    this.removeFeedback();
+    this.hideFeedback();
     this.hideSolution();
     this.setReadonly(false);
 
@@ -206,9 +206,35 @@ class AccountingJournalEntry extends H5P.Question {
   }
 
   showFeedback() {
-    this.setExplanation([], 'Explanation');
+    var data = this.answer.getNormalizedData();
+    var solution = this.getNormalizedSolution();
+    var explanations = [];
 
+    // Loop over each item and check if it exists as a possible solution
+    data.forEach(item => {
+      let found = solution.some(data => (
+        data.type === item.type &&
+        data.accountNumber === item.accountNumber &&
+        data.invoiceType === item.invoiceType &&
+        data.posNeg === item.posNeg &&
+        data.amount === item.amount
+      ));
+
+      item.items.forEach(item => {
+        item.setFeedback(found ? 'correct' : 'wrong');
+      });
+    });
+
+    this.setExplanation(explanations, 'Explanation');
     this.setFeedback('Feedback text.', this.getScore(), this.getMaxScore());
+  }
+
+  hideFeedback() {
+    var data = this.answer.getNormalizedData();
+
+    data.flatMap(item => item.items).forEach(item => { item.setFeedback() });
+
+    this.removeFeedback();
   }
 
   hideSolution() {
@@ -232,6 +258,26 @@ class AccountingJournalEntry extends H5P.Question {
     } : element => {
       element.removeAttribute('disabled');
     });
+  }
+
+  getNormalizedSolution() {
+    var entries = this.params.journalEntries;
+    var debitItems = entries.flatMap(entry => entry.debitItems);
+    var creditItems = entries.flatMap(entry => entry.creditItems);
+    var walker = (type, options) => {
+      options.forEach(item => {
+        item.type = type;
+
+        if (this.params.behaviour.posNegVisibility === 'hidden') {
+          item.posNeg = undefined;
+        }
+      })
+    };
+
+    debitItems.forEach(walker.bind(undefined, 'debit'));
+    creditItems.forEach(walker.bind(undefined, 'credit'));
+
+    return debitItems.concat(creditItems).flat();
   }
 
 }

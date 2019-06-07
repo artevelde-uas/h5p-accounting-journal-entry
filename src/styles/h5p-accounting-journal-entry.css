@@ -77,7 +77,8 @@ table.entry td.amount-debit,
 table.entry td.amount-credit {
   width: 5em;
 }
-table.entry td.controls {
+table.entry th.controls,
+table.entry td.feedback {
   width: 1em;
 }
 table.entry td.amount-debit > input,
@@ -107,6 +108,10 @@ table.entry th.controls button {
   font-family: 'H5PFontAwesome4';
   font-size: 1.5em;
   cursor: pointer;
+}
+table.entry td.feedback span {
+  font-family: 'H5PFontAwesome4';
+  font-size: 1.5em;
 }
 
 div.answer-container {
@@ -138,4 +143,12 @@ table.entry th.controls button.delete-entry::before {
 }
 table.entry:only-child th.controls button.delete-entry {
   display: none;
+}
+table.entry td.feedback span.correct::before {
+  content: '\F05D';
+  color: green;
+}
+table.entry td.feedback span.wrong::before {
+  content: '\F05C';
+  color: red;
 }

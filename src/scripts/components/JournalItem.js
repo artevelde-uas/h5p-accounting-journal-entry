@@ -162,7 +162,7 @@ class JournalItem extends Component {
             <input type="text" name="amount" ${this.isSolution ? 'disabled' : ''} />
           ` : ''}
         </td>
-        <td class="${styles.controls}"></td>
+        <td class="${styles.feedback}"></td>
       </tr>
     `);
 
@@ -181,6 +181,26 @@ class JournalItem extends Component {
         data.get(this)[name] = newValue;
       });
     });
+  }
+
+  setFeedback(type) {
+    var feedback = this.element.querySelector(`td.${styles.feedback}`);
+
+    switch (type) {
+      case 'correct':
+        feedback.innerHTML = `
+          <span class="${styles.correct}"></span>
+        `;
+        break;
+      case 'wrong':
+        feedback.innerHTML = `
+          <span class="${styles.wrong}"></span>
+        `;
+        break;
+      default:
+        feedback.innerHTML = '';
+        break;
+    }
   }
 
 }
