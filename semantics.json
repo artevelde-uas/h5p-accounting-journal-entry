@@ -158,11 +158,11 @@
         }
       },
       {
-        "name": "scoreRowOption",
+        "name": "singlePointPerRow",
         "type": "boolean",
         "label": "Score 0 or 1 per row",
         "description": "Each row gets 1 point if correct, otherwise 0 points are given.",
-        "default": true,
+        "default": false,
         "optional": true
       },
       {
