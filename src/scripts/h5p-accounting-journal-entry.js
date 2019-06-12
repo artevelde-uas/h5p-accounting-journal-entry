@@ -20,6 +20,9 @@ class AccountingJournalEntry extends Question {
   constructor(params, contentId, extras = {}) {
     super('accounting-journal-entry');
 
+    console.log(params.behaviour);
+    console.log(params.journalEntries);
+
     this.params = params;
   }
 
@@ -119,9 +122,11 @@ class AccountingJournalEntry extends Question {
       case 'recalculated':
         return this.params.behaviour.maxScore;
       default:
-        return this.params.journalEntries.reduce((sum, entry) => {
+        let numItems = this.params.journalEntries.reduce((sum, entry) => {
           return sum + entry.creditItems.length + entry.debitItems.length;
         }, 0);
+
+        return this.params.behaviour.singlePointPerRow ? numItems : numItems * 4;
     }
   }
 
