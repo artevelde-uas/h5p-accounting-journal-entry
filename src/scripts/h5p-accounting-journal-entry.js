@@ -1,3 +1,4 @@
+import Question from './Question';
 import { getJSON, getLang } from './helpers';
 import JournalEntryList from './components/JournalEntryList';
 import { translate as __ } from './helpers';
@@ -6,7 +7,8 @@ import { machineName } from '../../library.json';
 
 import styles from '../styles/h5p-accounting-journal-entry.css';
 
-class AccountingJournalEntry extends H5P.Question {
+
+class AccountingJournalEntry extends Question {
 
   /**
    * @constructor
@@ -19,13 +21,12 @@ class AccountingJournalEntry extends H5P.Question {
     super('accounting-journal-entry');
 
     this.params = params;
+  }
 
-    // Hack to override attach method
-    let super_attach = this.attach;
-    this.attach = function($container) {
-      this.container = $container[0];
-      super_attach($container);
-    }
+  attach($container) {
+    this.container = $container[0];
+
+    super.attach($container);
   }
 
   /**
