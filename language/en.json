@@ -129,9 +129,6 @@
                     "label": "Type",
                     "options": [
                       {
-                        "label": "&mdash;"
-                      },
-                      {
                         "label": "Assets"
                       },
                       {
@@ -176,9 +173,6 @@
                   {
                     "label": "Type",
                     "options": [
-                      {
-                        "label": "&mdash;"
-                      },
                       {
                         "label": "Assets"
                       },

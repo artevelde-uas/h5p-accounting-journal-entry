@@ -129,9 +129,6 @@
                     "label": "Type",
                     "options": [
                       {
-                        "label": "&mdash;"
-                      },
-                      {
                         "label": "Activa"
                       },
                       {
@@ -176,9 +173,6 @@
                   {
                     "label": "Type",
                     "options": [
-                      {
-                        "label": "&mdash;"
-                      },
                       {
                         "label": "Activa"
                       },
