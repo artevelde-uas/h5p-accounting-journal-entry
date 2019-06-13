@@ -1,8 +1,8 @@
 
 export default class extends H5P.Question {
 
-  constructor() {
-    super(arguments);
+  constructor(...args) {
+    super(...args);
 
     this.__super_attach = this.attach;
     delete this.attach;
