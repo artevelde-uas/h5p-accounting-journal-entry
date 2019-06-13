@@ -172,7 +172,6 @@ class AccountingJournalEntry extends Question {
    * Resets the task to its initial state, should also show buttons that were hidden by the `showSolutions()` function.
    */
   resetTask() {
-    this.setExplanation();
     this.hideFeedback();
     this.hideSolution();
     this.setReadonly(false);
@@ -215,6 +214,7 @@ class AccountingJournalEntry extends Question {
     var data = this.answer.getNormalizedData();
     var solution = this.getNormalizedSolution();
     var explanations = [];
+    var feedbackText = '';
 
     // Loop over each item and check if it exists as a possible solution
     data.forEach(item => {
@@ -231,8 +231,26 @@ class AccountingJournalEntry extends Question {
       });
     });
 
-    this.setExplanation(explanations, 'Explanation');
-    this.setFeedback('Feedback text.', this.getScore(), this.getMaxScore());
+    if (this.getScore() === this.getMaxScore()) {
+      feedbackText = `
+        <div>
+          <span class="${styles.correct}">${__('feedback_correct')}</span>
+        </div>
+      `;
+    } else {
+      feedbackText = `
+        <div>
+          <span class="${styles.wrong}">${__('feedback_wrong')}</span>
+        </div>
+        <ul>
+          ${explanations.reduce((text, item) => text + `
+            <li>${item}</li>
+          `, '')}
+        </ul>
+      `;
+    }
+
+    this.setFeedback(feedbackText, this.getScore(), this.getMaxScore());
   }
 
   hideFeedback() {

@@ -18,7 +18,9 @@
     "show_solution": "Bekijk de oplossing",
     "solution_title": "Solution",
     "solution_introduction": "Hou er rekening mee dat dit slechts een van de mogelijke antwoorden is. Er kunnen variaties zijn die ook correct zijn.",
-    "try_again": "Probeer het opnieuw"
+    "try_again": "Probeer het opnieuw",
+    "feedback_correct": "Dat klopt helemaal!",
+    "feedback_wrong": "Dat was niet helemaal juist."
   },
   "semantics": [
     {
