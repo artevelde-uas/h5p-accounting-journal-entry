@@ -1,4 +1,5 @@
 import Question from './Question';
+import Validator from './Validator'
 import { getJSON, getLang } from './helpers';
 import JournalEntryList from './components/JournalEntryList';
 import { translate as __ } from './helpers';
@@ -24,6 +25,7 @@ class AccountingJournalEntry extends Question {
     console.log(params.journalEntries);
 
     this.params = params;
+    this.validator = new Validator(params.behaviour, params.journalEntries);
   }
 
   attach($container) {
@@ -57,6 +59,9 @@ class AccountingJournalEntry extends Question {
       let showPosNeg = this.params.behaviour.posNegVisibility !== 'hidden';
       this.answer = new JournalEntryList(chart, false, showInvoiceType, showPosNeg);
       this.answer.render(answerContainer);
+
+      // Add the answer to the validator
+      this.validator.setAnswer(this.answer);
 
       // Add 'Check answer' button
       this.addButton('check-answer', __('check_answer'), () => {
@@ -108,8 +113,7 @@ class AccountingJournalEntry extends Question {
    * @returns {number} User's score for this task.
    */
   getScore() {
-    //TODO Return points
-    return 0;
+    return this.validator.getScore();
   }
 
   /**
@@ -118,16 +122,7 @@ class AccountingJournalEntry extends Question {
    * @returns {number} Max score achievable for this task.
    */
   getMaxScore() {
-    switch (this.params.behaviour.scoringMechanism) {
-      case 'recalculated':
-        return this.params.behaviour.maxScore;
-      default:
-        let numItems = this.params.journalEntries.reduce((sum, entry) => {
-          return sum + entry.creditItems.length + entry.debitItems.length;
-        }, 0);
-
-        return this.params.behaviour.singlePointPerRow ? numItems : numItems * 4;
-    }
+    return this.validator.getMaxScore();
   }
 
   /**
@@ -211,35 +206,11 @@ class AccountingJournalEntry extends Question {
   }
 
   showFeedback() {
-    var data = this.answer.getNormalizedData();
-    var solution = this.getNormalizedSolution();
-    var reducer = (type, sum, item) => (item.type === type ? (sum + item.amount) : sum);
-    var totalDebit = data.reduce(reducer.bind(undefined, 'debit'), 0);
-    var totalCredit = data.reduce(reducer.bind(undefined, 'credit'), 0);
-    var explanations = [];
     var feedbackText = '';
 
-    // Check if debit and credit totals are equal
-    if (this.params.behaviour.debetCreditEqual && (totalDebit !== totalCredit)) {
-      explanations.push(__('totals_not_equal'));
-    }
+    this.validator.validate();
 
-    // Loop over each item and check if it exists as a possible solution
-    data.forEach(item => {
-      let found = solution.some(data => (
-        data.type === item.type &&
-        data.accountNumber === item.accountNumber &&
-        data.invoiceType === item.invoiceType &&
-        data.posNeg === item.posNeg &&
-        data.amount === item.amount
-      ));
-
-      item.items.forEach(item => {
-        item.setFeedback(found ? 'correct' : 'wrong');
-      });
-    });
-
-    if (this.getScore() === this.getMaxScore()) {
+    if (this.validator.getScore() === this.validator.getMaxScore()) {
       feedbackText = `
         <div>
           <span class="${styles.correct}">${__('feedback_correct')}</span>
@@ -251,8 +222,8 @@ class AccountingJournalEntry extends Question {
           <span class="${styles.wrong}">${__('feedback_wrong')}</span>
         </div>
         <ul>
-          ${explanations.reduce((text, item) => text + `
-            <li>${item}</li>
+          ${this.validator.getFeedback().reduce((text, item) => text + `
+            <li>${__(item)}</li>
           `, '')}
         </ul>
       `;
@@ -290,26 +261,6 @@ class AccountingJournalEntry extends Question {
     } : element => {
       element.removeAttribute('disabled');
     });
-  }
-
-  getNormalizedSolution() {
-    var entries = this.params.journalEntries;
-    var debitItems = entries.flatMap(entry => entry.debitItems);
-    var creditItems = entries.flatMap(entry => entry.creditItems);
-    var walker = (type, options) => {
-      options.forEach(item => {
-        item.type = type;
-
-        if (this.params.behaviour.posNegVisibility === 'hidden') {
-          item.posNeg = undefined;
-        }
-      })
-    };
-
-    debitItems.forEach(walker.bind(undefined, 'debit'));
-    creditItems.forEach(walker.bind(undefined, 'credit'));
-
-    return debitItems.concat(creditItems).flat();
   }
 
 }
