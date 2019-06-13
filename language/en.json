@@ -21,7 +21,8 @@
     "try_again": "Try again",
     "feedback_correct": "Well done, that's all correct!",
     "feedback_wrong": "Sorry, that's incorrect.",
-    "totals_not_equal": "The debit total does not match the credit total."
+    "totals_not_equal": "The debit total does not match the credit total.",
+    "no_debit_or_credit_bookings": "You have no debit or credit bookings."
   },
   "semantics": [
     {

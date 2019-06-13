@@ -59,10 +59,18 @@ class Validator {
 
   getFeedback() {
     var data = this.answer.getNormalizedData();
-    var reducer = (type, sum, item) => (item.type === type ? (sum + item.amount) : sum);
-    var totalDebit = data.reduce(reducer.bind(undefined, 'debit'), 0);
-    var totalCredit = data.reduce(reducer.bind(undefined, 'credit'), 0);
+    var countFilter = (type, item) => (item.type === type);
+    var countDebit = data.filter(countFilter.bind(undefined, 'debit')).length;
+    var countCredit = data.filter(countFilter.bind(undefined, 'credit')).length;
+    var totalReducer = (type, sum, item) => (item.type === type ? (sum + item.amount) : sum);
+    var totalDebit = data.reduce(totalReducer.bind(undefined, 'debit'), 0);
+    var totalCredit = data.reduce(totalReducer.bind(undefined, 'credit'), 0);
     var feedback = [];
+
+    // Check if there is at least one debit and one credit item
+    if (countDebit === 0 || countCredit === 0) {
+      feedback.push('no_debit_or_credit_bookings');
+    }
 
     // Check if debit and credit are equal
     if (this.behaviour.debetCreditEqual && (totalDebit !== totalCredit)) {

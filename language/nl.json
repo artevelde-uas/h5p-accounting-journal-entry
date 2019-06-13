@@ -21,7 +21,8 @@
     "try_again": "Probeer het opnieuw",
     "feedback_correct": "Dat klopt helemaal!",
     "feedback_wrong": "Dat was niet helemaal juist.",
-    "totals_not_equal": "De debet bedragen komen niet overeen met de credit bedragen."
+    "totals_not_equal": "De debet bedragen komen niet overeen met de credit bedragen.",
+    "no_debit_or_credit_bookings": "Je hebt geen debet of credit boeking(en) verricht."
   },
   "semantics": [
     {
