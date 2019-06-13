@@ -97,7 +97,7 @@ class JournalEntryList extends Component {
   getNormalizedData() {
     var entries = this.entries.flatMap(entry => entry.getNormalizedData());
     var reducer = (list, item, i, items) => {
-      let data = list.find(data => (
+      var data = list.find(data => (
         data.type === item.type &&
         data.accountNumber === item.accountNumber &&
         data.invoiceType === item.invoiceType &&

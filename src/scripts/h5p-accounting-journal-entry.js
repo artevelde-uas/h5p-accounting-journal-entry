@@ -129,10 +129,10 @@ class AccountingJournalEntry extends Question {
    * Displays the solution(s) for this task, should also hide all buttons.
    */
   showSolutions() {
-    let showInvoiceType = this.params.behaviour.invoiceTypeVisibility !== 'hidden';
-    let showPosNeg = this.params.behaviour.posNegVisibility !== 'hidden';
-    let journalEntryList = new JournalEntryList(this.chart, true, showInvoiceType, showPosNeg);
-    let solutionContainer = this.container.querySelector(`.${styles.solutionContainer}`);
+    var showInvoiceType = this.params.behaviour.invoiceTypeVisibility !== 'hidden';
+    var showPosNeg = this.params.behaviour.posNegVisibility !== 'hidden';
+    var journalEntryList = new JournalEntryList(this.chart, true, showInvoiceType, showPosNeg);
+    var solutionContainer = this.container.querySelector(`.${styles.solutionContainer}`);
 
     // Create the solution if it doesn't exist
     if (solutionContainer === null) {
@@ -241,7 +241,7 @@ class AccountingJournalEntry extends Question {
   }
 
   hideSolution() {
-    let solutionContainer = this.container.querySelector(`.${styles.solutionContainer}`);
+    var solutionContainer = this.container.querySelector(`.${styles.solutionContainer}`);
 
     if (solutionContainer === null) return;
 

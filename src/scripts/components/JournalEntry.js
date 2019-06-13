@@ -200,7 +200,7 @@ class JournalEntry extends Component {
   getNormalizedData() {
     var items = this.items.debit.concat(this.items.credit);
     var reducer = (list, item, i, items) => {
-      let data = list.find(data => (
+      var data = list.find(data => (
         data.type === item.type &&
         data.accountNumber === item.data.accountNumber &&
         data.invoiceType === item.data.invoiceType &&
