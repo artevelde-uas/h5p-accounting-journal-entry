@@ -213,8 +213,16 @@ class AccountingJournalEntry extends Question {
   showFeedback() {
     var data = this.answer.getNormalizedData();
     var solution = this.getNormalizedSolution();
+    var reducer = (type, sum, item) => (item.type === type ? (sum + item.amount) : sum);
+    var totalDebit = data.reduce(reducer.bind(undefined, 'debit'), 0);
+    var totalCredit = data.reduce(reducer.bind(undefined, 'credit'), 0);
     var explanations = [];
     var feedbackText = '';
+
+    // Check if debit and credit totals are equal
+    if (this.params.behaviour.debetCreditEqual && (totalDebit !== totalCredit)) {
+      explanations.push(__('totals_not_equal'));
+    }
 
     // Loop over each item and check if it exists as a possible solution
     data.forEach(item => {

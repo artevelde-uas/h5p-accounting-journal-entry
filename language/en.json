@@ -20,7 +20,8 @@
     "solution_introduction": "Please remember that this is only one possible answer. There could be variations that are also correct.",
     "try_again": "Try again",
     "feedback_correct": "Well done, that's all correct!",
-    "feedback_wrong": "Sorry, that's incorrect."
+    "feedback_wrong": "Sorry, that's incorrect.",
+    "totals_not_equal": "The debit total does not match the credit total."
   },
   "semantics": [
     {
