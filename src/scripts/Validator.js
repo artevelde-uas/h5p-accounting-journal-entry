@@ -45,8 +45,12 @@ class Validator {
       options.forEach(item => {
         item.type = type;
 
-        if (this.behaviour.posNegVisibility === 'hidden') {
-          item.posNeg = undefined;
+        if (this.behaviour.invoiceTypeVisibility !== 'showWithScoring') {
+          delete item.invoiceType;
+        }
+
+        if (this.behaviour.posNegVisibility !== 'showWithScoring') {
+          delete item.posNeg;
         }
       })
     };
