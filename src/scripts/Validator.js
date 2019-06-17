@@ -16,8 +16,86 @@ class Validator {
    * @returns {number} User's score.
    */
   getScore() {
-    //TODO Return points
-    return 0;
+    var data = this.answer.getNormalizedData();
+    var solution = this.getNormalizedSolution();
+    var countReducer = (sum, item) => (sum + item.items.length);
+    var totalReducer = (type, sum, item) => (item.type === type ? (sum + item.amount) : sum);
+    var scoreReducer = (sum, item) => {
+      var found = solution.flat().find(data => (data.accountNumber === item.accountNumber));
+
+      // If the item is not found in the solution, don't give any points
+      if (found === undefined) {
+        return sum;
+      }
+
+      // If the single point per row option is enabled, add one point if all items are correct, zero otherwise
+      if (this.behaviour.singlePointPerRow) {
+        if (found.invoiceType === item.invoiceType &&
+            found.posNeg === item.posNeg &&
+            found.amount === item.amount) {
+          return sum + 1;
+        }
+
+        return sum;
+      }
+
+      // The account number was correct, so give at least one point
+      let points = 1;
+
+      let useInvoiceType = this.behaviour.invoiceTypeVisibility === 'showWithScoring';
+      let usePosNeg = this.behaviour.posNegVisibility === 'showWithScoring';
+
+      // If invoice type column was enabled and invoice type is correct, add one point
+      if (useInvoiceType && (found.invoiceType === item.invoiceType)) {
+        points += 1;
+      }
+
+      // If pos/neg column was enabled and pos/neg is correct, add one point
+      if (usePosNeg && (found.posNeg === item.posNeg)) {
+        points += 1;
+      }
+
+      // If amount is correct, add one point
+      if (found.amount === item.amount) {
+        points += 1;
+      }
+
+      // add points to the total
+      return sum + points;
+    };
+
+    // Check if debit and credit are equal
+    if (this.behaviour.debetCreditEqual) {
+      let totalDebit = data.reduce(totalReducer.bind(undefined, 'debit'), 0);
+      let totalCredit = data.reduce(totalReducer.bind(undefined, 'credit'), 0);
+
+      if (totalDebit !== totalCredit) {
+        return 0;
+      }
+    }
+
+    // Check if number of rows in answer exceeds number of rows in solution
+    if (this.behaviour.noExtraLines) {
+      let countAnswer = data.reduce(countReducer, 0);
+      let countSolution = this.getNormalizedSolution().length;
+
+      if (countAnswer > countSolution) {
+        return 0;
+      }
+    }
+
+    let score = data.reduce(scoreReducer, 0);
+
+    // Recalculate score
+    if (this.behaviour.scoringMechanism === 'recalculated') {
+      let countSolution = this.getNormalizedSolution().length;
+
+      console.log(score, this.behaviour.maxScore, countSolution, this.getMaxPointsPerRow());
+
+      score = score * this.behaviour.maxScore / (countSolution * this.getMaxPointsPerRow());
+    }
+
+    return score;
   }
 
   /**
