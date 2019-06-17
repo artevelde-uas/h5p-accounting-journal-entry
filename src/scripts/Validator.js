@@ -77,7 +77,7 @@ class Validator {
     debitItems.forEach(walker.bind(undefined, 'debit'));
     creditItems.forEach(walker.bind(undefined, 'credit'));
 
-    return debitItems.concat(creditItems).flat();
+    return debitItems.concat(creditItems);
   }
 
   getFeedback() {
@@ -115,7 +115,7 @@ class Validator {
 
     // Loop over each item and check if it exists as a possible solution
     data.forEach(item => {
-      var found = solution.some(data => (
+      var found = solution.flat().some(data => (
         data.type === item.type &&
         data.accountNumber === item.accountNumber &&
         data.invoiceType === item.invoiceType &&
