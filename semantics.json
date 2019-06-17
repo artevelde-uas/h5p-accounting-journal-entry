@@ -83,8 +83,7 @@
             "label": "Show without scoring"
           }
         ],
-        "default": "showWithScoring",
-        "optional": true
+        "default": "showWithScoring"
       },
       {
         "name": "posNegVisibility",
@@ -105,8 +104,7 @@
             "label": "Show without scoring"
           }
         ],
-        "default": "showWithScoring",
-        "optional": true
+        "default": "showWithScoring"
       },
       {
         "name": "scoringMechanism",
@@ -123,8 +121,7 @@
             "label": "Recalculated score"
           }
         ],
-        "default": "system",
-        "optional": true
+        "default": "system"
       },
       {
         "name": "minScore",
