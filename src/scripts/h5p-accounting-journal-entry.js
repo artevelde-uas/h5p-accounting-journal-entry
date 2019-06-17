@@ -21,9 +21,6 @@ class AccountingJournalEntry extends Question {
   constructor(params, contentId, extras = {}) {
     super('accounting-journal-entry');
 
-    console.log(params.behaviour);
-    console.log(params.journalEntries);
-
     this.params = params;
     this.validator = new Validator(params.behaviour, params.journalEntries);
   }
