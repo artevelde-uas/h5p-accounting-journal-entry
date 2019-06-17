@@ -97,18 +97,18 @@ class JournalEntryList extends Component {
   getNormalizedData() {
     var entries = this.entries.flatMap(entry => entry.getNormalizedData());
     var reducer = (list, item, i, items) => {
-      var data = list.find(data => (
+      var found = list.find(data => (
         data.type === item.type &&
         data.accountNumber === item.accountNumber &&
         data.invoiceType === item.invoiceType &&
         data.posNeg === item.posNeg
       ));
 
-      if (data === undefined) {
+      if (found === undefined) {
         list.push(item);
       } else {
-        data.amount += item.amount;
-        data.items = data.items.concat(item.items);
+        found.amount += item.amount;
+        found.items = found.items.concat(item.items);
       }
 
       return list;

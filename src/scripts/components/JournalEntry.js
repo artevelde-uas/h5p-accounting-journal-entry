@@ -202,21 +202,21 @@ class JournalEntry extends Component {
   getNormalizedData() {
     var items = this.items.debit.concat(this.items.credit);
     var reducer = (list, item, i, items) => {
-      var data = list.find(data => (
+      var found = list.find(data => (
         data.type === item.type &&
         data.accountNumber === item.data.accountNumber &&
         data.invoiceType === item.data.invoiceType &&
         data.posNeg === item.data.posNeg
       ));
 
-      if (data === undefined) {
+      if (found === undefined) {
         list.push(Object.assign({
           type: item.type,
           items: [item]
         }, item.data));
       } else {
-        data.amount += item.data.amount;
-        data.items.push(item);
+        found.amount += item.data.amount;
+        found.items.push(item);
       }
 
       return list;
