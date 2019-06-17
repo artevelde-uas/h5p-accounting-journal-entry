@@ -34,7 +34,26 @@ class Validator {
           return sum + entry.creditItems.length + entry.debitItems.length;
         }, 0);
 
-        return this.behaviour.singlePointPerRow ? numItems : numItems * 4;
+        // If the single point per row option is enabled, maximum score per row is one
+        if (this.behaviour.singlePointPerRow) {
+          return numItems;
+        }
+
+        let useInvoiceType = this.behaviour.invoiceTypeVisibility === 'showWithScoring';
+        let usePosNeg = this.behaviour.posNegVisibility === 'showWithScoring';
+
+        // If neither invoice type column or pos/neg column was enabled, maximum score per row is two
+        if (!useInvoiceType && !usePosNeg) {
+          return numItems * 2;
+        }
+
+        // If only one of invoice type column or pos/neg column was enabled, maximum score per row is three
+        if (useInvoiceType != usePosNeg) {
+          return numItems * 3;
+        }
+
+        // Otherwise, maximum score per row is four
+        return numItems * 4;
     }
   }
 
