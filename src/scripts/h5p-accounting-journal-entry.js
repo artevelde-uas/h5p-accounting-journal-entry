@@ -52,9 +52,9 @@ class AccountingJournalEntry extends Question {
       this.chart = chart;
 
       // Attach the component to the container
-      let showInvoiceType = this.params.behaviour.invoiceTypeVisibility !== 'hidden';
-      let showPosNeg = this.params.behaviour.posNegVisibility !== 'hidden';
-      this.answer = new JournalEntryList(chart, false, showInvoiceType, showPosNeg);
+      let invoiceTypeVisibility = this.params.behaviour.invoiceTypeVisibility;
+      let posNegVisibility = this.params.behaviour.posNegVisibility;
+      this.answer = new JournalEntryList(chart, false, invoiceTypeVisibility, posNegVisibility);
       this.answer.render(answerContainer);
 
       // Add the answer to the validator
@@ -126,9 +126,9 @@ class AccountingJournalEntry extends Question {
    * Displays the solution(s) for this task, should also hide all buttons.
    */
   showSolutions() {
-    var showInvoiceType = this.params.behaviour.invoiceTypeVisibility !== 'hidden';
-    var showPosNeg = this.params.behaviour.posNegVisibility !== 'hidden';
-    var journalEntryList = new JournalEntryList(this.chart, true, showInvoiceType, showPosNeg);
+    var invoiceTypeVisibility = this.params.behaviour.invoiceTypeVisibility;
+    var posNegVisibility = this.params.behaviour.posNegVisibility;
+    var journalEntryList = new JournalEntryList(this.chart, true, invoiceTypeVisibility, posNegVisibility);
     var solutionContainer = this.container.querySelector(`.${styles.solutionContainer}`);
 
     // Create the solution if it doesn't exist

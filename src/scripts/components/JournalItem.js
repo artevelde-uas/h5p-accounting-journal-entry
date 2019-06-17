@@ -18,19 +18,19 @@ class JournalItem extends Component {
   }
 
   get invoiceType() {
-    return this.showInvoiceType ? this.element.querySelector('[name="invoice-type"]').value : undefined;
+    return (this.invoiceTypeVisibility === 'showWithScoring') ? this.element.querySelector('[name="invoice-type"]').value : undefined;
   }
   set invoiceType(value) {
-    if (this.showInvoiceType) {
+    if (this.invoiceTypeVisibility === 'showWithScoring') {
       this.element.querySelector('[name="invoice-type"]').value = value;
     }
   }
 
   get posNeg() {
-    return this.showPosNeg ? this.element.querySelector('[name="pos-neg"]').value : undefined;
+    return (this.posNegVisibility === 'showWithScoring') ? this.element.querySelector('[name="pos-neg"]').value : undefined;
   }
   set posNeg(value) {
-    if (this.showPosNeg) {
+    if (this.posNegVisibility === 'showWithScoring') {
       this.element.querySelector('[name="pos-neg"]').value = value;
     }
   }
@@ -62,7 +62,7 @@ class JournalItem extends Component {
    * @param {string} type The type of item, either 'debit' or 'credit'
    * @param {object} chart The 'Chart of Accounts' to be used
    */
-  constructor(type, chart, isSolution, showInvoiceType, showPosNeg) {
+  constructor(type, chart, isSolution, invoiceTypeVisibility, posNegVisibility) {
     super();
 
     data.set(this, Object.create(null));
@@ -70,14 +70,14 @@ class JournalItem extends Component {
     this.type = type;
     this.chart = chart;
     this.isSolution = isSolution;
-    this.showInvoiceType = showInvoiceType;
-    this.showPosNeg = showPosNeg;
+    this.invoiceTypeVisibility = invoiceTypeVisibility;
+    this.posNegVisibility = posNegVisibility;
     this.inputNames = ['account-number', 'amount'];
 
-    if (this.showInvoiceType) {
+    if (this.invoiceTypeVisibility !== 'hiddden') {
       this.inputNames.push('invoice-type');
     }
-    if (this.showPosNeg) {
+    if (this.posNegVisibility !== 'hiddden') {
       this.inputNames.push('pos-neg');
     }
 
@@ -124,6 +124,9 @@ class JournalItem extends Component {
   }
 
   render(container) {
+    var showInvoiceType = this.invoiceTypeVisibility !== 'hidden';
+    var showPosNeg = this.posNegVisibility !== 'hidden';
+
     super.render(container, `
       <tr>
         <td class="${styles.accountNumber}">
@@ -132,7 +135,7 @@ class JournalItem extends Component {
         <td class="${styles.accountName}">
           <span class="${styles.empty}">${__('enter_account_number')}</span>
         </td>
-        ${this.showInvoiceType ? `
+        ${showInvoiceType ? `
           <td class="${styles.invoiceType}">
             <select name="invoice-type" ${this.isSolution ? 'disabled' : ''}>
               <option value="">&mdash;</option>
@@ -143,7 +146,7 @@ class JournalItem extends Component {
             </select>
           </td>
         ` : ''}
-        ${this.showPosNeg ? `
+        ${showPosNeg ? `
           <td class="${styles.posNeg}">
             <select name="pos-neg" ${this.isSolution ? 'disabled' : ''}>
               <option></option>

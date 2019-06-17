@@ -44,13 +44,13 @@ class JournalEntry extends Component {
    * @constructor
    * @param {object} chart The 'Chart of Accounts' to be used
    */
-  constructor(chart, isSolution, showInvoiceType, showPosNeg) {
+  constructor(chart, isSolution, invoiceTypeVisibility, posNegVisibility) {
     super();
 
     this.chart = chart;
     this.isSolution = isSolution;
-    this.showInvoiceType = showInvoiceType;
-    this.showPosNeg = showPosNeg;
+    this.invoiceTypeVisibility = invoiceTypeVisibility;
+    this.posNegVisibility = posNegVisibility;
     this.items = {
       debit: [],
       credit: []
@@ -64,10 +64,12 @@ class JournalEntry extends Component {
   }
 
   render(container) {
+    var showInvoiceType = this.invoiceTypeVisibility !== 'hidden';
+    var showPosNeg = this.posNegVisibility !== 'hidden';
     var totalColSpan = 3;
 
-    if (this.showInvoiceType) totalColSpan++;
-    if (this.showPosNeg) totalColSpan++;
+    if (showInvoiceType) totalColSpan++;
+    if (showPosNeg) totalColSpan++;
 
     super.render(container, `
       <table class="${styles.entry}">
@@ -76,10 +78,10 @@ class JournalEntry extends Component {
             <th></th>
             <th>${__('number')}</th>
             <th>${__('account_name')}</th>
-            ${this.showInvoiceType ? `
+            ${showInvoiceType ? `
               <th>${__('type')}</th>
             ` : ''}
-            ${this.showPosNeg ? `
+            ${showPosNeg ? `
               <th>&plus; / &minus;</th>
             ` : ''}
             <th>${__('debit')}</th>
@@ -131,7 +133,7 @@ class JournalEntry extends Component {
 
   addItemRow(type, data) {
     var items = this.items[type];
-    var item = new JournalItem(type, this.chart, this.isSolution, this.showInvoiceType, this.showPosNeg);
+    var item = new JournalItem(type, this.chart, this.isSolution, this.invoiceTypeVisibility, this.posNegVisibility);
     var tbody = this.element.querySelector(`tbody.${styles[type]}`);
 
     // Calculate the correct row span for the added row
