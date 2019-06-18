@@ -153,23 +153,23 @@ table.entry td.feedback span.wrong::before {
   color: red;
 }
 
-:global(.h5p-accounting-journal-entry .h5p-question-feedback-content-text) span.correct::before,
-:global(.h5p-accounting-journal-entry .h5p-question-feedback-content-text) span.wrong::before {
+:global .h5p-accounting-journal-entry .h5p-question-feedback-content-text :local(span.correct::before),
+:global .h5p-accounting-journal-entry .h5p-question-feedback-content-text :local(span.wrong::before) {
   font-family: 'H5PFontAwesome4';
   font-size: 1.25em;
   font-weight: normal;
   vertical-align: middle;
   margin-right: .25em;
 }
-:global(.h5p-accounting-journal-entry .h5p-question-feedback-content-text) span.correct {
+:global .h5p-accounting-journal-entry .h5p-question-feedback-content-text :local(span.correct) {
   color: green;
 }
-:global(.h5p-accounting-journal-entry .h5p-question-feedback-content-text) span.correct::before {
+:global .h5p-accounting-journal-entry .h5p-question-feedback-content-text :local(span.correct::before) {
   content: '\F05D';
 }
-:global(.h5p-accounting-journal-entry .h5p-question-feedback-content-text) span.wrong {
+:global .h5p-accounting-journal-entry .h5p-question-feedback-content-text :local(span.wrong) {
   color: red;
 }
-:global(.h5p-accounting-journal-entry .h5p-question-feedback-content-text) span.wrong::before {
+:global .h5p-accounting-journal-entry .h5p-question-feedback-content-text :local(span.wrong::before) {
   content: '\F05C';
 }
