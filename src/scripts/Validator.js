@@ -90,8 +90,6 @@ class Validator {
     if (this.behaviour.scoringMechanism === 'recalculated') {
       let countSolution = this.getNormalizedSolution().length;
 
-      console.log(score, this.behaviour.maxScore, countSolution, this.getMaxPointsPerRow());
-
       score = score * this.behaviour.maxScore / (countSolution * this.getMaxPointsPerRow());
     }
 
