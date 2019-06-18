@@ -218,7 +218,7 @@ class Validator {
     }
 
     // Check if debit and credit are equal
-    if (this.behaviour.debetCreditEqual) {
+    {
       let totalDebit = data.reduce(totalReducer.bind(undefined, 'debit'), 0);
       let totalCredit = data.reduce(totalReducer.bind(undefined, 'credit'), 0);
 
