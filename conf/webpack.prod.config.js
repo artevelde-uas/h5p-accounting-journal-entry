@@ -10,6 +10,7 @@ module.exports = {
   entry: {
     'h5p-accounting-journal-entry': [
       '@babel/polyfill',
+      'array-flat-polyfill',
       'nodelist-foreach-polyfill',
       'whatwg-fetch',
       './src/scripts/polyfills.js',

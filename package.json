@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.4.0",
+    "array-flat-polyfill": "^1.0.1",
     "events": "^3.0.0",
     "nodelist-foreach-polyfill": "^1.2.0",
     "whatwg-fetch": "^3.0.0"
