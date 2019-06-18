@@ -230,10 +230,12 @@ class AccountingJournalEntry extends Question {
   }
 
   hideFeedback() {
-    var data = this.answer.getNormalizedData();
+    // Loop through all the items an reset the feedback
+    this.answer.getItems().forEach(item => {
+      item.setFeedback();
+    });
 
-    data.flatMap(item => item.items).forEach(item => { item.setFeedback() });
-
+    // Hide the feedback text
     this.removeFeedback();
   }
 

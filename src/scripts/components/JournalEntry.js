@@ -196,33 +196,8 @@ class JournalEntry extends Component {
     this.element.querySelector('[name="total-credit"]').value = formatAmount(totalCredit);
   }
 
-  /**
-   * Gets the data with items grouped by accountName, invoiceType and posNeg, with the sum of their amounts
-   */
-  getNormalizedData() {
-    var items = this.items.debit.concat(this.items.credit);
-    var reducer = (list, item, i, items) => {
-      var found = list.find(data => (
-        data.type === item.type &&
-        data.accountNumber === item.data.accountNumber &&
-        data.invoiceType === item.data.invoiceType &&
-        data.posNeg === item.data.posNeg
-      ));
-
-      if (found === undefined) {
-        list.push(Object.assign({
-          type: item.type,
-          items: [item]
-        }, item.data));
-      } else {
-        found.amount += item.data.amount;
-        found.items.push(item);
-      }
-
-      return list;
-    };
-
-    return items.reduce(reducer, []);
+  getItems() {
+    return this.items.debit.concat(this.items.credit);
   }
 
 }

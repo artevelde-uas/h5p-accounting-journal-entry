@@ -16,7 +16,7 @@ class Validator {
    * @returns {number} User's score.
    */
   getScore() {
-    var data = this.answer.getNormalizedData();
+    var data = this.getNormalizedAnswer();
     var solution = this.getNormalizedSolution();
     var countReducer = (sum, item) => (sum + item.items.length);
     var totalReducer = (type, sum, item) => (item.type === type ? (sum + item.amount) : sum);
@@ -160,8 +160,49 @@ class Validator {
     return debitItems.concat(creditItems);
   }
 
+  /**
+   * Gets the data with items grouped by accountName, invoiceType and posNeg, with the sum of their amounts
+   */
+  getNormalizedAnswer() {
+    var items = this.answer.getItems();
+    var reducer = (list, item, i) => {
+      var found = list.find(data => (
+        data.type === item.type &&
+        data.accountNumber === item.data.accountNumber &&
+        data.invoiceType === item.data.invoiceType &&
+        data.posNeg === item.data.posNeg
+      ));
+
+      if (found === undefined) {
+        let data = {
+          type: item.type,
+          accountNumber: item.data.accountNumber,
+          amount: item.data.amount,
+          items: [item]
+        };
+
+        if (this.behaviour.invoiceTypeVisibility === 'showWithScoring') {
+          data.invoiceType = item.data.invoiceType;
+        }
+
+        if (this.behaviour.posNegVisibility === 'showWithScoring') {
+          data.posNeg = item.data.posNeg;
+        }
+
+        list.push(data);
+      } else {
+        found.amount += item.data.amount;
+        found.items.push(item);
+      }
+
+      return list;
+    };
+
+    return items.reduce(reducer, []);
+  }
+
   getFeedback() {
-    var data = this.answer.getNormalizedData();
+    var data = this.getNormalizedAnswer();
     var countFilter = (type, item) => (item.type === type);
     var totalReducer = (type, sum, item) => (item.type === type ? (sum + item.amount) : sum);
     var feedback = [];
@@ -190,7 +231,7 @@ class Validator {
   }
 
   validate() {
-    var data = this.answer.getNormalizedData();
+    var data = this.getNormalizedAnswer();
     var solution = this.getNormalizedSolution();
 
     // Loop over each item and check if it exists as a possible solution

@@ -91,30 +91,8 @@ class JournalEntryList extends Component {
     return journalEntry;
   }
 
-  /**
-   * Gets the data with items grouped by accountName, invoiceType and plusMin, with the sum of their amounts
-   */
-  getNormalizedData() {
-    var entries = this.entries.flatMap(entry => entry.getNormalizedData());
-    var reducer = (list, item, i, items) => {
-      var found = list.find(data => (
-        data.type === item.type &&
-        data.accountNumber === item.accountNumber &&
-        data.invoiceType === item.invoiceType &&
-        data.posNeg === item.posNeg
-      ));
-
-      if (found === undefined) {
-        list.push(item);
-      } else {
-        found.amount += item.amount;
-        found.items = found.items.concat(item.items);
-      }
-
-      return list;
-    };
-
-    return entries.reduce(reducer, []);
+  getItems() {
+    return this.entries.flatMap(entry => entry.getItems());
   }
 
 }
