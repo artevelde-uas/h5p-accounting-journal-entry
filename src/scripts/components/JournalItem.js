@@ -74,10 +74,10 @@ class JournalItem extends Component {
     this.posNegVisibility = posNegVisibility;
     this.inputNames = ['account-number', 'amount'];
 
-    if (this.invoiceTypeVisibility !== 'hiddden') {
+    if (this.invoiceTypeVisibility !== 'hidden') {
       this.inputNames.push('invoice-type');
     }
-    if (this.posNegVisibility !== 'hiddden') {
+    if (this.posNegVisibility !== 'hidden') {
       this.inputNames.push('pos-neg');
     }
 
