@@ -211,7 +211,7 @@ class Validator {
       let countCredit = data.filter(countFilter.bind(undefined, 'credit')).length;
 
       if (countDebit === 0 || countCredit === 0) {
-        feedback.push('no_debit_or_credit_bookings');
+        feedback.push('noDebitOrCreditBookings');
       }
     }
 
@@ -221,7 +221,7 @@ class Validator {
       let totalCredit = data.reduce(totalReducer.bind(undefined, 'credit'), 0);
 
       if (totalDebit !== totalCredit) {
-        feedback.push('totals_not_equal');
+        feedback.push('totalsNotEqual');
       }
     }
 

@@ -1,6 +1,7 @@
 import Component from '../Component';
 import JournalItem from './JournalItem';
-import { translate as __, formatAmount } from '../helpers';
+import l10n from '../l10n';
+import { formatAmount } from '../helpers';
 
 import styles from '../../styles/h5p-accounting-journal-entry.css';
 
@@ -19,7 +20,7 @@ class JournalEntry extends Component {
       this.items[type] = [];
       this.element.querySelector(`tbody.${styles[type]}`).innerHTML = `
         <tr>
-          <th class="${styles.title}">${__(type)}</th>
+          <th class="${styles.title}">${l10n[type]}</th>
         </tr>
       `;
 
@@ -76,36 +77,36 @@ class JournalEntry extends Component {
         <thead>
           <tr>
             <th></th>
-            <th>${__('number')}</th>
-            <th>${__('account_name')}</th>
+            <th>${l10n.number}</th>
+            <th>${l10n.accountName}</th>
             ${showInvoiceType ? `
-              <th>${__('type')}</th>
+              <th>${l10n.type}</th>
             ` : ''}
             ${showPosNeg ? `
               <th>&plus; / &minus;</th>
             ` : ''}
-            <th>${__('debit')}</th>
-            <th>${__('credit')}</th>
+            <th>${l10n.debit}</th>
+            <th>${l10n.credit}</th>
             <th class="${styles.controls}">
               ${this.isSolution ? '' : `
-                <button class="${styles.deleteEntry}" title="${__('delete_journal_entry')}"></button>
+                <button class="${styles.deleteEntry}" title="${l10n.deleteJournalEntry}"></button>
               `}
             </th>
           </tr>
         </thead>
         <tbody class="${styles.debit}">
           <tr>
-            <th class="${styles.title}">${__('debit')}</th>
+            <th class="${styles.title}">${l10n.debit}</th>
           </tr>
         </tbody>
         <tbody class="${styles.credit}">
           <tr>
-            <th class="${styles.title}">${__('credit')}</th>
+            <th class="${styles.title}">${l10n.credit}</th>
           </tr>
         </tbody>
         <tfoot>
           <tr>
-            <th class="${styles.totalLabel}" colspan="${totalColSpan}">${__('total')}:</th>
+            <th class="${styles.totalLabel}" colspan="${totalColSpan}">${l10n.total}:</th>
             <th class="${styles.totalDebit}"><output name="total-debit">${formatAmount(0)}</output></th>
             <th class="${styles.totalCredit}"><output name="total-credit">${formatAmount(0)}</output></th>
             <th></th>

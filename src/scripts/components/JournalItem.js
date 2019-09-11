@@ -1,5 +1,6 @@
 import Component from '../Component';
-import { translate as __, formatAmount } from '../helpers';
+import l10n from '../l10n';
+import { formatAmount } from '../helpers';
 
 import styles from '../../styles/h5p-accounting-journal-entry.css';
 
@@ -90,9 +91,9 @@ class JournalItem extends Component {
       if (this.chart.hasOwnProperty(newValue)) {
         accountNameCell.textContent = this.chart[newValue];
       } else if (newValue === '') {
-        accountNameCell.innerHTML = `<span class="${styles.empty}">${__('enter_account_number')}</span>`;
+        accountNameCell.innerHTML = `<span class="${styles.empty}">${l10n.enterAccountNumber}</span>`;
       } else {
-        accountNameCell.innerHTML = `<span class="${styles.invalid}">${__('invalid_account_number')}</span>`;
+        accountNameCell.innerHTML = `<span class="${styles.invalid}">${l10n.invalidAccountNumber}</span>`;
       }
     });
 
@@ -133,16 +134,16 @@ class JournalItem extends Component {
           <input type="text" name="account-number" ${this.isSolution ? 'disabled' : ''} />
         </td>
         <td class="${styles.accountName}">
-          <span class="${styles.empty}">${__('enter_account_number')}</span>
+          <span class="${styles.empty}">${l10n.enterAccountNumber}</span>
         </td>
         ${showInvoiceType ? `
           <td class="${styles.invoiceType}">
             <select name="invoice-type" ${this.isSolution ? 'disabled' : ''}>
               <option value="">&mdash;</option>
-              <option value="A">${__('assets')}</option>
-              <option value="L">${__('liabilities')}</option>
-              <option value="E">${__('expenses')}</option>
-              <option value="R">${__('revenue')}</option>
+              <option value="A">${l10n.assets}</option>
+              <option value="L">${l10n.liabilities}</option>
+              <option value="E">${l10n.expenses}</option>
+              <option value="R">${l10n.revenue}</option>
             </select>
           </td>
         ` : ''}

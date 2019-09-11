@@ -1,6 +1,7 @@
 import Component from '../Component';
 import JournalEntry from './JournalEntry';
-import { translate as __, formatAmount } from '../helpers';
+import l10n from '../l10n';
+import { formatAmount } from '../helpers';
 
 import styles from '../../styles/h5p-accounting-journal-entry.css';
 
@@ -47,7 +48,7 @@ class JournalEntryList extends Component {
         <div class="${styles.entryList}">
         </div>
         ${this.isSolution ? '' : `
-          <button class="h5p-joubelui-button truncated ${styles.addEntry}" title="${__('add_journal_entry')}"></button>
+          <button class="h5p-joubelui-button truncated ${styles.addEntry}" title="${l10n.addJournalEntry}"></button>
         `}
       </div>
     `, options);

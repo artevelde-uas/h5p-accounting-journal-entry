@@ -385,5 +385,175 @@
         }
       ]
     }
+  },
+  {
+    "name": "l10n",
+    "type": "group",
+    "label": "Localize",
+    "importance": "low",
+    "common": true,
+    "fields": [
+      {
+        "name": "number",
+        "type": "text",
+        "label": "Translation for \"Number\"",
+        "importance": "low",
+        "default": "Number"
+      },
+      {
+        "name": "accountName",
+        "type": "text",
+        "label": "Translation for \"Account name\"",
+        "importance": "low",
+        "default": "Account name"
+      },
+      {
+        "name": "type",
+        "type": "text",
+        "label": "Translation for \"Type\"",
+        "importance": "low",
+        "default": "Type"
+      },
+      {
+        "name": "debit",
+        "type": "text",
+        "label": "Translation for \"Debit\"",
+        "importance": "low",
+        "default": "Debit"
+      },
+      {
+        "name": "credit",
+        "type": "text",
+        "label": "Translation for \"Credit\"",
+        "importance": "low",
+        "default": "Credit"
+      },
+      {
+        "name": "total",
+        "type": "text",
+        "label": "Translation for \"Total\"",
+        "importance": "low",
+        "default": "Total"
+      },
+      {
+        "name": "assets",
+        "type": "text",
+        "label": "Translation for \"Assets\"",
+        "importance": "low",
+        "default": "Assets"
+      },
+      {
+        "name": "liabilities",
+        "type": "text",
+        "label": "Translation for \"Liabilities\"",
+        "importance": "low",
+        "default": "Liabilities"
+      },
+      {
+        "name": "expenses",
+        "type": "text",
+        "label": "Translation for \"Expenses\"",
+        "importance": "low",
+        "default": "Expenses"
+      },
+      {
+        "name": "revenue",
+        "type": "text",
+        "label": "Translation for \"Revenue\"",
+        "importance": "low",
+        "default": "Revenue"
+      },
+      {
+        "name": "enterAccountNumber",
+        "type": "text",
+        "label": "Translation for \"Enter an account number\"",
+        "importance": "low",
+        "default": "Enter an account number"
+      },
+      {
+        "name": "invalidAccountNumber",
+        "type": "text",
+        "label": "Translation for \"Invalid account number\"",
+        "importance": "low",
+        "default": "Invalid account number"
+      },
+      {
+        "name": "addJournalEntry",
+        "type": "text",
+        "label": "Translation for \"Add a jounal entry\"",
+        "importance": "low",
+        "default": "Add a jounal entry"
+      },
+      {
+        "name": "deleteJournalEntry",
+        "type": "text",
+        "label": "Translation for \"Delete jounal entry\"",
+        "importance": "low",
+        "default": "Delete jounal entry"
+      },
+      {
+        "name": "checkAnswer",
+        "type": "text",
+        "label": "Translation for \"Check the answer\"",
+        "importance": "low",
+        "default": "Check the answer"
+      },
+      {
+        "name": "showSolution",
+        "type": "text",
+        "label": "Translation for \"Show the solution\"",
+        "importance": "low",
+        "default": "Show the solution"
+      },
+      {
+        "name": "solutionTitle",
+        "type": "text",
+        "label": "Translation for \"Solution\"",
+        "importance": "low",
+        "default": "Solution"
+      },
+      {
+        "name": "solutionIntroduction",
+        "type": "text",
+        "label": "Translation for \"Please remember that this is only one possible answer. There could be variations that are also correct.\"",
+        "importance": "low",
+        "default": "Please remember that this is only one possible answer. There could be variations that are also correct."
+      },
+      {
+        "name": "tryAgain",
+        "type": "text",
+        "label": "Translation for \"Try again\"",
+        "importance": "low",
+        "default": "Try again"
+      },
+      {
+        "name": "feedbackCorrect",
+        "type": "text",
+        "label": "Translation for \"Well done, that's all correct!\"",
+        "importance": "low",
+        "default": "Well done, that's all correct!"
+      },
+      {
+        "name": "feedbackWrong",
+        "type": "text",
+        "label": "Translation for \"Sorry, that's incorrect.\"",
+        "importance": "low",
+        "default": "Sorry, that's incorrect."
+      },
+      {
+        "name": "totalsNotEqual",
+        "type": "text",
+        "label": "Translation for \"The debit total does not match the credit total.\"",
+        "importance": "low",
+        "default": "The debit total does not match the credit total."
+      },
+      {
+        "name": "noDebitOrCreditBookings",
+        "type": "text",
+        "label": "Translation for \"You have no debit or credit bookings.\"",
+        "importance": "low",
+        "default": "You have no debit or credit bookings."
+      }
+    ]
   }
 ]

@@ -2,7 +2,7 @@ import Question from './Question';
 import Validator from './Validator'
 import { getJSON, getLang } from './helpers';
 import JournalEntryList from './components/JournalEntryList';
-import { translate as __ } from './helpers';
+import l10n, { setTranslations } from './l10n';
 
 import { machineName } from '../../library.json';
 
@@ -23,6 +23,8 @@ class AccountingJournalEntry extends Question {
 
     this.params = params;
     this.validator = new Validator(params.behaviour, params.journalEntries);
+
+    setTranslations(params.l10n);
   }
 
   attach($container) {
@@ -36,18 +38,11 @@ class AccountingJournalEntry extends Question {
    */
   registerDomElements() {
     var answerContainer = document.createElement('div');
-    var lang = getLang(answerContainer);
-    var chartType = this.params.chartType;
-    var translations = getJSON(`./language/${lang}.json`);
-    var chart = getJSON(`./assets/charts/${chartType}.json`);
 
     answerContainer.className = styles.answerContainer;
 
-    // Wait for all the files to load, then do initialization
-    Promise.all([translations, chart]).then(([translations, chart]) => {
-      // Store UI strings into translation tool
-      H5PIntegration.l10n[machineName] = translations.uiStrings;
-
+    // Wait for the chart file to load, then do initialization
+    getJSON(`./assets/charts/${this.params.chartType}.json`).then(chart => {
       // Store chart
       this.chart = chart;
 
@@ -61,7 +56,7 @@ class AccountingJournalEntry extends Question {
       this.validator.setAnswer(this.answer);
 
       // Add 'Check answer' button
-      this.addButton('check-answer', __('check_answer'), () => {
+      this.addButton('check-answer', l10n.checkAnswer, () => {
         this.hideButton('check-answer');
         this.showButton('show-solution');
         this.showButton('try-again');
@@ -72,7 +67,7 @@ class AccountingJournalEntry extends Question {
 
       // Add 'Show solution' button
       if (this.params.behaviour.enableSolutionsButton) {
-        this.addButton('show-solution', __('show_solution'), () => {
+        this.addButton('show-solution', l10n.showSolution, () => {
           this.hideButton('show-solution');
 
           this.showSolutions();
@@ -81,7 +76,7 @@ class AccountingJournalEntry extends Question {
 
       // Add 'Retry' button
       if (this.params.behaviour.enableRetry) {
-        this.addButton('try-again', __('try_again'), () => {
+        this.addButton('try-again', l10n.tryAgain, () => {
           this.resetTask();
         }, false);
       }
@@ -137,10 +132,10 @@ class AccountingJournalEntry extends Question {
       solutionContainer.className = styles.solutionContainer;
       solutionContainer.insertAdjacentHTML('beforeend', `
         <div class="${styles.solutionTitle}">
-          ${__('solution_title')}
+          ${l10n.solutionTitle}
         </div>
         <div class="${styles.solutionIntroduction}">
-          ${__('solution_introduction')}
+          ${l10n.solutionIntroduction}
         </div>
         <div class="${styles.solutionSample}">
         </div>
@@ -210,17 +205,17 @@ class AccountingJournalEntry extends Question {
     if (this.validator.getScore() === this.validator.getMaxScore()) {
       feedbackText = `
         <div>
-          <span class="${styles.correct}">${__('feedback_correct')}</span>
+          <span class="${styles.correct}">${l10n.feedbackCorrect}</span>
         </div>
       `;
     } else {
       feedbackText = `
         <div>
-          <span class="${styles.wrong}">${__('feedback_wrong')}</span>
+          <span class="${styles.wrong}">${l10n.feedbackWrong}</span>
         </div>
         <ul>
           ${this.validator.getFeedback().reduce((text, item) => text + `
-            <li>${__(item)}</li>
+            <li>${l10n[item]}</li>
           `, '')}
         </ul>
       `;

@@ -1,29 +1,4 @@
 {
-  "uiStrings": {
-    "number": "Number",
-    "account_name": "Account name",
-    "type": "Type",
-    "debit": "Debit",
-    "credit": "Credit",
-    "total": "Total",
-    "assets": "Assets",
-    "liabilities": "Liabilities",
-    "expenses": "Expenses",
-    "revenue": "Revenue",
-    "enter_account_number": "Enter an account number",
-    "invalid_account_number": "Invalid account number",
-    "add_journal_entry": "Add a jounal entry",
-    "delete_journal_entry": "Delete jounal entry",
-    "check_answer": "Check the answer",
-    "show_solution": "Show the solution",
-    "solution_title": "Solution",
-    "solution_introduction": "Please remember that this is only one possible answer. There could be variations that are also correct.",
-    "try_again": "Try again",
-    "feedback_correct": "Well done, that's all correct!",
-    "feedback_wrong": "Sorry, that's incorrect.",
-    "totals_not_equal": "The debit total does not match the credit total.",
-    "no_debit_or_credit_bookings": "You have no debit or credit bookings."
-  },
   "semantics": [
     {
       "label": "Description"
@@ -211,6 +186,103 @@
           }
         ]
       }
+    },
+    {
+      "label": "Localiseren",
+      "fields": [
+        {
+          "label": "Translation for \"Number\"",
+          "default": "Number"
+        },
+        {
+          "label": "Translation for \"Account name\"",
+          "default": "Account name"
+        },
+        {
+          "label": "Translation for \"Type\"",
+          "default": "Type"
+        },
+        {
+          "label": "Translation for \"Debit\"",
+          "default": "Debit"
+        },
+        {
+          "label": "Translation for \"Credit\"",
+          "default": "Credit"
+        },
+        {
+          "label": "Translation for \"Total\"",
+          "default": "Total"
+        },
+        {
+          "label": "Translation for \"Assets\"",
+          "default": "Assets"
+        },
+        {
+          "label": "Translation for \"Liabilities\"",
+          "default": "Liabilities"
+        },
+        {
+          "label": "Translation for \"Expenses\"",
+          "default": "Expenses"
+        },
+        {
+          "label": "Translation for \"Revenue\"",
+          "default": "Revenue"
+        },
+        {
+          "label": "Translation for \"Enter an account number\"",
+          "default": "Enter an account number"
+        },
+        {
+          "label": "Translation for \"Invalid account number\"",
+          "default": "Invalid account number"
+        },
+        {
+          "label": "Translation for \"Add a jounal entry\"",
+          "default": "Add a jounal entry"
+        },
+        {
+          "label": "Translation for \"Delete jounal entry\"",
+          "default": "Delete jounal entry"
+        },
+        {
+          "label": "Translation for \"Check the answer\"",
+          "default": "Check the answer"
+        },
+        {
+          "label": "Translation for \"Show the solution\"",
+          "default": "Show the solution"
+        },
+        {
+          "label": "Translation for \"Solution\"",
+          "default": "Solution"
+        },
+        {
+          "label": "Translation for \"Please remember that this is only one possible answer. There could be variations that are also correct.\"",
+          "default": "Please remember that this is only one possible answer. There could be variations that are also correct."
+        },
+        {
+          "label": "Translation for \"Try again\"",
+          "default": "Try again"
+        },
+        {
+          "label": "Translation for \"Well done, that's all correct!\"",
+          "default": "Well done, that's all correct!"
+        },
+        {
+          "label": "Translation for \"Sorry, that's incorrect.\"",
+          "default": "Sorry, that's incorrect."
+        },
+        {
+          "label": "Translation for \"The debit total does not match the credit total.\"",
+          "default": "The debit total does not match the credit total."
+        },
+        {
+          "label": "Translation for \"You have no debit or credit bookings.\"",
+          "default": "You have no debit or credit bookings."
+        }
+      ]
     }
   ]
 }

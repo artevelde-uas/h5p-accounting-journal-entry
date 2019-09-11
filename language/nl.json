@@ -1,29 +1,4 @@
 {
-  "uiStrings": {
-    "number": "Nummer",
-    "account_name": "Rekening naam",
-    "type": "Type",
-    "debit": "Debet",
-    "credit": "Credit",
-    "total": "Totaal",
-    "assets": "Activa",
-    "liabilities": "Passiva",
-    "expenses": "Kost",
-    "revenue": "Opbrengst",
-    "enter_account_number": "Geef een rekeningnummer in",
-    "invalid_account_number": "Ongeldig rekening nummer",
-    "add_journal_entry": "Voeg journaalpost toe",
-    "delete_journal_entry": "Verwijder journaalpost",
-    "check_answer": "Controleer het antwoord",
-    "show_solution": "Bekijk de oplossing",
-    "solution_title": "Solution",
-    "solution_introduction": "Hou er rekening mee dat dit slechts een van de mogelijke antwoorden is. Er kunnen variaties zijn die ook correct zijn.",
-    "try_again": "Probeer het opnieuw",
-    "feedback_correct": "Dat klopt helemaal!",
-    "feedback_wrong": "Dat was niet helemaal juist.",
-    "totals_not_equal": "De debet bedragen komen niet overeen met de credit bedragen.",
-    "no_debit_or_credit_bookings": "Je hebt geen debet of credit boeking(en) verricht."
-  },
   "semantics": [
     {
       "label": "Omschrijving"
@@ -211,6 +186,103 @@
           }
         ]
       }
+    },
+    {
+      "label": "Localiseren",
+      "fields": [
+        {
+          "label": "Translation for \"Nummer\"",
+          "default": "Nummer"
+        },
+        {
+          "label": "Translation for \"Rekening naam\"",
+          "default": "Rekening naam"
+        },
+        {
+          "label": "Translation for \"Type\"",
+          "default": "Type"
+        },
+        {
+          "label": "Translation for \"Debet\"",
+          "default": "Debet"
+        },
+        {
+          "label": "Translation for \"Credit\"",
+          "default": "Credit"
+        },
+        {
+          "label": "Translation for \"Totaal\"",
+          "default": "Totaal"
+        },
+        {
+          "label": "Translation for \"Activa\"",
+          "default": "Activa"
+        },
+        {
+          "label": "Translation for \"Passiva\"",
+          "default": "Passiva"
+        },
+        {
+          "label": "Translation for \"Kost\"",
+          "default": "Kost"
+        },
+        {
+          "label": "Translation for \"Opbrengst\"",
+          "default": "Opbrengst"
+        },
+        {
+          "label": "Translation for \"Geef een rekeningnummer in\"",
+          "default": "Geef een rekeningnummer in"
+        },
+        {
+          "label": "Translation for \"Ongeldig rekening nummer\"",
+          "default": "Ongeldig rekening nummer"
+        },
+        {
+          "label": "Translation for \"Voeg journaalpost toe\"",
+          "default": "Voeg journaalpost toe"
+        },
+        {
+          "label": "Translation for \"Verwijder journaalpost\"",
+          "default": "Verwijder journaalpost"
+        },
+        {
+          "label": "Translation for \"Controleer het antwoord\"",
+          "default": "Controleer het antwoord"
+        },
+        {
+          "label": "Translation for \"Bekijk de oplossing\"",
+          "default": "Bekijk de oplossing"
+        },
+        {
+          "label": "Translation for \"Solution\"",
+          "default": "Solution"
+        },
+        {
+          "label": "Translation for \"Hou er rekening mee dat dit slechts een van de mogelijke antwoorden is. Er kunnen variaties zijn die ook correct zijn.\"",
+          "default": "Hou er rekening mee dat dit slechts een van de mogelijke antwoorden is. Er kunnen variaties zijn die ook correct zijn."
+        },
+        {
+          "label": "Translation for \"Probeer het opnieuw\"",
+          "default": "Probeer het opnieuw"
+        },
+        {
+          "label": "Translation for \"Dat klopt helemaal!\"",
+          "default": "Dat klopt helemaal!"
+        },
+        {
+          "label": "Translation for \"Dat was niet helemaal juist.\"",
+          "default": "Dat was niet helemaal juist."
+        },
+        {
+          "label": "Translation for \"De debet bedragen komen niet overeen met de credit bedragen.\"",
+          "default": "De debet bedragen komen niet overeen met de credit bedragen."
+        },
+        {
+          "label": "Translation for \"Je hebt geen debet of credit boeking(en) verricht.\"",
+          "default": "Je hebt geen debet of credit boeking(en) verricht."
+        }
+      ]
     }
   ]
 }
