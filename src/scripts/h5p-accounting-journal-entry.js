@@ -63,6 +63,9 @@ class AccountingJournalEntry extends Question {
 
         this.setReadonly();
         this.showFeedback();
+
+        // Save the scores using xAPI
+        this.triggerXAPIScored(this.getScore(), this.getMaxScore(), 'answered', true, this.getScore() === this.getMaxScore());
       });
 
       // Add 'Show solution' button
@@ -192,10 +195,10 @@ class AccountingJournalEntry extends Question {
    *
    * @returns {XAPIData}
    */
-  getXAPIData() {
+  /*getXAPIData() {
     //TODO return xAPI data
     return {};
-  }
+  }*/
 
   showFeedback() {
     var feedbackText = '';
