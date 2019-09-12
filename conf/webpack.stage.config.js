@@ -30,9 +30,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new EnvironmentPlugin({
-      NODE_ENV: 'development'
-    }),
     new MiniCssExtractPlugin()
   ],
   module: {

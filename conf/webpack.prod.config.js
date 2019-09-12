@@ -23,9 +23,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new EnvironmentPlugin({
-      NODE_ENV: 'production'
-    }),
     new MiniCssExtractPlugin()
   ],
   module: {

@@ -1,11 +1,14 @@
 import { normalize as normalizePath } from 'path';
 
-import { machineName } from '../../library.json';
+
+// Store the base URL
+var scripts = document.getElementsByTagName('script');
+var url = new URL(scripts[scripts.length - 1].src);
+var baseUrl = normalizePath(`${url.pathname}/../..`);
+
 
 export function getPath(path = '') {
-  var librariesFolder = (process.env.NODE_ENV === 'development') ? 'development' : 'libraries';
-
-  return normalizePath(`${H5PIntegration.url}/${librariesFolder}/${machineName}/${path}`);
+  return normalizePath(`${baseUrl}/${path}`);
 }
 
 export function getJSON(path) {
