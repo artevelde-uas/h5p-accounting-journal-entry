@@ -1,7 +1,7 @@
 import Question from './Question';
 import Validator from './Validator'
-import { getJSON, getLang } from './helpers';
 import JournalEntryList from './components/JournalEntryList';
+import { getJSON } from './path';
 import l10n, { setTranslations } from './l10n';
 
 import { machineName } from '../../library.json';
