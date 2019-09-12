@@ -1,7 +1,6 @@
 import Component from '../Component';
 import JournalEntry from './JournalEntry';
 import l10n from '../l10n';
-import { formatAmount } from '../helpers';
 
 import styles from '../../styles/h5p-accounting-journal-entry.css';
 
