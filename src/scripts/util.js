@@ -2,9 +2,10 @@ import { normalize as normalizePath } from 'path';
 
 import { machineName } from '../../library.json';
 
-export function getPath(path = '') {
-  var librariesFolder = (process.env.NODE_ENV === 'development') ? 'development' : 'libraries';
+const librariesFolder = (process.env.NODE_ENV === 'development') ? 'development' : 'libraries';
 
+
+export function getPath(path = '') {
   return normalizePath(`${H5PIntegration.url}/${librariesFolder}/${machineName}/${path}`);
 }
 
