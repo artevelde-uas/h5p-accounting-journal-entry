@@ -1,14 +1,9 @@
 import Component from '../Component';
 import JournalItem from './JournalItem';
 import l10n from '../l10n';
+import { formatAmount } from '../util';
 
 import styles from '../../styles/h5p-accounting-journal-entry.css';
-
-
-function formatAmount(amount) {
-  return amount.toLocaleString(undefined, { minimumFractionDigits: 2 });
-}
-
 
 class JournalEntry extends Component {
 

@@ -1,10 +1,8 @@
 import Question from './Question';
 import Validator from './Validator'
+import { getJSON, getLang } from './util';
 import JournalEntryList from './components/JournalEntryList';
-import { getJSON } from './path';
 import l10n, { setTranslations } from './l10n';
-
-import { machineName } from '../../library.json';
 
 import styles from '../styles/h5p-accounting-journal-entry.css';
 
