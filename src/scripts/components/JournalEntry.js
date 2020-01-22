@@ -121,7 +121,7 @@ class JournalEntry extends Component {
         // Don't remove if there is only one entry left
         if (this.element.parentNode.children.length === 1) return;
 
-        this.remove()
+        this.remove();
       });
     }
 

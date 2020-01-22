@@ -149,7 +149,7 @@ class Validator {
         if (this.behaviour.posNegVisibility !== 'showWithScoring') {
           delete item.posNeg;
         }
-      })
+      });
     };
 
     debitItems.forEach(walker.bind(undefined, 'debit'));

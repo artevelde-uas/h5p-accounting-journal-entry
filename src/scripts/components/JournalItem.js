@@ -48,7 +48,7 @@ class JournalItem extends Component {
       invoiceType: this.invoiceType,
       posNeg: this.posNeg,
       amount: this.amount
-    }
+    };
   }
   set data(value) {
     this.accountNumber = value.accountNumber;
@@ -106,7 +106,7 @@ class JournalItem extends Component {
 
       if (isNewItem) {
         this.emit('newItem');
-      };
+      }
     });
 
     // Fire an event when all the fields become empty
@@ -119,7 +119,7 @@ class JournalItem extends Component {
 
       if (deleteItem) {
         this.emit('deleteItem');
-      };
+      }
     });
   }
 

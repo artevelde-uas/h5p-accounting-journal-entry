@@ -1,5 +1,5 @@
 import Question from './Question';
-import Validator from './Validator'
+import Validator from './Validator';
 import { getJSON, getLang } from './util';
 import JournalEntryList from './components/JournalEntryList';
 import l10n, { setTranslations } from './l10n';
