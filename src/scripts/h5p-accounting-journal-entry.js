@@ -1,6 +1,6 @@
 import Question from './Question';
 import Validator from './Validator';
-import { getJSON, getLang } from './util';
+import { getJSON, getLibraryPath } from './util';
 import JournalEntryList from './components/JournalEntryList';
 import l10n, { setTranslations } from './l10n';
 
@@ -20,6 +20,7 @@ class AccountingJournalEntry extends Question {
     super('accounting-journal-entry');
 
     this.params = params;
+    this.contentId = contentId;
     this.validator = new Validator(params.behaviour, params.journalEntries);
 
     setTranslations(params.l10n);
@@ -36,11 +37,12 @@ class AccountingJournalEntry extends Question {
    */
   registerDomElements() {
     var answerContainer = document.createElement('div');
+    var libraryPath = getLibraryPath(this.contentId);
 
     answerContainer.className = styles.answerContainer;
 
     // Wait for the chart file to load, then do initialization
-    getJSON(`./assets/charts/${this.params.chartType}.json`).then(chart => {
+    getJSON(`${libraryPath}/assets/charts/${this.params.chartType}.json`).then(chart => {
       // Store chart
       this.chart = chart;
 

@@ -1,16 +1,21 @@
 import { normalize as normalizePath } from 'path';
 
-import { machineName } from '../../library.json';
-
 const librariesFolder = (process.env.NODE_ENV === 'development') ? 'development' : 'libraries';
 
 
-export function getPath(path = '') {
-  return normalizePath(`${H5PIntegration.url}/${librariesFolder}/${machineName}/${path}`);
+export function getLibraryPath(contentId) {
+  var library = H5P.libraryFromString(H5P.getContentForInstance(contentId).library);
+  var libraryName = library.machineName;
+
+  if (process.env.NODE_ENV !== 'development') {
+    libraryName += `-${library.majorVersion}.${library.minorVersion}`;
+  }
+
+  return normalizePath(`${H5PIntegration.url}/${librariesFolder}/${libraryName}`);
 }
 
 export function getJSON(path) {
-  return fetch(getPath(path))
+  return fetch(path)
     .then(response => response.json())
     .catch(function (error) {
       throw error;
