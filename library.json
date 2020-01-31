@@ -1,14 +1,14 @@
 {
-  "title": "H5P.AccountingJournalEntry",
-  "description": "Accounting - Journal Entry",
+  "title": "Accounting - Journal Entry",
+  "description": "Make journal entry excercises for accounting",
+  "machineName": "H5P.AccountingJournalEntry",
   "contentType": "Question",
+  "author": "Artevelde University of Applied Sciences",
+  "license": "MIT",
   "majorVersion": 0,
   "minorVersion": 1,
   "patchVersion": 0,
   "runnable": 1,
-  "author": "AUC Ghent",
-  "license": "MIT",
-  "machineName": "H5P.AccountingJournalEntry",
   "coreApi": {
     "majorVersion": 1,
     "minorVersion": 0
