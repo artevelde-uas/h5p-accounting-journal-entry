@@ -7,7 +7,7 @@
 
   if (!elementPrototype.closest) {
     elementPrototype.closest = function(selector) {
-      var element = this;
+      let element = this;
 
       do {
         if (element.matches(selector)) return element;

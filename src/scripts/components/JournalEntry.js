@@ -65,9 +65,9 @@ class JournalEntry extends Component {
   }
 
   render(container) {
-    var showInvoiceType = this.invoiceTypeVisibility !== 'hidden';
-    var showPosNeg = this.posNegVisibility !== 'hidden';
-    var totalColSpan = 3;
+    let showInvoiceType = this.invoiceTypeVisibility !== 'hidden';
+    let showPosNeg = this.posNegVisibility !== 'hidden';
+    let totalColSpan = 3;
 
     if (showInvoiceType) totalColSpan++;
     if (showPosNeg) totalColSpan++;
@@ -133,9 +133,9 @@ class JournalEntry extends Component {
   }
 
   addItemRow(type, data) {
-    var items = this.items[type];
-    var item = new JournalItem(type, this.chart, this.isSolution, this.invoiceTypeVisibility, this.posNegVisibility);
-    var tbody = this.element.querySelector(`tbody.${styles[type]}`);
+    let items = this.items[type];
+    let item = new JournalItem(type, this.chart, this.isSolution, this.invoiceTypeVisibility, this.posNegVisibility);
+    let tbody = this.element.querySelector(`tbody.${styles[type]}`);
 
     // Calculate the correct row span for the added row
     function setRowspan() {
@@ -189,9 +189,9 @@ class JournalEntry extends Component {
   }
 
   calculateTotals() {
-    var reducer = (sum, item) => (sum + item.amount);
-    var totalDebit = this.items.debit.reduce(reducer, 0);
-    var totalCredit = this.items.credit.reduce(reducer, 0);
+    let reducer = (sum, item) => (sum + item.amount);
+    let totalDebit = this.items.debit.reduce(reducer, 0);
+    let totalCredit = this.items.credit.reduce(reducer, 0);
 
     this.element.querySelector('[name="total-debit"]').value = formatAmount(totalDebit);
     this.element.querySelector('[name="total-credit"]').value = formatAmount(totalCredit);

@@ -83,7 +83,7 @@ class JournalItem extends Component {
 
     // When the account number changes, lookup the number in the chart of accounts
     this.on('itemChange', (name, oldValue, newValue) => {
-      var accountNameCell = this.element.querySelector(`td.${styles.accountName}`);
+      let accountNameCell = this.element.querySelector(`td.${styles.accountName}`);
 
       if (name !== 'account-number') return;
 
@@ -98,8 +98,8 @@ class JournalItem extends Component {
 
     // Fire an event if data is added for the first time
     this.on('itemChange', (name, oldValue, newValue) => {
-      var isNewItem = this.inputNames.every(key => {
-        var value = this.element.querySelector(`[name=${key}]`).value;
+      let isNewItem = this.inputNames.every(key => {
+        let value = this.element.querySelector(`[name=${key}]`).value;
 
         return !Boolean((key === name) ? oldValue : value);
       });
@@ -111,8 +111,8 @@ class JournalItem extends Component {
 
     // Fire an event when all the fields become empty
     this.on('itemChange', (name, oldValue, newValue) => {
-      var deleteItem = !this.inputNames.some(key => {
-        var value = this.element.querySelector(`[name=${key}]`).value;
+      let deleteItem = !this.inputNames.some(key => {
+        let value = this.element.querySelector(`[name=${key}]`).value;
 
         return Boolean(value);
       });
@@ -124,8 +124,8 @@ class JournalItem extends Component {
   }
 
   render(container) {
-    var showInvoiceType = this.invoiceTypeVisibility !== 'hidden';
-    var showPosNeg = this.posNegVisibility !== 'hidden';
+    let showInvoiceType = this.invoiceTypeVisibility !== 'hidden';
+    let showPosNeg = this.posNegVisibility !== 'hidden';
 
     super.render(container, `
       <tr>
@@ -170,12 +170,12 @@ class JournalItem extends Component {
     `);
 
     this.inputNames.forEach(name => {
-      var element = this.element.querySelector(`[name="${name}"]`);
-      var type = (element.tagName === 'SELECT') ? 'change' : 'input';
+      let element = this.element.querySelector(`[name="${name}"]`);
+      let type = (element.tagName === 'SELECT') ? 'change' : 'input';
 
       element.addEventListener(type, event => {
-        var newValue = event.target.value;
-        var oldValue = data.get(this)[name] || '';
+        let newValue = event.target.value;
+        let oldValue = data.get(this)[name] || '';
 
         if (newValue === oldValue) return;
 
@@ -187,7 +187,7 @@ class JournalItem extends Component {
   }
 
   setFeedback(type) {
-    var feedback = this.element.querySelector(`td.${styles.feedback}`);
+    let feedback = this.element.querySelector(`td.${styles.feedback}`);
 
     switch (type) {
       case 'correct':

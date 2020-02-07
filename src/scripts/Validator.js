@@ -16,12 +16,12 @@ class Validator {
    * @returns {number} User's score.
    */
   getScore() {
-    var data = this.getNormalizedAnswer();
-    var solution = this.getNormalizedSolution();
-    var countReducer = (sum, item) => (sum + item.items.length);
-    var totalReducer = (type, sum, item) => (item.type === type ? (sum + item.amount) : sum);
-    var scoreReducer = (sum, item) => {
-      var found = solution.flat().find(data => (data.accountNumber === item.accountNumber));
+    let data = this.getNormalizedAnswer();
+    let solution = this.getNormalizedSolution();
+    let countReducer = (sum, item) => (sum + item.items.length);
+    let totalReducer = (type, sum, item) => (item.type === type ? (sum + item.amount) : sum);
+    let scoreReducer = (sum, item) => {
+      let found = solution.flat().find(data => (data.accountNumber === item.accountNumber));
 
       // If the item is not found in the solution, don't give any points
       if (found === undefined) {
@@ -136,9 +136,9 @@ class Validator {
   }
 
   getNormalizedSolution() {
-    var debitItems = this.solution.flatMap(entry => entry.debitItems);
-    var creditItems = this.solution.flatMap(entry => entry.creditItems);
-    var walker = (type, options) => {
+    let debitItems = this.solution.flatMap(entry => entry.debitItems);
+    let creditItems = this.solution.flatMap(entry => entry.creditItems);
+    let walker = (type, options) => {
       options.forEach(item => {
         item.type = type;
 
@@ -162,9 +162,9 @@ class Validator {
    * Gets the data with items grouped by accountName, invoiceType and posNeg, with the sum of their amounts
    */
   getNormalizedAnswer() {
-    var items = this.answer.getItems();
-    var reducer = (list, item, i) => {
-      var found = list.find(data => (
+    let items = this.answer.getItems();
+    let reducer = (list, item, i) => {
+      let found = list.find(data => (
         data.type === item.type &&
         data.accountNumber === item.data.accountNumber &&
         data.invoiceType === item.data.invoiceType &&
@@ -200,10 +200,10 @@ class Validator {
   }
 
   getFeedback() {
-    var data = this.getNormalizedAnswer();
-    var countFilter = (type, item) => (item.type === type);
-    var totalReducer = (type, sum, item) => (item.type === type ? (sum + item.amount) : sum);
-    var feedback = [];
+    let data = this.getNormalizedAnswer();
+    let countFilter = (type, item) => (item.type === type);
+    let totalReducer = (type, sum, item) => (item.type === type ? (sum + item.amount) : sum);
+    let feedback = [];
 
     // Check if there is at least one debit and one credit item
     {
@@ -229,12 +229,12 @@ class Validator {
   }
 
   validate() {
-    var data = this.getNormalizedAnswer();
-    var solution = this.getNormalizedSolution();
+    let data = this.getNormalizedAnswer();
+    let solution = this.getNormalizedSolution();
 
     // Loop over each item and check if it exists as a possible solution
     data.forEach(item => {
-      var found = solution.flat().some(data => (
+      let found = solution.flat().some(data => (
         data.type === item.type &&
         data.accountNumber === item.accountNumber &&
         data.invoiceType === item.invoiceType &&

@@ -11,7 +11,7 @@ class JournalEntryList extends Component {
   }
 
   set data(data) {
-    var listDiv = this.element.querySelector(`div.${styles.entryList}`);
+    let listDiv = this.element.querySelector(`div.${styles.entryList}`);
 
     // Remove all current journal entries
     listDiv.innerHTML = '';
@@ -62,8 +62,8 @@ class JournalEntryList extends Component {
   }
 
   addJournalEntry(data) {
-    var journalEntry = new JournalEntry(this.chart, this.isSolution, this.invoiceTypeVisibility, this.posNegVisibility);
-    var listDiv = this.element.querySelector(`div.${styles.entryList}`);
+    let journalEntry = new JournalEntry(this.chart, this.isSolution, this.invoiceTypeVisibility, this.posNegVisibility);
+    let listDiv = this.element.querySelector(`div.${styles.entryList}`);
 
     journalEntry.render(listDiv);
 

@@ -4,8 +4,8 @@ const librariesFolder = (process.env.NODE_ENV === 'development') ? 'development'
 
 
 export function getLibraryPath(contentId) {
-  var library = H5P.libraryFromString(H5P.getContentForInstance(contentId).library);
-  var libraryName = library.machineName;
+  let library = H5P.libraryFromString(H5P.getContentForInstance(contentId).library);
+  let libraryName = library.machineName;
 
   if (process.env.NODE_ENV !== 'development') {
     libraryName += `-${library.majorVersion}.${library.minorVersion}`;

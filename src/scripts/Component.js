@@ -13,7 +13,7 @@ export default class Component extends EventEmitter {
    * @param {string} template The HTML to be rendered
    */
   render(container, template, options = {}) {
-    var fragment = document.createElement(container.tagName);
+    let fragment = document.createElement(container.tagName);
 
     fragment.innerHTML = template;
 

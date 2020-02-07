@@ -36,8 +36,8 @@ class AccountingJournalEntry extends Question {
    * Register the DOM elements with H5P.Question
    */
   registerDomElements() {
-    var answerContainer = document.createElement('div');
-    var libraryPath = getLibraryPath(this.contentId);
+    let answerContainer = document.createElement('div');
+    let libraryPath = getLibraryPath(this.contentId);
 
     answerContainer.className = styles.answerContainer;
 
@@ -124,10 +124,10 @@ class AccountingJournalEntry extends Question {
    * Displays the solution(s) for this task, should also hide all buttons.
    */
   showSolutions() {
-    var invoiceTypeVisibility = this.params.behaviour.invoiceTypeVisibility;
-    var posNegVisibility = this.params.behaviour.posNegVisibility;
-    var journalEntryList = new JournalEntryList(this.chart, true, invoiceTypeVisibility, posNegVisibility);
-    var solutionContainer = this.container.querySelector(`.${styles.solutionContainer}`);
+    let invoiceTypeVisibility = this.params.behaviour.invoiceTypeVisibility;
+    let posNegVisibility = this.params.behaviour.posNegVisibility;
+    let journalEntryList = new JournalEntryList(this.chart, true, invoiceTypeVisibility, posNegVisibility);
+    let solutionContainer = this.container.querySelector(`.${styles.solutionContainer}`);
 
     // Create the solution if it doesn't exist
     if (solutionContainer === null) {
@@ -201,7 +201,7 @@ class AccountingJournalEntry extends Question {
   }*/
 
   showFeedback() {
-    var feedbackText = '';
+    let feedbackText = '';
 
     this.validator.validate();
 
@@ -238,7 +238,7 @@ class AccountingJournalEntry extends Question {
   }
 
   hideSolution() {
-    var solutionContainer = this.container.querySelector(`.${styles.solutionContainer}`);
+    let solutionContainer = this.container.querySelector(`.${styles.solutionContainer}`);
 
     if (solutionContainer === null) return;
 
@@ -251,7 +251,7 @@ class AccountingJournalEntry extends Question {
    * @param {boolean} value TRUE to disable, FALSE to enable.
    */
   setReadonly(readonly = true) {
-    var inputs = this.answer.element.querySelectorAll('input, button, select');
+    let inputs = this.answer.element.querySelectorAll('input, button, select');
 
     inputs.forEach(readonly ? element => {
       element.setAttribute('disabled', 'disabled');
